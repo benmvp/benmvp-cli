@@ -1,43 +1,7 @@
 #!/usr/bin/env node
 
-const argv = require('yargs')
-  .version()
-  .command('test', 'Runs linting, typing & unit tests for the library', {
-    modes: {
-      describe: 'The types/modes of tests to run',
-      alias: 'm',
-      array: true,
-      default: ['type', 'lint', 'unit'],
-    },
-  })
-  .command('start', "Runs the lib's tests in watch mode", {
-    modes: {
-      describe: 'The types/modes of tests to run',
-      alias: 'm',
-      array: true,
-      default: ['type', 'lint', 'unit'],
-    },
-  })
-  .command('build', 'Builds the library into desired module formats', {
-    formats: {
-      describe: 'The module formats to build',
-      alias: 'f',
-      array: true,
-      default: ['ejs', 'umd', 'dist'],
-    },
-    'output-path': {
-      describe: 'Path to the output directory for the build formats',
-      alias: 'o',
-      default: '.',
-      type: 'string',
-    },
-  })
-  .command('generate', 'Creates a new library with infra using @benmvp/cli')
-  .epilog('For more details, visit https://github.com/benmvp/benmvp-cli')
-  .help().argv
-// const cli = require('../lib')
+const path = require('path')
+const argv = require('./args')
 
-// cli.run(arv)
-
-// console.log(argv)
+console.log(argv)
 console.log('Coming soon!')
