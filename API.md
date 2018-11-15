@@ -132,7 +132,7 @@ benmvp test --modes lint
 To run typing & linting:
 
 ```sh
-benmvp start -m type lint
+benmvp start --modes type lint
 ```
 
 ### Arguments
@@ -170,7 +170,7 @@ benmvp start --modes type
 To run linting & unit test:
 
 ```sh
-benmvp start -m lint unit
+benmvp start --modes lint unit
 ```
 
 ### Arguments
@@ -210,7 +210,7 @@ benmvp build --formats esm umd type
 To put ESM & web distribution formats in an alternate build location with continuous watch:
 
 ```sh
-benmvp build -f esm dist -o ./built -w
+benmvp build -f esm dist --output-path ./built --watch
 ```
 
 ### Arguments
