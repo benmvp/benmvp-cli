@@ -1,6 +1,6 @@
-# `@benmvp/cli`
+# benmvp CLI
 
-A CLI for consistent infra for Ben Ilegbodu's libraries.
+A CLI for consistent infra for Ben Ilegbodu's JavaScript libraries.
 
 > NOTE: This CLI is still in initial development.
 
