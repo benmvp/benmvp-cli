@@ -8,6 +8,8 @@
 - [`benmvp start`](#benmvp-start)
 - [`benmvp build`](#benmvp-build)
 
+---
+
 ## `benmvp create`
 
 Creates a new library with infrastructure using `@benmvp/cli`. 
@@ -107,6 +109,8 @@ npm install --save-dev @benmvp/cli
 
 You will want to create scripts to call [`benmvp test`](#benmvp-test), [`benmvp start`](#benmvp-start), and [`benmvp build`](#benmvp-build) for ease of use.
 
+---
+
 ## `benmvp test`
 
 Runs a one-time pass of typing, linting & unit tests for the library.
@@ -143,6 +147,8 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 Defaults to all modes. 
 
+---
+
 ## `benmvp start`
 
 Runs the lib's tests in on-going watch mode during active development. When building a library, the best way to validate that it is working is by running tests. Having the tests running in watch mode make it easier to ensure that refactors are non-breaking.
@@ -178,6 +184,8 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 - `unit` - Runs Jest-based unit tests
 
 Defaults to all modes.
+
+---
 
 ## `benmvp build`
 
@@ -229,6 +237,8 @@ Defaults to the current working directory (`.`).
 Continuously generates the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/) or [`npm link`](https://docs.npmjs.com/cli/link)). Aliased as `-w`.
 
 Defaults to `false`.
+
+---
 
 ## More help
 
