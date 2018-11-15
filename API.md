@@ -14,6 +14,34 @@ Creates a new library with infrastructure using `@benmvp/cli`.
 
 It will add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](#benmvp-test), [`benmvp start`](#benmvp-start), and [`benmvp build`](#benmvp-build), respectively. After the `package.json` is created or updated, it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/).
 
+### Examples
+
+`@benmvp/cli` works best with [`npx`](https://github.com/zkat/npx) so that you don't have to globally install it and can always use the latest and greatest version.
+
+Create a new lib named `lib-of-fun` with the default settings (simplest setup):
+
+```sh
+npx @benmvp/cli create lib-of-fun
+```
+
+Add lint verification to an existing library:
+
+```sh
+npx @benmvp/cli create --modes lint
+```
+
+Create a new library named `my-lib` that only outputs ESM format:
+
+```sh
+npx @benmvp/cli create my-lib --formats esm
+```
+
+Add custom setup to an existing library:
+
+```sh
+npx @benmvp/cli create --modes type unit --output-dir ./built --formats esm umd
+```
+
 ### Arguments
 
 #### `[name]`
@@ -61,34 +89,6 @@ Defaults to all modes.
 
 This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
 
-### Examples
-
-`@benmvp/cli` works best with [`npx`](https://github.com/zkat/npx) so that you don't have to globally install it and can always use the latest and greatest version.
-
-Create a new lib named `lib-of-fun` with the default settings (simplest setup):
-
-```sh
-npx @benmvp/cli create lib-of-fun
-```
-
-Add lint verification to an existing library:
-
-```sh
-npx @benmvp/cli create --modes lint
-```
-
-Create a new library named `my-lib` that only outputs ESM format:
-
-```sh
-npx @benmvp/cli create my-lib --formats esm
-```
-
-Add custom setup to an existing library:
-
-```sh
-npx @benmvp/cli create --modes type unit --output-dir ./built --formats esm umd
-```
-
 ### Manual installation
 
 `benmvp create` will automatically add the latest version of `@benmvp/cli` as a dev dependency to your library, even if a `package.json` exists. However, you can manually install it.
@@ -111,18 +111,6 @@ You will want to create scripts to call [`benmvp test`](#benmvp-test), [`benmvp 
 
 Runs a one-time pass of typing, linting & unit tests for the library.
 
-### Arguments
-
-#### `--modes`
-
-A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
-
-- `type` - Runs Typescript type-checking
-- `lint` - Runs ESLint
-- `unit` - Runs Jest-based unit tests
-
-Defaults to all modes. 
-
 ### Examples
 
 To run all modes (default behavior):
@@ -143,10 +131,6 @@ To run typing & linting:
 benmvp start -m type lint
 ```
 
-## `benmvp start`
-
-Runs the lib's tests in on-going watch mode during active development. When building a library, the best way to validate that it is working is by running tests. Having the tests running in watch mode make it easier to ensure that refactors are non-breaking.
-
 ### Arguments
 
 #### `--modes`
@@ -157,7 +141,11 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 - `lint` - Runs ESLint
 - `unit` - Runs Jest-based unit tests
 
-Defaults to all modes.
+Defaults to all modes. 
+
+## `benmvp start`
+
+Runs the lib's tests in on-going watch mode during active development. When building a library, the best way to validate that it is working is by running tests. Having the tests running in watch mode make it easier to ensure that refactors are non-breaking.
 
 ### Examples
 
@@ -179,9 +167,43 @@ To run linting & unit test:
 benmvp start -m lint unit
 ```
 
+### Arguments
+
+#### `--modes`
+
+A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
+
+- `type` - Runs Typescript type-checking
+- `lint` - Runs ESLint
+- `unit` - Runs Jest-based unit tests
+
+Defaults to all modes.
+
 ## `benmvp build`
 
 Builds the library into desired module formats at the specified location.
+
+### Examples
+
+To specify an alternate output directory:
+
+```sh
+benmvp build --output-path ./built
+```
+
+NOTE: You will need to manually update the default `"main"`, `"module"`, `"jsnext:main"`, `"browser"`, and `"types"` properties in your `package.json` to reflect the new location of the built module formats.
+
+To exclude bundled web distribution format:
+
+```sh
+benmvp build --formats esm umd type
+```
+
+To put ESM & web distribution formats in an alternate build location with continuous watch:
+
+```sh
+benmvp build -f esm dist -o ./built -w
+```
 
 ### Arguments
 
@@ -207,28 +229,6 @@ Defaults to the current working directory (`.`).
 Continuously generates the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/) or [`npm link`](https://docs.npmjs.com/cli/link)). Aliased as `-w`.
 
 Defaults to `false`.
-
-### Examples
-
-To specify an alternate output directory:
-
-```sh
-benmvp build --output-path ./built
-```
-
-NOTE: You will need to manually update the default `"main"`, `"module"`, `"jsnext:main"`, `"browser"`, and `"types"` properties in your `package.json` to reflect the new location of the built module formats.
-
-To exclude bundled web distribution format:
-
-```sh
-benmvp build --formats esm umd type
-```
-
-To put ESM & web distribution formats in an alternate build location with continuous watch:
-
-```sh
-benmvp build -f esm dist -o ./built -w
-```
 
 ## More help
 
