@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "A CLI for consistent infra for Ben Ilegbodu's libraries",
   "main": "lib/index.js",
-  "bin": {
-    "benmvp": "./bin/benmvp"
-  },
+  "bin": "./bin/benmvp",
   "repository": "https://github.com/benmvp/benmvp-cli.git",
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
