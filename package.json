@@ -10,9 +10,9 @@
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
-    "start": "echo 'start'",
-    "test": "echo 'test'",
-    "build": "echo 'build'"
+    "start": "./bin/benmvp start",
+    "test": "./bin/benmvp test",
+    "build": "./bin/benmvp build --formats esm umd"
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",

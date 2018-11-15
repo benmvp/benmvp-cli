@@ -13,7 +13,7 @@ const BUILD_FORMATS = {
     describe: 'The module formats to build',
     alias: 'f',
     array: true,
-    default: ['esm', 'umd', 'dist'],
+    default: ['type', 'esm', 'umd', 'dist'],
   },
 }
 const OUTPUT_PATH = {
@@ -36,6 +36,12 @@ const argv = yargs
   .command('build', 'Builds the library into desired module formats', {
     ...BUILD_FORMATS,
     ...OUTPUT_PATH,
+    watch: {
+      describe: 'Update built assets when source files change',
+      alias: 'w',
+      type: 'boolean',
+      default: false,
+    },
   })
   .command(
     ['create [name]', '$0'],
