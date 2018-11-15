@@ -4,4 +4,3 @@ const path = require('path')
 const argv = require('./args')
 
 console.log(argv)
-console.log('Coming soon!')
