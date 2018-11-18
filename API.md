@@ -41,7 +41,7 @@ npx @benmvp/cli create my-lib --formats esm
 Add custom setup to an existing library:
 
 ```sh
-npx @benmvp/cli create --modes type unit --output-dir ./built --formats esm umd
+npx @benmvp/cli create --modes type unit --out ./built --formats esm umd
 ```
 
 ### Arguments
@@ -71,7 +71,7 @@ Defaults to all formats.
 
 This will include the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`) and `"browser"` (`dist` minified) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
-#### `--output-dir`
+#### `--out`
 
 A path (relative or absolute) to the output directory for where the module formats should be built. Aliased as `-o`.
 
@@ -196,7 +196,7 @@ Builds the library into desired module formats at the specified location.
 To specify an alternate output directory:
 
 ```sh
-benmvp build --output-path ./built
+benmvp build --out ./built
 ```
 
 NOTE: You will need to manually update the default `"main"`, `"module"`, `"jsnext:main"`, `"browser"`, and `"types"` properties in your `package.json` to reflect the new location of the built module formats.
@@ -210,7 +210,7 @@ benmvp build --formats esm umd type
 To put ESM & web distribution formats in an alternate build location with continuous watch:
 
 ```sh
-benmvp build -f esm dist --output-path ./built --watch
+benmvp build -f esm dist --out ./built --watch
 ```
 
 ### Arguments
@@ -226,7 +226,7 @@ A space-separated list of the module formats to build. Aliased as `-f`. Availabl
 
 Defaults to all formats.
 
-#### `--output-path`
+#### `--out`
 
 A path (relative or absolute) to the output directory for the built module formats. Aliased as `-o`.
 

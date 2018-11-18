@@ -1,58 +1,26 @@
 const yargs = require('yargs')
-
-const TEST_MODES = {
-  modes: {
-    describe: 'The types/modes of tests to run',
-    alias: 'm',
-    array: true,
-    default: ['type', 'lint', 'unit'],
-  },
-}
-const BUILD_FORMATS = {
-  formats: {
-    describe: 'The module formats to build',
-    alias: 'f',
-    array: true,
-    default: ['type', 'esm', 'umd', 'dist'],
-  },
-}
-const OUTPUT_PATH = {
-  'output-path': {
-    describe: 'Path to the output directory for the built formats',
-    alias: 'o',
-    default: '.',
-    type: 'string',
-  },
-}
+const {
+  CREATE_COMMAND,
+  CREATE_ARGS,
+  TEST_COMMAND,
+  TEST_ARGS,
+  BUILD_COMMAND,
+  BUILD_ARGS,
+  START_COMMAND,
+  START_ARGS,
+} = require('../lib/umd/cli/args')
 
 const argv = yargs
   .version()
-  .command('test', 'Runs linting, typing & unit tests for the library', {
-    ...TEST_MODES,
-  })
-  .command('start', "Runs the lib's tests in watch mode", {
-    ...TEST_MODES,
-  })
-  .command('build', 'Builds the library into desired module formats', {
-    ...BUILD_FORMATS,
-    ...OUTPUT_PATH,
-    watch: {
-      describe: 'Update built assets when source files change',
-      alias: 'w',
-      type: 'boolean',
-      default: false,
-    },
-  })
+  .command(TEST_COMMAND, 'Runs linting, typing & unit tests for the library', TEST_ARGS)
+  .command(START_COMMAND, "Runs the lib's tests in watch mode", START_ARGS)
+  .command(BUILD_COMMAND, 'Builds the library into desired module formats', BUILD_ARGS)
   .command(
-    ['create [name]', '$0'],
+    [`${CREATE_COMMAND} [name]`, '$0'],
     'Creates a new library with test/build infra using @benmvp/cli',
-    {
-      ...BUILD_FORMATS,
-      ...OUTPUT_PATH,
-      ...TEST_MODES,
-    },
+    CREATE_ARGS,
   )
-  .epilog('For more details, visit https://github.com/benmvp/benmvp-cli')
+  .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
   .help().argv
 
 module.exports = argv
