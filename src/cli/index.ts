@@ -1,22 +1,32 @@
-import yargs from 'yargs'
-import {pick} from 'lodash'
+import pick from 'lodash/pick'
 import {create, test, start, build} from '../'
-import {Command, CREATE_ARGS, TEST_ARGS, START_ARGS, BUILD_ARGS, DEFAULT_COMMAND} from './args'
+import {
+  Command,
+  CREATE_ARGS,
+  CREATE_POS_ARGS,
+  TEST_ARGS,
+  START_ARGS,
+  BUILD_ARGS,
+  DEFAULT_COMMAND,
+  parseArgs,
+} from './args'
 
-export const run = (argv: object): Promise<any> => {
-  const [argv_ = DEFAULT_COMMAND] = (argv as yargs.Arguments)._
-
-  const command = argv_ as Command
+export const run = (args: Array<string>): Promise<any> => {
+  const parsedArgs = parseArgs(args)
+  const [firstCommand = DEFAULT_COMMAND] = parsedArgs._
+  const command = firstCommand as Command
 
   switch (command) {
     case 'create':
-      return create(pick(argv, Object.keys(CREATE_ARGS)))
+      return create(
+        pick(parsedArgs, [...Object.keys(CREATE_ARGS), ...Object.keys(CREATE_POS_ARGS)]),
+      )
     case 'build':
-      return build(pick(argv, Object.keys(BUILD_ARGS)))
+      return build(pick(parsedArgs, Object.keys(BUILD_ARGS)))
     case 'test':
-      return test(pick(argv, Object.keys(TEST_ARGS)))
+      return test(pick(parsedArgs, Object.keys(TEST_ARGS)))
     case 'start':
-      return start(pick(argv, Object.keys(START_ARGS)))
+      return start(pick(parsedArgs, Object.keys(START_ARGS)))
   }
 
   throw new Error(

@@ -1,4 +1,4 @@
-import {noop} from 'lodash'
+import noop from 'lodash/noop'
 
 /**
  * Stubs the method on the object with an optional implementation
