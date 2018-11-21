@@ -1,4 +1,4 @@
-import * as cli from '../'
+import {run} from '../'
 
 describe('run', () => {
   describe('unknown command', () => {

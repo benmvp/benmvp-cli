@@ -13,4 +13,10 @@ The CLI exposes the following commands:
 
 ## Node API docs
 
-TBD.
+The Node API exposes the following functions:
+
+- [`create()`](docs/create.md) - Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`
+- [`test()`](docs/test.md) - Runs a one-time pass of the specified modes of tests
+- [`start()`](docs/start.md) - Runs the specified modes of tests in on-going watch mode during active development
+- [`build()`](docs/build.md) - Builds the library into the desired module formats at the specified location
+- [`run()`](docs/run.md) - Parses the specified array of CLI arguments to runs the desired command

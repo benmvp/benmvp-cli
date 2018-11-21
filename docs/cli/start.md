@@ -2,7 +2,7 @@
 
 Runs the library's tests in on-going watch mode during active development. 
 
-When building a library, the best way to validate that it is working is by running tests. Having the tests running in watch mode make it easier to continuously ensure that refactors are non-breaking.
+When building a library, the best way to validate that it is working is by type-checking and running tests. Having the type-checking and tests running in watch mode make it easier to continuously ensure that new code is correct and refactors are non-breaking.
 
 ## Examples
 

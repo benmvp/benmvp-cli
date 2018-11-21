@@ -1,11 +1,12 @@
 import yargs from 'yargs'
+import {ModuleFormat, TestMode, Command} from '../commands/types'
 
 const TEST_MODES = {
   modes: {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['type', 'lint', 'unit'],
+    default: ['type', 'lint', 'unit'] as Array<TestMode>,
   },
 }
 const BUILD_FORMATS = {
@@ -13,7 +14,7 @@ const BUILD_FORMATS = {
     describe: 'The module formats to build',
     alias: 'f',
     array: true,
-    default: ['type', 'esm', 'umd', 'dist'],
+    default: ['type', 'esm', 'umd', 'dist'] as Array<ModuleFormat>,
   },
 }
 const OUTPUT_PATH = {
@@ -48,13 +49,12 @@ export const BUILD_ARGS = {
   },
 }
 
-export const CREATE_COMMAND = 'create'
-export const TEST_COMMAND = 'test'
-export const START_COMMAND = 'start'
-export const BUILD_COMMAND = 'build'
+export const CREATE_COMMAND = 'create' as Command
+export const TEST_COMMAND = 'test' as Command
+export const START_COMMAND = 'start' as Command
+export const BUILD_COMMAND = 'build' as Command
 
 export const DEFAULT_COMMAND = CREATE_COMMAND
-export type Command = 'create' | 'test' | 'start' | 'build'
 
 export const parseArgs = (args: Array<string>) =>
   yargs(args)

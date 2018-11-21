@@ -1,7 +1,6 @@
 import pick from 'lodash/pick'
 import {create, test, start, build} from '../'
 import {
-  Command,
   CREATE_ARGS,
   CREATE_POS_ARGS,
   TEST_ARGS,
@@ -10,8 +9,14 @@ import {
   DEFAULT_COMMAND,
   parseArgs,
 } from './args'
+import {Command, Result} from '../commands/types'
 
-export const run = (args: Array<string>): Promise<any> => {
+/**
+ * Parses the specified array of CLI arguments to run the desired command
+ * @param {Array<string>} args An array of CLI arguments similar to the arguments received by `process.argv` (after the first two elements)
+ * @returns Promise<Result> The result of the executing the command
+ */
+export const run = (args: Array<string>): Promise<Result> => {
   const parsedArgs = parseArgs(args)
   const [firstCommand = DEFAULT_COMMAND] = parsedArgs._
   const command = firstCommand as Command
