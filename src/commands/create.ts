@@ -5,6 +5,6 @@ export default async ({
   out = CREATE_ARGS.out.default,
   modes = CREATE_ARGS.modes.default,
   name = CREATE_POS_ARGS.name.default,
-}): Promise<any> => {
+} = {}): Promise<any> => {
   console.log('run create', {formats, out, modes, name})
 }
