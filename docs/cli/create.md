@@ -2,7 +2,9 @@
 
 Creates a new library set up with infrastructure using `@benmvp/cli`. 
 
-It will add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](#benmvp-test), [`benmvp start`](#benmvp-start), and [`benmvp build`](#benmvp-build), respectively. After the `package.json` is created or updated, it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/).
+It will add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build), respectively. After the `package.json` is created or updated, it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/).
+
+Looking for Node API docs? View companion [`create()` documentation](../api/create.md).
 
 ## Examples
 
@@ -55,7 +57,7 @@ A space-separated list of the module formats to build. Aliased as `-f`. Availabl
 - `umd` - Universal module definition format (Combination of CJS & AMD (asynchronous module definition) fully transpiled to ES5 includes minified version)
 - `dist` - Bundled web distribution (`<script>` include fully transpiled to ES5 w/ a minified version)
 
-Defaults to all formats.
+Optional. Defaults to all formats.
 
 This will include the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`) and `"browser"` (`dist` minified) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
@@ -63,7 +65,9 @@ This will include the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`
 
 A path (relative or absolute) to the output directory for where the module formats should be built. Aliased as `-o`.
 
-Defaults to the current working directory (`.`).
+If you chose `'esm'` as one of the [`formats`](#formats) and choose `'./built'` as the output directory, the ESM files will live at `./built/esm`.
+
+Optional. Defaults to the current working directory (`.`).
 
 This will update the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`), `"browser"` (`dist` minified), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
@@ -75,7 +79,7 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 - `lint` - Runs ESLint
 - `unit` - Runs Jest-based unit tests
 
-Defaults to all modes. 
+Optional. Defaults to all modes. 
 
 This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
 
@@ -101,4 +105,6 @@ You will want to create scripts to call [`benmvp test`](#benmvp-test), [`benmvp 
 
 ## More help
 
-Still unsure of how to use `@benmvp/cli`? [Ask for help](https://github.com/benmvp/benmvp-cli/issues/new)!
+Looking for Node API docs? View companion [`create()` documentation](../api/create.md).
+
+Still unsure of how to use `@benmvp/cli`? [Ask for help](https://github.com/benmvp/benmvp-cli/issues)!

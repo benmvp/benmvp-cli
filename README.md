@@ -1,6 +1,6 @@
 # benmvp CLI
 
-A CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
+A zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
 
 > NOTE: This CLI is still in initial development.
 
@@ -70,7 +70,7 @@ Read the API docs for more on [`benmvp build`](API.md#benmvp-build).
 
 ## Docs
 
-View the full [docs](docs/).
+`@benmvp/cli` has two interfaces: a CLI and a Node API. View the full [docs](docs/).
 
 ## Supported Node Versions
 
