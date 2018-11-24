@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const argv = require('./args')
+const {run} = require('../lib/umd')
 
-console.log(argv)
+const [, , ...args] = process.argv
+
+run(args)

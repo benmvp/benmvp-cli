@@ -1,6 +1,6 @@
 # benmvp CLI
 
-A CLI for consistent infra for Ben Ilegbodu's JavaScript libraries.
+A zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
 
 > NOTE: This CLI is still in initial development.
 
@@ -8,8 +8,9 @@ A CLI for consistent infra for Ben Ilegbodu's JavaScript libraries.
 
 *  [Installation](#installation)
 *  [Quick Usage](#quick-usage)
-*  [API Docs](API.md)
+*  [Docs](docs/)
 *  [Supported Node Versions](#supported-node-versions)
+*  [Technologies Used](#technologies-used)
 *  [Contributing](CONTRIBUTING.md)
 *  [Project philosophy](#project-philosophy)
 *  [License](LICENSE)
@@ -37,16 +38,6 @@ Read the API docs for more on [`benmvp create`](API.md#benmvp-create).
 
 ## Quick Usage
 
-### Developing
-
-```sh
-yarn start
-```
-
-When developing, run `yarn start` (or `npm start`) which will validate Typescript typings, ESLint linting, and Jest tests as you develop and change code.
-
-Read the API docs for more on [`benmvp start`](API.md#benmvp-start).
-
 ### Testing
 
 ```sh
@@ -56,6 +47,16 @@ yarn test
 In your continuous integration (CI) environment, run `yarn test` (or `npm test`) to do a one-time pass of Typescript typings, ESLint linting, and Jest tests. This can also be run locally (i.e. for commit hooks).
 
 Read the API docs for more on [`benmvp test`](API.md#benmvp-test).
+
+### Developing
+
+```sh
+yarn start
+```
+
+When developing, run `yarn start` (or `npm start`) which will validate Typescript typings, ESLint linting, and Jest tests as you develop and change code.
+
+Read the API docs for more on [`benmvp start`](API.md#benmvp-start).
 
 ### Building
 
@@ -67,13 +68,21 @@ In your continuous integration (CI) environment, run `yarn build` (or `npm build
 
 Read the API docs for more on [`benmvp build`](API.md#benmvp-build).
 
-## API
+## Docs
 
-View the full [API docs](API.md).
+`@benmvp/cli` has two interfaces: a CLI and a Node API. View the full [docs](docs/).
 
 ## Supported Node Versions
 
 The CLI has been tested to work in Node 8+.
+
+## Technologies Used
+
+- [TypeScript](https://www.typescriptlang.org/) (type-checking)
+- [Babel](https://babeljs.io/) (transpiling)
+- [Jest](https://jestjs.io/en) (testing & code coverage)
+- [ESLint](http://eslint.org/) (linting)
+- [Yargs](https://github.com/yargs/yargs) (command line argument parsing)
 
 ## Contributing
 
