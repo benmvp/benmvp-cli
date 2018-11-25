@@ -39,7 +39,7 @@ export const CREATE_POS_ARGS = {
   },
 }
 export const TEST_ARGS = TEST_MODES
-export const START_ARGS = TEST_ARGS
+export const START_ARGS = TEST_MODES
 export const BUILD_ARGS = {
   ...BUILD_FORMATS,
   ...OUTPUT_PATH,

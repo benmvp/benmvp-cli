@@ -1,17 +1,17 @@
 import {run} from '../'
-import {create} from '../../commands'
-import {CREATE_ARGS, CREATE_POS_ARGS} from '../args'
+import {create, build, test, start} from '../../commands'
+import {CREATE_ARGS, CREATE_POS_ARGS, BUILD_ARGS, TEST_ARGS, START_ARGS} from '../args'
 
 jest.mock('../../commands')
 
-afterEach(() => {
-  const creatMock = create as jest.Mock
-
-  creatMock.mockReset()
-})
-
 describe('run', () => {
   describe('unknown commands', () => {
+    afterEach(() => {
+      const creatMock = create as jest.Mock
+
+      creatMock.mockReset()
+    })
+
     it('defaults to create command when no args passed', () => {
       run()
 
@@ -47,6 +47,12 @@ describe('run', () => {
   })
 
   describe('create command', () => {
+    afterEach(() => {
+      const createMock = create as jest.Mock
+
+      createMock.mockReset()
+    })
+
     it('defaults args when none are passed', () => {
       run(['create'])
 
@@ -160,7 +166,7 @@ describe('run', () => {
         })
       })
 
-      it('parses user-relative path', () => {
+      it('parses user-relative path (alias)', () => {
         run(['create', '-o', '~/github/benmvp-cli/built'])
 
         expect(create).toBeCalledWith({
@@ -171,7 +177,7 @@ describe('run', () => {
         })
       })
 
-      it('parses absolute path', () => {
+      it('parses absolute path (alias)', () => {
         run(['create', '-o', '/Users/foo.bar/github/benmvp-cli/built'])
 
         expect(create).toBeCalledWith({
@@ -265,9 +271,296 @@ describe('run', () => {
     })
   })
 
-  describe('build command', () => {})
+  describe('build command', () => {
+    afterEach(() => {
+      const buildMock = build as jest.Mock
 
-  describe('test command', () => {})
+      buildMock.mockReset()
+    })
+    it('defaults args when none are passed', () => {
+      run(['build'])
 
-  describe('start command', () => {})
+      expect(build).toBeCalledWith({
+        formats: BUILD_ARGS.formats.default,
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+    })
+
+    describe('formats', () => {
+      it('parses singular format', () => {
+        run(['build', '--formats', 'esm'])
+
+        expect(build).toBeCalledWith({
+          formats: ['esm'],
+          out: BUILD_ARGS.out.default,
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses singular format (alias)', () => {
+        run(['build', '-f', 'dist'])
+
+        expect(build).toBeCalledWith({
+          formats: ['dist'],
+          out: BUILD_ARGS.out.default,
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses plural format', () => {
+        run(['build', '--formats', 'esm', 'umd'])
+
+        expect(build).toBeCalledWith({
+          formats: ['esm', 'umd'],
+          out: BUILD_ARGS.out.default,
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses singular format (alias)', () => {
+        run(['build', '-f', 'type', 'esm'])
+
+        expect(build).toBeCalledWith({
+          formats: ['type', 'esm'],
+          out: BUILD_ARGS.out.default,
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+    })
+
+    describe('output path', () => {
+      it('parses relative path', () => {
+        run(['build', '--out', './built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: './built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses user-relative path', () => {
+        run(['build', '--out', '~/github/benmvp-cli/built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: '~/github/benmvp-cli/built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses absolute path', () => {
+        run(['build', '--out', '/Users/foo.bar/github/benmvp-cli/built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: '/Users/foo.bar/github/benmvp-cli/built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses relative path (alias)', () => {
+        run(['build', '-o', './built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: './built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses user-relative path (alias)', () => {
+        run(['build', '-o', '~/github/benmvp-cli/built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: '~/github/benmvp-cli/built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+
+      it('parses absolute path (alias)', () => {
+        run(['build', '-o', '/Users/foo.bar/github/benmvp-cli/built'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: '/Users/foo.bar/github/benmvp-cli/built',
+          watch: BUILD_ARGS.watch.default,
+        })
+      })
+    })
+
+    describe('watch', () => {
+      it('parses when present', () => {
+        run(['build', '--watch'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: true,
+        })
+      })
+
+      it('parses when present & true', () => {
+        run(['build', '--watch', 'true'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: true,
+        })
+      })
+      it('parses when present & false', () => {
+        run(['build', '--watch', 'false'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: false,
+        })
+      })
+
+      it('parses when present (alias)', () => {
+        run(['build', '-w'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: true,
+        })
+      })
+
+      it('parses when present & true (alias)', () => {
+        run(['build', '-w', 'true'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: true,
+        })
+      })
+      it('parses when present & false (alias)', () => {
+        run(['build', '-w', 'false'])
+
+        expect(build).toBeCalledWith({
+          formats: BUILD_ARGS.formats.default,
+          out: BUILD_ARGS.out.default,
+          watch: false,
+        })
+      })
+    })
+
+    describe('combination', () => {
+      it('parses multiple arguments', () => {
+        run(['build', '--out', './output', '--watch', '--formats', 'esm', 'umd'])
+
+        expect(build).toBeCalledWith({
+          formats: ['esm', 'umd'],
+          out: './output',
+          watch: true,
+        })
+      })
+
+      it('parses multiple arguments (aliases)', () => {
+        run(['build', '-w', '-o', './built', '-f', 'dist', 'type'])
+
+        expect(build).toBeCalledWith({
+          formats: ['dist', 'type'],
+          out: './built',
+          watch: true,
+        })
+      })
+    })
+  })
+
+  describe('test command', () => {
+    afterEach(() => {
+      const testMock = test as jest.Mock
+
+      testMock.mockReset()
+    })
+
+    it('defaults args when none are passed', () => {
+      run(['test'])
+
+      expect(test).toBeCalledWith({
+        modes: TEST_ARGS.modes.default,
+      })
+    })
+
+    describe('test modes', () => {
+      it('parses singular mode', () => {
+        run(['test', '--modes', 'lint'])
+
+        expect(test).toBeCalledWith({
+          modes: ['lint'],
+        })
+      })
+
+      it('parses multiple modes', () => {
+        run(['test', '--modes', 'lint', 'unit'])
+
+        expect(test).toBeCalledWith({
+          modes: ['lint', 'unit'],
+        })
+      })
+
+      it('parses singular mode (alias)', () => {
+        run(['test', '-m', 'type'])
+
+        expect(test).toBeCalledWith({
+          modes: ['type'],
+        })
+      })
+
+      it('parses multiple modes (alias)', () => {
+        run(['test', '-m', 'lint', 'unit'])
+
+        expect(test).toBeCalledWith({
+          modes: ['lint', 'unit'],
+        })
+      })
+    })
+  })
+
+  describe('start command', () => {
+    afterEach(() => {
+      const startMock = test as jest.Mock
+
+      startMock.mockReset()
+    })
+
+    it('defaults args when none are passed', () => {
+      run(['start'])
+
+      expect(start).toBeCalledWith({modes: START_ARGS.modes.default})
+    })
+
+    describe('start modes', () => {
+      it('parses singular mode', () => {
+        run(['start', '--modes', 'lint'])
+
+        expect(start).toBeCalledWith({modes: ['lint']})
+      })
+
+      it('parses multiple modes', () => {
+        run(['start', '--modes', 'lint', 'unit'])
+
+        expect(start).toBeCalledWith({modes: ['lint', 'unit']})
+      })
+
+      it('parses singular mode (alias)', () => {
+        run(['start', '-m', 'type'])
+
+        expect(start).toBeCalledWith({modes: ['type']})
+      })
+
+      it('parses multiple modes (alias)', () => {
+        run(['start', '-m', 'lint', 'unit'])
+
+        expect(start).toBeCalledWith({modes: ['lint', 'unit']})
+      })
+    })
+  })
 })
