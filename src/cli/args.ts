@@ -22,7 +22,7 @@ const OUTPUT_PATH = {
     describe: 'Path to the output directory for the built formats',
     alias: 'o',
     default: '.',
-    type: 'string',
+    string: true,
   },
 }
 
@@ -33,7 +33,9 @@ export const CREATE_ARGS = {
 }
 export const CREATE_POS_ARGS = {
   name: {
+    description: 'Name of the library to create',
     default: 'my-awesome-lib',
+    string: true,
   },
 }
 export const TEST_ARGS = TEST_MODES
@@ -65,7 +67,9 @@ export const parseArgs = (args: Array<string>) =>
     .command(
       [`${CREATE_COMMAND} [name]`, '$0'],
       'Creates a new library with test/build infra using @benmvp/cli',
-      CREATE_ARGS,
+      (commandYargs: yargs.Argv) => {
+        commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name)
+      },
     )
     .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
     .help().argv
