@@ -1,6 +1,10 @@
-import {TestMode} from './types'
+import {TestMode} from '../types'
 
-const VALIDATE_TEST_MODES = {type: 1, lint: 1, unit: 1}
+const VALID_TEST_MODES = {
+  type: 1,
+  // lint: 1,
+  unit: 1,
+}
 
 /**
  * Validates whether all the specified modes are valid
@@ -9,7 +13,7 @@ const VALIDATE_TEST_MODES = {type: 1, lint: 1, unit: 1}
  * @throws An error if any of the modes are invalid
  */
 export const modesAreValid = (modes: Array<TestMode>) => {
-  const invalidModes = modes.filter(mode => !(mode in VALIDATE_TEST_MODES))
+  const invalidModes = modes.filter(mode => !(mode in VALID_TEST_MODES))
 
   if (invalidModes.length) {
     throw new Error(`Invalid test modes specified: ${invalidModes}`)

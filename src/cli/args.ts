@@ -6,7 +6,7 @@ const TEST_MODES = {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['type', 'lint', 'unit'] as Array<TestMode>,
+    default: ['type', /*'lint',*/ 'unit'] as Array<TestMode>,
   },
 }
 const BUILD_FORMATS = {
@@ -26,11 +26,7 @@ const OUTPUT_PATH = {
   },
 }
 
-export const CREATE_ARGS = {
-  ...BUILD_FORMATS,
-  ...OUTPUT_PATH,
-  ...TEST_MODES,
-}
+export const CREATE_ARGS = {...BUILD_FORMATS, ...OUTPUT_PATH, ...TEST_MODES}
 export const CREATE_POS_ARGS = {
   name: {
     description: 'Name of the library to create',
@@ -38,8 +34,12 @@ export const CREATE_POS_ARGS = {
     string: true,
   },
 }
-export const TEST_ARGS = TEST_MODES
-export const START_ARGS = TEST_MODES
+export const TEST_ARGS = {
+  ...TEST_MODES,
+}
+export const START_ARGS = {
+  ...TEST_MODES,
+}
 export const BUILD_ARGS = {
   ...BUILD_FORMATS,
   ...OUTPUT_PATH,
