@@ -35,7 +35,7 @@ describe('getJestArgs', () => {
 
   it('returns single project when single valid mode is specified', () => {
     const actual = getJestArgs({modes: ['type']})
-    expect(actual).toEqual(['--projects', expect.any(String)])
+    expect(actual).toEqual(['--projects', expect.stringContaining('project-type.js')])
   })
 
   it('returns multiple projects when multiple valid modes are specified', () => {

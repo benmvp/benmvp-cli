@@ -35,7 +35,7 @@ export const modesAreValid = (modes: Array<TestMode>) => {
  * @param {Array<TestMode>} options.modes List of the types or modes of tests to run
  * @returns {Array<string>} The array of arguments
  */
-export const getJestArgs = ({modes}: {modes: Array<TestMode>}) => {
+export const getJestArgs = ({modes}: {modes: Array<TestMode>}): Array<string> => {
   const validModes = modes.filter(mode => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {

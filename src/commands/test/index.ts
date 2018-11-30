@@ -1,7 +1,7 @@
-import {run} from 'jest'
 import {TEST_ARGS} from '../../cli/args'
 import {Result} from '../types'
 import {getJestArgs} from './utils'
+import runJest from './run-jest'
 
 /**
  * Runs a one-time pass of the specified modes of tests
@@ -11,12 +11,12 @@ import {getJestArgs} from './utils'
  */
 export default async ({modes = TEST_ARGS.modes.default} = {}): Promise<Result> => {
   try {
-    await run(getJestArgs({modes}))
-  } catch (ex) {
+    await runJest(getJestArgs({modes}))
+  } catch (error) {
     return {
       code: 1,
       message: 'Error running test command',
-      error: ex,
+      error,
     }
   }
 
