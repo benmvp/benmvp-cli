@@ -8,6 +8,7 @@ import {Result} from './types'
  * @param {Array<ModuleFormat>} [options.formats] A list of the module formats to build
  * @param {string} [options.out] A path (relative or absolute) to the output directory for the built module formats
  * @param {Array<TestMode>} [options.modes] List of the types or modes of tests to run
+ * @returns {Promise<Result>} The result of executing the create
  */
 export default async ({
   name = CREATE_POS_ARGS.name.default,

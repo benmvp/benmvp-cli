@@ -29,7 +29,13 @@ export const modesAreValid = (modes: Array<TestMode>) => {
   return true
 }
 
-export const getArgs = ({modes}: {modes: Array<TestMode>}) => {
+/**
+ * Retrieves the arguments to pass to Jest based on the specified options
+ * @param {Object} options The configuration options for testing the library
+ * @param {Array<TestMode>} options.modes List of the types or modes of tests to run
+ * @returns {Array<string>} The array of arguments
+ */
+export const getJestArgs = ({modes}: {modes: Array<TestMode>}) => {
   const validModes = modes.filter(mode => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {
