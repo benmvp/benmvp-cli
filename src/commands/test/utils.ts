@@ -14,22 +14,6 @@ const VALID_TEST_MODES = {
 } as ValidTestModes
 
 /**
- * Validates whether all the specified modes are valid
- * @param modes List of test modes/types to validate
- * @returns True if all of the modes are valid
- * @throws An error if any of the modes are invalid
- */
-export const modesAreValid = (modes: Array<TestMode>) => {
-  const invalidModes = modes.filter(mode => !(mode in VALID_TEST_MODES))
-
-  if (invalidModes.length) {
-    throw new Error(`Invalid test modes specified: ${invalidModes}`)
-  }
-
-  return true
-}
-
-/**
  * Retrieves the arguments to pass to Jest based on the specified options
  * @param {Object} options The configuration options for testing the library
  * @param {Array<TestMode>} options.modes List of the types or modes of tests to run
