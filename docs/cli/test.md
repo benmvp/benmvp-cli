@@ -2,6 +2,8 @@
 
 Runs a one-time pass of typing, linting, unit tests & code coverage for the library.
 
+> NOTE: `benmvp test` assumes your source files live within the `src/` folder of the current working directory where the script is being called.
+
 Looking for Node API docs? View companion [`test()` documentation](../api/test.md).
 
 ## Examples
@@ -30,9 +32,9 @@ benmvp start --modes type lint
 
 A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
 
-- `type` - Runs Typescript type-checking
-- `lint` - Runs ESLint
-- `unit` - Runs Jest-based unit tests
+- `'type'` - Runs Typescript type-checking (files ending in `.ts`)
+- `'lint'` - Runs ESLint (files ending in `.ts`)
+- `'unit'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes.
 

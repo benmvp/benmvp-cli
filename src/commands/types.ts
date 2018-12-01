@@ -3,5 +3,7 @@ export type ModuleFormat = 'type' | 'esm' | 'umd' | 'dist'
 export type TestMode = 'type' | 'lint' | 'unit'
 
 export interface Result {
-  code: number
+  readonly code?: number
+  readonly error?: Error
+  readonly message?: string
 }

@@ -6,7 +6,7 @@ const TEST_MODES = {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['type', 'lint', 'unit'] as Array<TestMode>,
+    default: ['type', /*'lint',*/ 'unit'] as Array<TestMode>,
   },
 }
 const BUILD_FORMATS = {
@@ -22,22 +22,24 @@ const OUTPUT_PATH = {
     describe: 'Path to the output directory for the built formats',
     alias: 'o',
     default: '.',
-    type: 'string',
+    string: true,
   },
 }
 
-export const CREATE_ARGS = {
-  ...BUILD_FORMATS,
-  ...OUTPUT_PATH,
-  ...TEST_MODES,
-}
+export const CREATE_ARGS = {...BUILD_FORMATS, ...OUTPUT_PATH, ...TEST_MODES}
 export const CREATE_POS_ARGS = {
   name: {
+    description: 'Name of the library to create',
     default: 'my-awesome-lib',
+    string: true,
   },
 }
-export const TEST_ARGS = TEST_MODES
-export const START_ARGS = TEST_ARGS
+export const TEST_ARGS = {
+  ...TEST_MODES,
+}
+export const START_ARGS = {
+  ...TEST_MODES,
+}
 export const BUILD_ARGS = {
   ...BUILD_FORMATS,
   ...OUTPUT_PATH,
@@ -65,7 +67,9 @@ export const parseArgs = (args: Array<string>) =>
     .command(
       [`${CREATE_COMMAND} [name]`, '$0'],
       'Creates a new library with test/build infra using @benmvp/cli',
-      CREATE_ARGS,
+      (commandYargs: yargs.Argv) => {
+        commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name)
+      },
     )
     .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
     .help().argv
