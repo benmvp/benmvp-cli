@@ -1,15 +1,13 @@
 language: node_js
 node_js:
-# Removed until v11 bug is resolve see #43
-- "node"
-  - "10"
-  - "8"
+  - 'node'
+  - '10'
+  - '8'
 
 # Run the the test
 script:
   - yarn test
   # - yarn run build
-
 # Using semantic-release, deploy a new version of the library
 # We're running multiple node jobs so running on lowest allowed
 # Node version
