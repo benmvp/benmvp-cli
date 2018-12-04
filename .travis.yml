@@ -6,8 +6,9 @@ node_js:
 
 # Run the the test
 script:
-  - yarn test
   # - yarn run build
+  - npx babel src --out-dir lib/umd --extensions ".ts,.js"
+  - yarn test
 # Using semantic-release, deploy a new version of the library
 # We're running multiple node jobs so running on lowest allowed
 # Node version
