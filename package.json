@@ -11,9 +11,11 @@
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
+    "prestart": "yarn run build",
     "start": "./bin/benmvp start",
+    "pretest": "yarn run build",
     "test": "./bin/benmvp test",
-    "build": "./bin/benmvp build --formats esm umd"
+    "build": "./bin/benmvp build --formats umd"
   },
   "engines": {
     "node": ">= 8"
