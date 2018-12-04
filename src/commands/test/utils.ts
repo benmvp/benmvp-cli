@@ -7,6 +7,11 @@ interface ValidTestModes {
   unit: string
   [index: string]: string
 }
+export interface Args {
+  modes: Array<TestMode>
+  watch: boolean
+}
+
 const VALID_TEST_MODES = {
   type: resolve(__dirname, 'project-type.js'),
   // lint: resolve(__dirname, 'project-lint.js'),
@@ -17,9 +22,16 @@ const VALID_TEST_MODES = {
  * Retrieves the arguments to pass to Jest based on the specified options
  * @param {Object} options The configuration options for testing the library
  * @param {Array<TestMode>} options.modes List of the types or modes of tests to run
+ * @param {boolean} options.watch Whether or not to re-run tests as source files change
  * @returns {Array<string>} The array of arguments
  */
-export const getJestArgs = ({modes}: {modes: Array<TestMode>}): Array<string> => {
+export const getJestArgs = ({modes, watch}: Args): Array<string> => {
+  let jestArgs = [] as Array<string>
+
+  if (watch) {
+    jestArgs = [...jestArgs, '--watch']
+  }
+
   const validModes = modes.filter(mode => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {
@@ -28,5 +40,7 @@ export const getJestArgs = ({modes}: {modes: Array<TestMode>}): Array<string> =>
 
   const projects = validModes.map(mode => VALID_TEST_MODES[mode])
 
-  return ['--projects', ...projects]
+  jestArgs = [...jestArgs, '--projects', ...projects]
+
+  return jestArgs
 }

@@ -58,6 +58,12 @@ An `Array` of the types or modes of tests to run. Available modes:
 
 Optional. Defaults to all modes when unspecified. 
 
+### `watch`
+
+A flag indicating whether or not to continuously run the tests whenever source files change.
+
+Optional. Defaults to `false`.
+
 ## Return Value
 
 `test()` returns a `Promise`.

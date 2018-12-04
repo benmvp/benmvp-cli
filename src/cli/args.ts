@@ -36,6 +36,12 @@ export const CREATE_POS_ARGS = {
 }
 export const TEST_ARGS = {
   ...TEST_MODES,
+  watch: {
+    describe: 'Re-run tests when source files change',
+    alias: 'w',
+    type: 'boolean',
+    default: false,
+  },
 }
 export const START_ARGS = {
   ...TEST_MODES,

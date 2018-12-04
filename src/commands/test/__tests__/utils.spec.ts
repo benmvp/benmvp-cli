@@ -1,49 +1,63 @@
-import {getJestArgs} from '../utils'
+import {getJestArgs, Args} from '../utils'
+import {TestMode} from '../../types'
 
 describe('getJestArgs', () => {
-  it('throws an error if no modes are specified', () => {
+  it('throws an error if no args are specified', () => {
     const tryGet = () => {
-      getJestArgs({})
+      const args = {} as Args
+      getJestArgs(args)
     }
 
     expect(tryGet).toThrowError()
   })
 
-  it('throws an error if empty modes are specified', () => {
-    const tryGet = () => {
-      getJestArgs({modes: []})
-    }
+  describe('modes', () => {
+    const DUMMY_MODE = 'foo' as TestMode
 
-    expect(tryGet).toThrowError()
+    it('throws an error if empty modes are specified', () => {
+      const tryGet = () => {
+        getJestArgs({modes: [], watch: false})
+      }
+
+      expect(tryGet).toThrowError()
+    })
+
+    it('throws an error if specified mode does not exist', () => {
+      const tryGet = () => {
+        getJestArgs({modes: [DUMMY_MODE], watch: false})
+      }
+
+      expect(tryGet).toThrowError()
+    })
+
+    it('throws an error if modes has a mix of valid and invalid', () => {
+      const tryGet = () => {
+        getJestArgs({modes: ['type', DUMMY_MODE], watch: false})
+      }
+
+      expect(tryGet).toThrowError()
+    })
+
+    it('returns single project when single valid mode is specified', () => {
+      const actual = getJestArgs({modes: ['type'], watch: false})
+      expect(actual).toEqual(['--projects', expect.stringContaining('project-type.js')])
+    })
+
+    it('returns multiple projects when multiple valid modes are specified', () => {
+      const actual = getJestArgs({modes: ['type', 'unit'], watch: false})
+      expect(actual).toEqual([
+        '--projects',
+        expect.stringContaining('project-type.js'),
+        expect.stringContaining('project-unit.js'),
+      ])
+    })
   })
 
-  it('throws an error if specified mode does not exist', () => {
-    const tryGet = () => {
-      getJestArgs({modes: ['foo']})
-    }
+  describe('watch', () => {
+    it('includes --watch flag when watch option is specified as true', () => {
+      const actual = getJestArgs({watch: true, modes: ['unit']})
 
-    expect(tryGet).toThrowError()
-  })
-
-  it('throws an error if modes has a mix of valid and invalid', () => {
-    const tryGet = () => {
-      getJestArgs({modes: ['type', 'foo']})
-    }
-
-    expect(tryGet).toThrowError()
-  })
-
-  it('returns single project when single valid mode is specified', () => {
-    const actual = getJestArgs({modes: ['type']})
-    expect(actual).toEqual(['--projects', expect.stringContaining('project-type.js')])
-  })
-
-  it('returns multiple projects when multiple valid modes are specified', () => {
-    const actual = getJestArgs({modes: ['type', 'unit']})
-    expect(actual).toEqual([
-      '--projects',
-      expect.stringContaining('project-type.js'),
-      expect.stringContaining('project-unit.js'),
-    ])
+      expect(actual).toEqual(['--watch', '--projects', expect.stringContaining('project-unit.js')])
+    })
   })
 })

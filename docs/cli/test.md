@@ -38,6 +38,12 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 Optional. Defaults to all modes.
 
+### `--watch`
+
+A flag indicating whether or not to continuously run the tests whenever source files change. Aliased as `-w`.
+
+Optional. Defaults to `false`.
+
 ---
 
 ## More help
