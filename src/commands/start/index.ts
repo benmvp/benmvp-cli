@@ -1,5 +1,6 @@
-import {START_ARGS} from '../cli/args'
-import {Result} from './types'
+import {START_ARGS} from '../../cli/args'
+import {Result} from '../types'
+import test from '../test'
 
 /**
  * Runs the specified modes of tests in on-going watch mode during active development
@@ -7,11 +8,9 @@ import {Result} from './types'
  * @param {Array<TestMode>} [options.modes] List of the types or modes of tests to run
  * @returns {Promise<Result>} The result of executing the start
  */
-export default async ({modes = START_ARGS.modes.default} = {}): Promise<Result> => {
-  // npx jest --config config/jest/config.js --watch
-  console.log('run start')
-
-  return {
-    code: 0,
-  }
+export default ({modes = START_ARGS.modes.default} = {}): Promise<Result> => {
+  return test({
+    modes,
+    watch: true,
+  })
 }

@@ -486,6 +486,7 @@ describe('run', () => {
 
       expect(test).toBeCalledWith({
         modes: TEST_ARGS.modes.default,
+        watch: TEST_ARGS.watch.default,
       })
     })
 
@@ -495,6 +496,7 @@ describe('run', () => {
 
         expect(test).toBeCalledWith({
           modes: ['lint'],
+          watch: TEST_ARGS.watch.default,
         })
       })
 
@@ -503,15 +505,14 @@ describe('run', () => {
 
         expect(test).toBeCalledWith({
           modes: ['lint', 'unit'],
+          watch: TEST_ARGS.watch.default,
         })
       })
 
       it('parses singular mode (alias)', () => {
         run(['test', '-m', 'type'])
 
-        expect(test).toBeCalledWith({
-          modes: ['type'],
-        })
+        expect(test).toBeCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
       })
 
       it('parses multiple modes (alias)', () => {
@@ -519,7 +520,35 @@ describe('run', () => {
 
         expect(test).toBeCalledWith({
           modes: ['lint', 'unit'],
+          watch: TEST_ARGS.watch.default,
         })
+      })
+
+      it('parses watch', () => {
+        run(['test', '--watch'])
+
+        expect(test).toBeCalledWith({
+          modes: TEST_ARGS.modes.default,
+          watch: true,
+        })
+      })
+
+      it('parses watch (alias)', () => {
+        run(['test', '-w'])
+
+        expect(test).toBeCalledWith({modes: TEST_ARGS.modes.default, watch: true})
+      })
+
+      it('parses all args', () => {
+        run(['test', '--watch', '--modes', 'unit', 'type'])
+
+        expect(test).toBeCalledWith({modes: ['unit', 'type'], watch: true})
+      })
+
+      it('parses all args (aliases)', () => {
+        run(['test', '-m', 'type', 'lint', '-w'])
+
+        expect(test).toBeCalledWith({modes: ['type', 'lint'], watch: true})
       })
     })
   })
