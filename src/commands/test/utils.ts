@@ -14,7 +14,7 @@ export interface Args {
 
 const VALID_TEST_MODES = {
   type: resolve(__dirname, 'project-type.js'),
-  // lint: resolve(__dirname, 'project-lint.js'),
+  lint: resolve(__dirname, 'project-lint.js'),
   unit: resolve(__dirname, 'project-unit.js'),
 } as ValidTestModes
 
@@ -32,13 +32,13 @@ export const getJestArgs = ({modes, watch}: Args): Array<string> => {
     jestArgs = [...jestArgs, '--watch']
   }
 
-  const validModes = modes.filter(mode => mode in VALID_TEST_MODES)
+  const validModes = modes.filter((mode) => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {
     throw new Error(`Invalid test modes specified: ${modes}`)
   }
 
-  const projects = validModes.map(mode => VALID_TEST_MODES[mode])
+  const projects = validModes.map((mode) => VALID_TEST_MODES[mode])
 
   jestArgs = [...jestArgs, '--projects', ...projects]
 

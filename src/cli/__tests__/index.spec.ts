@@ -1,5 +1,5 @@
-import {run} from '../'
-import {create, build, test, start} from '../../commands'
+import {run} from '..'
+import {create, build, test as testCommand, start} from '../../commands'
 import {CREATE_ARGS, CREATE_POS_ARGS, BUILD_ARGS, TEST_ARGS, START_ARGS} from '../args'
 
 jest.mock('../../commands')
@@ -109,7 +109,7 @@ describe('run', () => {
         })
       })
 
-      it('parses singular format (alias)', () => {
+      it('parses plural format (alias)', () => {
         run(['create', '-f', 'type', 'esm'])
 
         expect(create).toBeCalledWith({
@@ -318,7 +318,7 @@ describe('run', () => {
         })
       })
 
-      it('parses singular format (alias)', () => {
+      it('parses plural format (alias)', () => {
         run(['build', '-f', 'type', 'esm'])
 
         expect(build).toBeCalledWith({
@@ -476,7 +476,7 @@ describe('run', () => {
 
   describe('test command', () => {
     afterEach(() => {
-      const testMock = test as jest.Mock
+      const testMock = testCommand as jest.Mock
 
       testMock.mockReset()
     })
@@ -484,7 +484,7 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['test'])
 
-      expect(test).toBeCalledWith({
+      expect(testCommand).toBeCalledWith({
         modes: TEST_ARGS.modes.default,
         watch: TEST_ARGS.watch.default,
       })
@@ -494,7 +494,7 @@ describe('run', () => {
       it('parses singular mode', () => {
         run(['test', '--modes', 'lint'])
 
-        expect(test).toBeCalledWith({
+        expect(testCommand).toBeCalledWith({
           modes: ['lint'],
           watch: TEST_ARGS.watch.default,
         })
@@ -503,7 +503,7 @@ describe('run', () => {
       it('parses multiple modes', () => {
         run(['test', '--modes', 'lint', 'unit'])
 
-        expect(test).toBeCalledWith({
+        expect(testCommand).toBeCalledWith({
           modes: ['lint', 'unit'],
           watch: TEST_ARGS.watch.default,
         })
@@ -512,13 +512,13 @@ describe('run', () => {
       it('parses singular mode (alias)', () => {
         run(['test', '-m', 'type'])
 
-        expect(test).toBeCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
+        expect(testCommand).toBeCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
       })
 
       it('parses multiple modes (alias)', () => {
         run(['test', '-m', 'lint', 'unit'])
 
-        expect(test).toBeCalledWith({
+        expect(testCommand).toBeCalledWith({
           modes: ['lint', 'unit'],
           watch: TEST_ARGS.watch.default,
         })
@@ -527,7 +527,7 @@ describe('run', () => {
       it('parses watch', () => {
         run(['test', '--watch'])
 
-        expect(test).toBeCalledWith({
+        expect(testCommand).toBeCalledWith({
           modes: TEST_ARGS.modes.default,
           watch: true,
         })
@@ -536,26 +536,26 @@ describe('run', () => {
       it('parses watch (alias)', () => {
         run(['test', '-w'])
 
-        expect(test).toBeCalledWith({modes: TEST_ARGS.modes.default, watch: true})
+        expect(testCommand).toBeCalledWith({modes: TEST_ARGS.modes.default, watch: true})
       })
 
       it('parses all args', () => {
         run(['test', '--watch', '--modes', 'unit', 'type'])
 
-        expect(test).toBeCalledWith({modes: ['unit', 'type'], watch: true})
+        expect(testCommand).toBeCalledWith({modes: ['unit', 'type'], watch: true})
       })
 
       it('parses all args (aliases)', () => {
         run(['test', '-m', 'type', 'lint', '-w'])
 
-        expect(test).toBeCalledWith({modes: ['type', 'lint'], watch: true})
+        expect(testCommand).toBeCalledWith({modes: ['type', 'lint'], watch: true})
       })
     })
   })
 
   describe('start command', () => {
     afterEach(() => {
-      const startMock = test as jest.Mock
+      const startMock = start as jest.Mock
 
       startMock.mockReset()
     })

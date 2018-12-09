@@ -9,15 +9,17 @@ import {Result} from './types'
  * @param {boolean} [options.watch] A flag indicating whether or not to continuously generate the built module formats whenever source files change
  * @returns {Promise<Result>} The result of executing the build
  */
-export default async ({
+export default async({
   formats = BUILD_ARGS.formats.default,
   out = BUILD_ARGS.out.default,
   watch = BUILD_ARGS.watch.default,
 } = {}): Promise<Result> => {
-  // npx babel src --out-dir lib/umd --extensions ".ts,.js"
+  // npx babel src --out-dir lib/umd --extensions ".ts,.js,.json"
+  // eslint-disable-next-line no-console
   console.log('run build', {formats, out, watch})
 
   return {
     code: 0,
   }
 }
+

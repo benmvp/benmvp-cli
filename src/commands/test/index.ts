@@ -10,7 +10,7 @@ import runJest from './run-jest'
  * @param {boolean} [options.watch] Whether or not to re-run tests as source files change
  * @returns {Promise<Result>} The result of executing the test
  */
-export default async ({
+export default async({
   modes = TEST_ARGS.modes.default,
   watch = TEST_ARGS.watch.default,
 } = {}): Promise<Result> => {

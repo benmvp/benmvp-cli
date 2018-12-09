@@ -1,5 +1,5 @@
 import pick from 'lodash/pick'
-import {create, test, start, build} from '../'
+import {create, test as testCommand, start, build} from '..'
 import {
   CREATE_ARGS,
   CREATE_POS_ARGS,
@@ -29,12 +29,12 @@ export const run = (args: Array<string> = []): Promise<Result> => {
     case 'build':
       return build(pick(parsedArgs, Object.keys(BUILD_ARGS)))
     case 'test':
-      return test(pick(parsedArgs, Object.keys(TEST_ARGS)))
+      return testCommand(pick(parsedArgs, Object.keys(TEST_ARGS)))
     case 'start':
       return start(pick(parsedArgs, Object.keys(START_ARGS)))
+    default:
+      throw new Error(
+        `Command "${command}" is an invalid command. Pass "--help" for full list of commands.`,
+      )
   }
-
-  throw new Error(
-    `Command "${command}" is an invalid command. Pass "--help" for full list of commands.`,
-  )
 }

@@ -1,7 +1,0 @@
-{
-  "cliOptions": {
-    "config": ".eslintrc.json",
-    "ext": [".ts"],
-    "cache": true
-  }
-}
