@@ -10,7 +10,7 @@ import {Result} from './types'
  * @param {Array<TestMode>} [options.modes] List of the types or modes of tests to run
  * @returns {Promise<Result>} The result of executing the create
  */
-export default async({
+export default async ({
   name: libraryName = CREATE_POS_ARGS.name.default,
   formats = CREATE_ARGS.formats.default,
   out = CREATE_ARGS.out.default,
@@ -23,4 +23,3 @@ export default async({
     code: 0,
   }
 }
-
