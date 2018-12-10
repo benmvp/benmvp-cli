@@ -15,7 +15,7 @@
     "start": "./bin/benmvp start",
     "pretest": "yarn run build",
     "test": "./bin/benmvp test",
-    "build": "./bin/benmvp build --formats umd"
+    "build": "babel src --out-dir lib/umd --extensions '.ts,.js' --copy-files"
   },
   "engines": {
     "node": ">= 8"
