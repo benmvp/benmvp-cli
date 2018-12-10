@@ -12,6 +12,10 @@ export interface Args {
   watch: boolean
 }
 
+// NOTE: Ideally we'd point to project configuration objects for
+// each type instead of files that contain the configuration, but
+// Jest kept throwing an error even though it says it supports the
+// functionality. See: https://github.com/facebook/jest/issues/7415
 const VALID_TEST_MODES = {
   type: resolve(__dirname, 'project-type.js'),
   lint: resolve(__dirname, 'project-lint.js'),

@@ -2,7 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/benmvp/benmvp-cli.svg)](https://greenkeeper.io/)
 
-A zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
+A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
 
 > NOTE: This CLI is still in initial development.
 
