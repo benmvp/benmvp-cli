@@ -11,12 +11,13 @@ import {Result} from './types'
  * @returns {Promise<Result>} The result of executing the create
  */
 export default async ({
-  name = CREATE_POS_ARGS.name.default,
+  name: libraryName = CREATE_POS_ARGS.name.default,
   formats = CREATE_ARGS.formats.default,
   out = CREATE_ARGS.out.default,
   modes = CREATE_ARGS.modes.default,
 } = {}): Promise<Result> => {
-  console.log('run create', {formats, out, modes, name})
+  // eslint-disable-next-line no-console
+  console.log('run create', {formats, out, modes, libraryName})
 
   return {
     code: 0,

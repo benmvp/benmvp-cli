@@ -1,4 +1,4 @@
-import test from '..'
+import testCommand from '..'
 import runJest from '../run-jest'
 import {TestMode} from '../../types'
 
@@ -6,7 +6,7 @@ jest.mock('../run-jest')
 
 describe('error cases', () => {
   it('returns an error w/ empty modes', async () => {
-    const result = await test({modes: []})
+    const result = await testCommand({modes: []})
 
     expect(result).toEqual({
       code: 1,
@@ -17,7 +17,7 @@ describe('error cases', () => {
 
   it('returns an error w/ invalid mode', async () => {
     const DUMMY_MODE = 'foo' as TestMode
-    const result = await test({modes: [DUMMY_MODE]})
+    const result = await testCommand({modes: [DUMMY_MODE]})
 
     expect(result).toEqual({
       code: 1,
@@ -28,7 +28,7 @@ describe('error cases', () => {
 
   it('returns an error if jest fails (for some reason)', async () => {
     runJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
-    const result = await test({modes: ['unit']})
+    const result = await testCommand({modes: ['unit']})
 
     expect(result).toEqual({
       code: 1,
@@ -46,11 +46,12 @@ describe('success cases', () => {
   })
 
   it('calls jest with args and returns success when no options are passed', async () => {
-    const result = await test()
+    const result = await testCommand()
 
     expect(runJest).toHaveBeenCalledWith([
       '--projects',
       expect.stringContaining('project-type.js'),
+      expect.stringContaining('project-lint.js'),
       expect.stringContaining('project-unit.js'),
     ])
 
@@ -59,11 +60,12 @@ describe('success cases', () => {
 
   describe('modes', () => {
     it('calls jest with args and returns success when no modes are passed', async () => {
-      const result = await test({})
+      const result = await testCommand({})
 
       expect(runJest).toHaveBeenCalledWith([
         '--projects',
         expect.stringContaining('project-type.js'),
+        expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
       ])
 
@@ -71,7 +73,7 @@ describe('success cases', () => {
     })
 
     it('calls jest with args and returns success when valid modes are passed', async () => {
-      const result = await test({modes: ['unit']})
+      const result = await testCommand({modes: ['unit']})
 
       expect(runJest).toHaveBeenCalledWith([
         '--projects',
@@ -84,7 +86,7 @@ describe('success cases', () => {
 
   describe('watch', () => {
     it('calls jest with args and returns success when no watch flag is passed', async () => {
-      const result = await test({modes: ['type']})
+      const result = await testCommand({modes: ['type']})
 
       expect(runJest).toHaveBeenCalledWith([
         '--projects',
@@ -95,12 +97,12 @@ describe('success cases', () => {
     })
 
     it('calls jest with args and returns success when watch flag is passed', async () => {
-      const result = await test({watch: true, modes: ['type']})
+      const result = await testCommand({watch: true, modes: ['lint']})
 
       expect(runJest).toHaveBeenCalledWith([
         '--watch',
         '--projects',
-        expect.stringContaining('project-type.js'),
+        expect.stringContaining('project-lint.js'),
       ])
 
       expect(result).toEqual({code: 0})

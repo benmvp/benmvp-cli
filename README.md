@@ -1,8 +1,18 @@
-# benmvp CLI
+# `@benmvp/cli`
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/benmvp/benmvp-cli.svg)](https://greenkeeper.io/)
+![module formats: esm, & umd](https://img.shields.io/badge/module%20formats-ems%2C%20umd-green.svg)
+[![license](https://img.shields.io/github/license/benmvp/benmvp-cli.svg)](LICENSE)
 
-A zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
+[![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
+[![Build Status](https://travis-ci.org/benmvp/benmvp-cli.svg?branch=master)](https://travis-ci.org/benmvp/benmvp-cli)
+[![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
+[![Dev Dependencies status](https://img.shields.io/david/dev/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli?type=dev)[![Greenkeeper badge](https://badges.greenkeeper.io/benmvp/benmvp-cli.svg)](https://greenkeeper.io/)
+
+[![Watch on GitHub](https://img.shields.io/github/watchers/benmvp/benmvp-cli.svg?style=social)](https://github.com/benmvp/benmvp-cli/watchers)
+[![Star on GitHub](https://img.shields.io/github/stars/benmvp/benmvp-cli.svg?style=social)](https://github.com/benmvp/benmvp-cli/stargazers)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/benmvp/benmvp-cli.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20benmvp-cli%20by%20%40benmvp!%0A%0Ahttps%3A%2F%2Fgithub.com%2Fbenmvp%2Fbenmvp-cli)
+
+A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
 
 > NOTE: This CLI is still in initial development.
 

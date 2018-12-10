@@ -52,6 +52,7 @@ describe('success cases', () => {
       '--watch',
       '--projects',
       expect.stringContaining('project-type.js'),
+      expect.stringContaining('project-lint.js'),
       expect.stringContaining('project-unit.js'),
     ])
 
@@ -66,6 +67,7 @@ describe('success cases', () => {
         '--watch',
         '--projects',
         expect.stringContaining('project-type.js'),
+        expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
       ])
 

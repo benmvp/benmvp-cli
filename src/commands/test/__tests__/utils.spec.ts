@@ -5,6 +5,7 @@ describe('getJestArgs', () => {
   it('throws an error if no args are specified', () => {
     const tryGet = () => {
       const args = {} as Args
+
       getJestArgs(args)
     }
 
@@ -40,14 +41,16 @@ describe('getJestArgs', () => {
 
     it('returns single project when single valid mode is specified', () => {
       const actual = getJestArgs({modes: ['type'], watch: false})
+
       expect(actual).toEqual(['--projects', expect.stringContaining('project-type.js')])
     })
 
     it('returns multiple projects when multiple valid modes are specified', () => {
-      const actual = getJestArgs({modes: ['type', 'unit'], watch: false})
+      const actual = getJestArgs({modes: ['lint', 'unit'], watch: false})
+
       expect(actual).toEqual([
         '--projects',
-        expect.stringContaining('project-type.js'),
+        expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
       ])
     })
