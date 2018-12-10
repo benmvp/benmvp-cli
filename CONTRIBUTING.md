@@ -17,7 +17,7 @@ Thank you for your interest in contributing to my CLI!
 1. [For the repository](https://help.github.com/articles/fork-a-repo/)
 1. Clone your new forked repository to your local computer
 1. Set the `benmvp` repository as your branch's upstream branch: `git remote add upstream https://github.com/benmvp/benmvp-cli.git`
-1. Navigate to the root directory of your newly cloned repository: `cd /path/to/eventbrite-sdk-javascript`
+1. Navigate to the root directory of your newly cloned repository: `cd /path/to/benmvp-cli`
 1. `yarn install` to install local dependencies
 
 ## Using branches to submit changes
@@ -42,15 +42,15 @@ It is always a good idea to pull the upstream branch in to your master branch be
 
 Create issues to file bugs, changes, and proposals.
 
-Before opening a new issue, please [search](https://github.com/eventbrite/eventbrite-sdk-javascript/issues) to see if there has been previous discussion about the same feature or issue. If so, please contribute to the discussion there.
+Before opening a new issue, please [search](https://github.com/benmvp/benmvp-cli/issues) to see if there has been previous discussion about the same feature or issue. If so, please contribute to the discussion there.
 
-If nothing is found, feel free to [open a new issue](https://github.com/eventbrite/eventbrite-sdk-javascript/issues) and fill out the issue template to the best of your ability.
+If nothing is found, feel free to [open a new issue](https://github.com/benmvp/benmvp-cli/issues) and fill out the issue template to the best of your ability.
 
 ## Working on and submitting changes
 
-When starting on improvements or new features that are non-trivial, it is always a good idea to first discuss the changes you wish to implement by [opening a github issue](https://github.com/eventbrite/eventbrite-sdk-javascript/issues) before getting started.
+When starting on improvements or new features that are non-trivial, it is always a good idea to first discuss the changes you wish to implement by [opening a github issue](https://github.com/benmvp/benmvp-cli/issues) before getting started.
 
-If you've found a bug or feature you'd like to work on in our [github issue tracker](https://github.com/eventbrite/eventbrite-sdk-javascript/issues), please comment on the issue to let others know that you'd like to work on it.
+If you've found a bug or feature you'd like to work on in our [github issue tracker](https://github.com/benmvp/benmvp-cli/issues), please comment on the issue to let others know that you'd like to work on it.
 
 While implementing fixes, please try to change as little code as possible. This helps speed up the review process and helps diminish the chance of additional bugs.
 
