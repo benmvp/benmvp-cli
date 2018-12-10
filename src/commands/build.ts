@@ -14,7 +14,6 @@ export default async ({
   out = BUILD_ARGS.out.default,
   watch = BUILD_ARGS.watch.default,
 } = {}): Promise<Result> => {
-  // npx babel src --out-dir lib/umd --extensions ".ts,.js"
   // eslint-disable-next-line no-console
   console.log('run build', {formats, out, watch})
 
