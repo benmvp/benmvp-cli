@@ -1,5 +1,7 @@
-import {BUILD_ARGS} from '../cli/args'
-import {Result} from './types'
+import {resolve} from 'path'
+import babelCli from '@babel/cli/lib/babel/dir'
+import {BUILD_ARGS} from '../../cli/args'
+import {Result} from '../types'
 
 /**
  * Builds the library into the desired module formats at the specified location
@@ -14,8 +16,27 @@ export default async ({
   out = BUILD_ARGS.out.default,
   watch = BUILD_ARGS.watch.default,
 } = {}): Promise<Result> => {
-  // eslint-disable-next-line no-console
-  console.log('run build', {formats, out, watch})
+  try {
+    await babelCli({
+      babelOptions: {
+        presets: [resolve(__dirname, 'babel-preset.js')],
+        babelrc: false,
+        ignore: ['src/**/*.spec.ts'],
+      },
+      cliOptions: {
+        filenames: [resolve(process.cwd(), 'src')],
+        outDir: resolve(out, 'lib/umd'),
+        extensions: '.ts,.js',
+        watch,
+      },
+    })
+  } catch (error) {
+    return {
+      code: 1,
+      message: 'Error running "build" command',
+      error,
+    }
+  }
 
   return {
     code: 0,

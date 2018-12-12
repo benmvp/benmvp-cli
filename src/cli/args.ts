@@ -21,7 +21,7 @@ const OUTPUT_PATH = {
   out: {
     describe: 'Path to the output directory for the built formats',
     alias: 'o',
-    default: '.',
+    default: process.cwd(),
     string: true,
   },
 }
