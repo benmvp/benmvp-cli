@@ -1,4 +1,4 @@
-module.exports = () => ({
+module.exports = {
   presets: [
     [
       '@babel/preset-env',
@@ -8,11 +8,11 @@ module.exports = () => ({
         },
         loose: true,
       },
-    ], 
+    ],
     '@babel/preset-typescript',
   ],
   plugins: [
     ['@babel/plugin-proposal-class-properties', {loose: true}],
     '@babel/plugin-proposal-object-rest-spread',
   ],
-})
+}

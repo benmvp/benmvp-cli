@@ -1,7 +1,7 @@
-import {resolve} from 'path'
 import babelCli from '@babel/cli/lib/babel/dir'
 import {BUILD_ARGS} from '../../cli/args'
 import {Result} from '../types'
+import {getBabelArgs} from './utils'
 
 /**
  * Builds the library into the desired module formats at the specified location
@@ -12,24 +12,16 @@ import {Result} from '../types'
  * @returns {Promise<Result>} The result of executing the build
  */
 export default async ({
-  formats = BUILD_ARGS.formats.default,
+  formats = new Set(BUILD_ARGS.formats.default),
   out = BUILD_ARGS.out.default,
   watch = BUILD_ARGS.watch.default,
 } = {}): Promise<Result> => {
   try {
-    await babelCli({
-      babelOptions: {
-        presets: [resolve(__dirname, 'babel-preset.js')],
-        babelrc: false,
-        ignore: ['src/**/*.spec.ts'],
-      },
-      cliOptions: {
-        filenames: [resolve(process.cwd(), 'src')],
-        outDir: resolve(out, 'lib/umd'),
-        extensions: '.ts,.js',
-        watch,
-      },
-    })
+    const babelArgsToRun = getBabelArgs({formats, out, watch})
+
+    for (const babelArgs of babelArgsToRun) {
+      await babelCli(babelArgs)
+    }
   } catch (error) {
     return {
       code: 1,

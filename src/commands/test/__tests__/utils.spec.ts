@@ -4,9 +4,7 @@ import {TestMode} from '../../types'
 describe('getJestArgs', () => {
   it('throws an error if no args are specified', () => {
     const tryGet = () => {
-      const args = {} as Args
-
-      getJestArgs(args)
+      getJestArgs({} as Args)
     }
 
     expect(tryGet).toThrowError()

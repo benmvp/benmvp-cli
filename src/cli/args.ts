@@ -68,7 +68,7 @@ export const parseArgs = (args: Array<string>) =>
   yargs(args)
     .version()
     .command(TEST_COMMAND, 'Runs linting, typing & unit tests for the library', TEST_ARGS)
-    .command(START_COMMAND, 'Runs the lib\'s tests in watch mode', START_ARGS)
+    .command(START_COMMAND, "Runs the lib's tests in watch mode", START_ARGS)
     .command(BUILD_COMMAND, 'Builds the library into desired module formats', BUILD_ARGS)
     .command(
       [`${CREATE_COMMAND} [name]`, '$0'],

@@ -11,13 +11,13 @@
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "babel src --out-dir lib/umd --extensions '.ts,.js' --presets=./src/commands/build/babel-preset.js --ignore 'src/**/*.spec.ts' --no-babelrc",
-    "prestart": "yarn run bootstrap",
+    "bootstrap": "babel src --out-dir lib/umd --extensions '.ts,.js' --ignore 'src/**/*.spec.ts'",
+    "prestart": "yarn run build",
     "start": "./bin/benmvp start",
-    "pretest": "yarn run bootstrap",
+    "pretest": "yarn run build",
     "test": "./bin/benmvp test",
     "prebuild": "yarn run bootstrap",
-    "build": "./bin/benmvp build --formats umd"
+    "build": "./bin/benmvp build --formats umd esm type"
   },
   "engines": {
     "node": ">= 8"
