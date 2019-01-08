@@ -21,7 +21,7 @@ const VALID_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
 export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Options> => {
   const validatedFormats = [...formats].filter((format) => VALID_FORMATS.has(format))
 
-  const foo = validatedFormats.map(
+  const argsList = validatedFormats.map(
     (format) =>
       ({
         babelOptions: {
@@ -39,7 +39,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Opt
       } as Options),
   )
 
-  return foo
+  return argsList
 }
 
 /**
@@ -52,7 +52,7 @@ export const getBabelConfig = (moduleType: 'cjs' | 'esm') => ({
       '@babel/preset-env',
       {
         loose: true,
-        modules: moduleType === 'cjs' ? 'cjs' : false,
+        modules: moduleType === 'esm' ? false : moduleType,
         useBuiltIns: 'usage',
       },
     ],

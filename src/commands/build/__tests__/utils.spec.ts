@@ -1,5 +1,5 @@
 import {resolve} from 'path'
-import {getBabelArgs, Args} from '../utils'
+import {getBabelArgs, getBabelConfig, Args} from '../utils'
 import {BUILD_ARGS} from '../../../cli/args'
 import {ModuleFormat} from '../../types'
 
@@ -106,4 +106,24 @@ describe('getBabelArgs', () => {
   })
 })
 
-describe('getBabelConfig', () => {})
+describe('getBabelConfig', () => {
+  describe('@babel/preset-env', () => {
+    it('returns `false` for `modules` for `esm` module type', () => {
+      const babelConfig = getBabelConfig('esm')
+      const {
+        presets: [[, presetEnvConfig]],
+      } = babelConfig
+
+      expect(presetEnvConfig).toHaveProperty('modules', false)
+    })
+
+    it('returns "cjs" for `modules` for `cjs` module type', () => {
+      const babelConfig = getBabelConfig('cjs')
+      const {
+        presets: [[, presetEnvConfig]],
+      } = babelConfig
+
+      expect(presetEnvConfig).toHaveProperty('modules', 'cjs')
+    })
+  })
+})
