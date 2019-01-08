@@ -1,3 +1,3 @@
 const {getBabelConfig} = require('./utils')
 
-module.exports = () => getBabelConfig('umd')
+module.exports = () => getBabelConfig('cjs')

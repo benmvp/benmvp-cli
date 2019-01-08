@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {run} = require('../lib/umd')
+const {run} = require('../lib/cjs')
 
 const [, , ...args] = process.argv
 

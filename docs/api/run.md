@@ -21,7 +21,7 @@ Build with specified formats:
 ```js
 const {run} = require('@benmvp/cli');
 
-run(['build', '--formats', 'esm', 'umd'])
+run(['build', '--formats', 'esm', 'cjs'])
 ```
 
 To run just unit tests:

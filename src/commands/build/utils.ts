@@ -8,7 +8,7 @@ export interface Args {
   watch: boolean
 }
 
-const VALID_FORMATS = new Set(['umd', 'esm'] as Array<ModuleFormat>)
+const VALID_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
 
 /**
  * Gets an array of options/arguments to pass babel, one for each valid format
@@ -43,15 +43,15 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Opt
 
 /**
  * Generates a babel configuration for the specified module type
- * @param {'umd' | 'esm'} moduleType The module type for which to generate a config
+ * @param {'cjs' | 'esm'} moduleType The module type for which to generate a config
  */
-export const getBabelConfig = (moduleType: 'umd' | 'esm') => ({
+export const getBabelConfig = (moduleType: 'cjs' | 'esm') => ({
   presets: [
     [
       '@babel/preset-env',
       {
         loose: true,
-        modules: moduleType === 'umd' ? 'umd' : false,
+        modules: moduleType === 'cjs' ? 'cjs' : false,
         useBuiltIns: 'usage',
       },
     ],

@@ -26,31 +26,31 @@ describe('getBabelArgs', () => {
       expect(babelArgsToRun).toHaveLength(0)
     })
 
-    it('generates UMD + ESM w/ default output directory', () => {
-      const [umdArgs, esmArgs] = getBabelArgs({
-        formats: new Set(['umd', 'esm'] as Array<ModuleFormat>),
+    it('generates CJS + ESM w/ default output directory', () => {
+      const [cjsArgs, esmArgs] = getBabelArgs({
+        formats: new Set(['cjs', 'esm'] as Array<ModuleFormat>),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(umdArgs.babelOptions.presets[0]).toMatch('babel-config-umd.js')
-      expect(umdArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/umd'))
+      expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/cjs'))
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
       expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/esm'))
     })
 
-    it('still only generates UMD + ESM when more formats are specified', () => {
-      const [umdArgs, esmArgs, ...otherArgs] = getBabelArgs({
-        formats: new Set(['umd', 'esm', 'dist', 'type'] as Array<ModuleFormat>),
+    it('still only generates CJS + ESM when more formats are specified', () => {
+      const [cjsArgs, esmArgs, ...otherArgs] = getBabelArgs({
+        formats: new Set(['cjs', 'esm', 'type'] as Array<ModuleFormat>),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
 
       expect(otherArgs).toHaveLength(0)
 
-      expect(umdArgs.babelOptions.presets[0]).toMatch('babel-config-umd.js')
-      expect(umdArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/umd'))
+      expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/cjs'))
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
       expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/esm'))
@@ -69,13 +69,13 @@ describe('getBabelArgs', () => {
 
     it('sets correct outDir when `out` is absolute', () => {
       const out = '/path/to/built'
-      const [umdArgs] = getBabelArgs({
-        formats: new Set(['umd'] as Array<ModuleFormat>),
+      const [cjsArgs] = getBabelArgs({
+        formats: new Set(['cjs'] as Array<ModuleFormat>),
         out,
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(umdArgs.cliOptions).toHaveProperty('outDir', `${out}/lib/umd`)
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', `${out}/lib/cjs`)
     })
   })
 

@@ -14,7 +14,7 @@ const BUILD_FORMATS = {
     describe: 'The module formats to build',
     alias: 'f',
     array: true,
-    default: ['type', 'esm', 'umd', 'dist'] as Array<ModuleFormat>,
+    default: ['type', 'esm', 'cjs'] as Array<ModuleFormat>,
   },
 }
 const OUTPUT_PATH = {

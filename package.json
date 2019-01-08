@@ -2,7 +2,7 @@
   "name": "@benmvp/cli",
   "version": "0.0.1",
   "description": "A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries",
-  "main": "lib/umd/index.js",
+  "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "jsnext:main": "lib/esm/index.js",
   "types": "lib/index.d.ts",
@@ -11,13 +11,13 @@
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "babel src --out-dir lib/umd --extensions '.ts,.js' --ignore 'src/**/*.spec.ts'",
+    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --ignore 'src/**/*.spec.ts'",
     "prestart": "yarn run build",
     "start": "./bin/benmvp start",
     "pretest": "yarn run build",
     "test": "./bin/benmvp test",
     "prebuild": "yarn run bootstrap",
-    "build": "./bin/benmvp build --formats umd esm type"
+    "build": "./bin/benmvp build --formats cjs esm type"
   },
   "engines": {
     "node": ">= 8"

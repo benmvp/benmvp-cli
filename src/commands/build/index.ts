@@ -19,6 +19,7 @@ export default async ({
   try {
     const babelArgsToRun = getBabelArgs({formats, out, watch})
 
+    // disable-next-line no-await-in-loop
     for (const babelArgs of babelArgsToRun) {
       await babelCli(babelArgs)
     }

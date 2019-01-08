@@ -31,7 +31,7 @@ npx @benmvp/cli create my-lib --formats esm
 Add custom setup to an existing library:
 
 ```sh
-npx @benmvp/cli create --modes type unit --out ./built --formats esm umd
+npx @benmvp/cli create --modes type unit --out ./built --formats esm cjs
 ```
 
 ## Arguments
@@ -54,12 +54,11 @@ A space-separated list of the module formats to build. Aliased as `-f`. Availabl
 
 - `type` - Typescript definition files (`.d.ts`) so that clients of your library can use your library fully-typed
 - `esm` - ECMAScript module format (everything transpiled to ES5 except for ES2015 `import`/`export` statements enabling [_tree shaking_](https://webpack.js.org/guides/tree-shaking/))
-- `umd` - Universal module definition format (Combination of CJS & AMD (asynchronous module definition) fully transpiled to ES5 includes minified version)
-- `dist` - Bundled web distribution (`<script>` include fully transpiled to ES5 w/ a minified version)
+- `cjs` - CommonJS format (fully transpiled)
 
 Optional. Defaults to all formats.
 
-This will include the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`) and `"browser"` (`dist` minified) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
+This will include the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), and `"jsnext:main"` (`esm`) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
 ### `--out`
 
@@ -69,7 +68,7 @@ If you chose `'esm'` as one of the [`formats`](#formats) and choose `'./built'` 
 
 Optional. Defaults to the current working directory (`.`).
 
-This will update the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`), `"browser"` (`dist` minified), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
+This will update the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), `"jsnext:main"` (`esm`), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
 ### `--modes`
 

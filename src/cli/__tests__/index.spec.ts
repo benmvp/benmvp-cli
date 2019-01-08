@@ -88,22 +88,22 @@ describe('run', () => {
       })
 
       it('parses singular format (alias)', () => {
-        run(['create', '-f', 'dist'])
+        run(['create', '-f', 'cjs'])
 
         expect(create).toBeCalledWith({
           name: CREATE_POS_ARGS.name.default,
-          formats: ['dist'],
+          formats: ['cjs'],
           out: CREATE_ARGS.out.default,
           modes: CREATE_ARGS.modes.default,
         })
       })
 
       it('parses plural format', () => {
-        run(['create', '--formats', 'esm', 'umd'])
+        run(['create', '--formats', 'esm', 'cjs'])
 
         expect(create).toBeCalledWith({
           name: CREATE_POS_ARGS.name.default,
-          formats: ['esm', 'umd'],
+          formats: ['esm', 'cjs'],
           out: CREATE_ARGS.out.default,
           modes: CREATE_ARGS.modes.default,
         })
@@ -247,23 +247,23 @@ describe('run', () => {
           './output',
           '--formats',
           'esm',
-          'umd',
+          'cjs',
         ])
 
         expect(create).toBeCalledWith({
           name: 'new-lib',
-          formats: ['esm', 'umd'],
+          formats: ['esm', 'cjs'],
           out: './output',
           modes: ['lint', 'unit'],
         })
       })
 
       it('parses multiple arguments (aliases)', () => {
-        run(['create', 'test-lib', '-m', 'type', '-o', './built', '-f', 'dist', 'type'])
+        run(['create', 'test-lib', '-m', 'type', '-o', './built', '-f', 'esm', 'type'])
 
         expect(create).toBeCalledWith({
           name: 'test-lib',
-          formats: ['dist', 'type'],
+          formats: ['esm', 'type'],
           out: './built',
           modes: ['type'],
         })
@@ -299,20 +299,20 @@ describe('run', () => {
       })
 
       it('parses singular format (alias)', () => {
-        run(['build', '-f', 'dist'])
+        run(['build', '-f', 'cjs'])
 
         expect(build).toBeCalledWith({
-          formats: ['dist'],
+          formats: ['cjs'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
         })
       })
 
       it('parses plural format', () => {
-        run(['build', '--formats', 'esm', 'umd'])
+        run(['build', '--formats', 'esm', 'cjs'])
 
         expect(build).toBeCalledWith({
-          formats: ['esm', 'umd'],
+          formats: ['esm', 'cjs'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
         })
@@ -453,20 +453,20 @@ describe('run', () => {
 
     describe('combination', () => {
       it('parses multiple arguments', () => {
-        run(['build', '--out', './output', '--watch', '--formats', 'esm', 'umd'])
+        run(['build', '--out', './output', '--watch', '--formats', 'esm', 'cjs'])
 
         expect(build).toBeCalledWith({
-          formats: ['esm', 'umd'],
+          formats: ['esm', 'cjs'],
           out: './output',
           watch: true,
         })
       })
 
       it('parses multiple arguments (aliases)', () => {
-        run(['build', '-w', '-o', './built', '-f', 'dist', 'type'])
+        run(['build', '-w', '-o', './built', '-f', 'cjs', 'type'])
 
         expect(build).toBeCalledWith({
-          formats: ['dist', 'type'],
+          formats: ['cjs', 'type'],
           out: './built',
           watch: true,
         })
