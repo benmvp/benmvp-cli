@@ -34,6 +34,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Opt
           outDir: resolve(outputPath, `lib/${format}`),
           extensions: '.ts,.js',
           watch,
+          copyFiles: true,
         },
       } as Options),
   )

@@ -11,7 +11,7 @@
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --ignore 'src/**/*.spec.ts'",
+    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --ignore 'src/**/*.spec.ts' --copy-files",
     "prestart": "yarn run build",
     "start": "./bin/benmvp start",
     "pretest": "yarn run build",
