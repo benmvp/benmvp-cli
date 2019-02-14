@@ -53,6 +53,6 @@
     "@types/jest": "^23.3.10",
     "@types/lodash-es": "^4.17.1",
     "@types/node": "^10.12.12",
-    "@types/yargs": "^12.0.1"
+    "@types/yargs": "^12.0.9"
   }
 }
