@@ -42,10 +42,10 @@ export const TEST_ARGS = {
     type: 'boolean',
     default: false,
   },
-}
+} as {[key: string]: yargs.Options}
 export const START_ARGS = {
   ...TEST_MODES,
-}
+} as {[key: string]: yargs.Options}
 export const BUILD_ARGS = {
   ...BUILD_FORMATS,
   ...OUTPUT_PATH,
@@ -55,7 +55,7 @@ export const BUILD_ARGS = {
     type: 'boolean',
     default: false,
   },
-}
+} as {[key: string]: yargs.Options}
 
 export const CREATE_COMMAND = 'create' as Command
 export const TEST_COMMAND = 'test' as Command
@@ -67,15 +67,26 @@ export const DEFAULT_COMMAND = CREATE_COMMAND
 export const parseArgs = (args: Array<string>) =>
   yargs(args)
     .version()
-    .command(TEST_COMMAND, 'Runs linting, typing & unit tests for the library', TEST_ARGS)
-    .command(START_COMMAND, "Runs the lib's tests in watch mode", START_ARGS)
-    .command(BUILD_COMMAND, 'Builds the library into desired module formats', BUILD_ARGS)
+    .command<{[key: string]: yargs.Options}>(
+      TEST_COMMAND,
+      'Runs linting, typing & unit tests for the library',
+      TEST_ARGS,
+    )
+    .command<{[key: string]: yargs.Options}>(
+      START_COMMAND,
+      'Runs the lib\'s tests in watch mode',
+      START_ARGS,
+    )
+    .command<{[key: string]: yargs.Options}>(
+      BUILD_COMMAND,
+      'Builds the library into desired module formats',
+      BUILD_ARGS,
+    )
     .command(
       [`${CREATE_COMMAND} [name]`, '$0'],
       'Creates a new library with test/build infra using @benmvp/cli',
-      (commandYargs: yargs.Argv) => {
-        commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name)
-      },
+      (commandYargs: yargs.Argv) =>
+        commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name),
     )
     .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
     .help().argv

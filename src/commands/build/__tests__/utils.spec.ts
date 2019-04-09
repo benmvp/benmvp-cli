@@ -13,7 +13,7 @@ describe('getBabelArgs', () => {
         } as Args)
       }
 
-      expect(callGetBabelArgs).toThrowError()
+      expect(callGetBabelArgs).toThrow()
     })
 
     it('returns empty array when empty formats are specified', () => {

@@ -1,6 +1,51 @@
 import {resolve} from 'path'
-import {Options} from '@babel/cli/lib/babel/dir'
 import {ModuleFormat} from '../types'
+
+interface BabelOptions {
+  presets: Array<string>
+  plugins?: Array<string>
+  rootMode?: 'root' | 'upward' | 'upward-optional'
+  configFile?: string
+  envName?: string
+  sourceType?: 'script' | 'module'
+  ignore: Array<string>
+  only?: Array<string>
+  retainLines?: boolean
+  compact?: true | false | 'auto'
+  minified?: boolean
+  auxiliaryCommentBefore?: string
+  auxiliaryCommentAfter?: string
+  sourceMaps?: boolean
+  sourceFileName?: string
+  sourceRoot?: string
+  moduleRoot?: string
+  moduleIds?: Array<string>
+  moduleId?: string
+  babelrc?: boolean
+  highlightCode?: boolean
+  comments?: boolean
+}
+interface CLIOptions {
+  filename?: string
+  filenames: Array<string>
+  extensions?: string
+  keepFileExtension?: boolean
+  watch?: boolean
+  skipInitialBuild?: boolean
+  outFile?: string
+  outDir?: string
+  relative?: boolean
+  copyFiles?: boolean
+  includeDotfiles?: boolean
+  verbose?: boolean
+  deleteDirOnStart?: boolean
+  sourceMapTarget?: string
+}
+
+interface Options {
+  babelOptions: BabelOptions
+  cliOptions: CLIOptions
+}
 
 export interface Args {
   formats: Set<ModuleFormat>

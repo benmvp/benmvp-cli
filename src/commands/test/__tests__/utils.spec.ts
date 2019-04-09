@@ -7,7 +7,7 @@ describe('getJestArgs', () => {
       getJestArgs({} as Args)
     }
 
-    expect(tryGet).toThrowError()
+    expect(tryGet).toThrow()
   })
 
   describe('modes', () => {
@@ -18,7 +18,7 @@ describe('getJestArgs', () => {
         getJestArgs({modes: [], watch: false})
       }
 
-      expect(tryGet).toThrowError()
+      expect(tryGet).toThrow()
     })
 
     it('throws an error if specified mode does not exist', () => {
@@ -26,7 +26,7 @@ describe('getJestArgs', () => {
         getJestArgs({modes: [DUMMY_MODE], watch: false})
       }
 
-      expect(tryGet).toThrowError()
+      expect(tryGet).toThrow()
     })
 
     it('throws an error if modes has a mix of valid and invalid', () => {
@@ -34,7 +34,7 @@ describe('getJestArgs', () => {
         getJestArgs({modes: ['type', DUMMY_MODE], watch: false})
       }
 
-      expect(tryGet).toThrowError()
+      expect(tryGet).toThrow()
     })
 
     it('returns single project when single valid mode is specified', () => {

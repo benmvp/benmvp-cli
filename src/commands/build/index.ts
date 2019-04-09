@@ -1,6 +1,6 @@
-import babelCli from '@babel/cli/lib/babel/dir'
+import runBabel from './run-babel'
 import {BUILD_ARGS} from '../../cli/args'
-import {Result} from '../types'
+import {Result, ModuleFormat} from '../types'
 import {getBabelArgs} from './utils'
 
 /**
@@ -12,16 +12,16 @@ import {getBabelArgs} from './utils'
  * @returns {Promise<Result>} The result of executing the build
  */
 export default async ({
-  formats = new Set(BUILD_ARGS.formats.default),
-  out = BUILD_ARGS.out.default,
-  watch = BUILD_ARGS.watch.default,
+  formats = new Set(BUILD_ARGS.formats.default) as Set<ModuleFormat>,
+  out = BUILD_ARGS.out.default as string,
+  watch = BUILD_ARGS.watch.default as boolean,
 } = {}): Promise<Result> => {
   try {
     const babelArgsToRun = getBabelArgs({formats, out, watch})
 
     for (const babelArgs of babelArgsToRun) {
       // eslint-disable-next-line no-await-in-loop
-      await babelCli(babelArgs)
+      await runBabel(babelArgs)
     }
   } catch (error) {
     return {

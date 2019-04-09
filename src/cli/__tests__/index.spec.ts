@@ -15,7 +15,7 @@ describe('run', () => {
     it('defaults to create command when no args passed', () => {
       run()
 
-      expect(create).toBeCalledWith({
+      expect(create).toHaveBeenCalledWith({
         name: CREATE_POS_ARGS.name.default,
         formats: CREATE_ARGS.formats.default,
         out: CREATE_ARGS.out.default,
@@ -26,7 +26,7 @@ describe('run', () => {
     it('defaults to create command when empty args are passed', () => {
       run([])
 
-      expect(create).toBeCalledWith({
+      expect(create).toHaveBeenCalledWith({
         name: CREATE_POS_ARGS.name.default,
         formats: CREATE_ARGS.formats.default,
         out: CREATE_ARGS.out.default,
@@ -37,7 +37,7 @@ describe('run', () => {
     it('parses unknown command as name for default create command', () => {
       run(['foo'])
 
-      expect(create).toBeCalledWith({
+      expect(create).toHaveBeenCalledWith({
         name: 'foo',
         formats: CREATE_ARGS.formats.default,
         out: CREATE_ARGS.out.default,
@@ -56,7 +56,7 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['create'])
 
-      expect(create).toBeCalledWith({
+      expect(create).toHaveBeenCalledWith({
         name: CREATE_POS_ARGS.name.default,
         formats: CREATE_ARGS.formats.default,
         out: CREATE_ARGS.out.default,
@@ -67,7 +67,7 @@ describe('run', () => {
     it('parses lib name', () => {
       run(['create', 'lib-name'])
 
-      expect(create).toBeCalledWith({
+      expect(create).toHaveBeenCalledWith({
         name: 'lib-name',
         formats: CREATE_ARGS.formats.default,
         out: CREATE_ARGS.out.default,
@@ -79,7 +79,7 @@ describe('run', () => {
       it('parses singular format', () => {
         run(['create', '--formats', 'esm'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: ['esm'],
           out: CREATE_ARGS.out.default,
@@ -90,7 +90,7 @@ describe('run', () => {
       it('parses singular format (alias)', () => {
         run(['create', '-f', 'cjs'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: ['cjs'],
           out: CREATE_ARGS.out.default,
@@ -101,7 +101,7 @@ describe('run', () => {
       it('parses plural format', () => {
         run(['create', '--formats', 'esm', 'cjs'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: ['esm', 'cjs'],
           out: CREATE_ARGS.out.default,
@@ -112,7 +112,7 @@ describe('run', () => {
       it('parses plural format (alias)', () => {
         run(['create', '-f', 'type', 'esm'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: ['type', 'esm'],
           out: CREATE_ARGS.out.default,
@@ -125,7 +125,7 @@ describe('run', () => {
       it('parses relative path', () => {
         run(['create', '--out', './built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: './built',
@@ -136,7 +136,7 @@ describe('run', () => {
       it('parses user-relative path', () => {
         run(['create', '--out', '~/github/benmvp-cli/built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: '~/github/benmvp-cli/built',
@@ -147,7 +147,7 @@ describe('run', () => {
       it('parses absolute path', () => {
         run(['create', '--out', '/Users/foo.bar/github/benmvp-cli/built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: '/Users/foo.bar/github/benmvp-cli/built',
@@ -158,7 +158,7 @@ describe('run', () => {
       it('parses relative path (alias)', () => {
         run(['create', '-o', './built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: './built',
@@ -169,7 +169,7 @@ describe('run', () => {
       it('parses user-relative path (alias)', () => {
         run(['create', '-o', '~/github/benmvp-cli/built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: '~/github/benmvp-cli/built',
@@ -180,7 +180,7 @@ describe('run', () => {
       it('parses absolute path (alias)', () => {
         run(['create', '-o', '/Users/foo.bar/github/benmvp-cli/built'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: '/Users/foo.bar/github/benmvp-cli/built',
@@ -193,7 +193,7 @@ describe('run', () => {
       it('parses singular mode', () => {
         run(['create', '--modes', 'lint'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
@@ -204,7 +204,7 @@ describe('run', () => {
       it('parses multiple modes', () => {
         run(['create', '--modes', 'lint', 'unit'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
@@ -215,7 +215,7 @@ describe('run', () => {
       it('parses singular mode (alias)', () => {
         run(['create', '-m', 'type'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
@@ -226,7 +226,7 @@ describe('run', () => {
       it('parses multiple modes (alias)', () => {
         run(['create', '-m', 'lint', 'unit'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
@@ -250,7 +250,7 @@ describe('run', () => {
           'cjs',
         ])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: 'new-lib',
           formats: ['esm', 'cjs'],
           out: './output',
@@ -261,7 +261,7 @@ describe('run', () => {
       it('parses multiple arguments (aliases)', () => {
         run(['create', 'test-lib', '-m', 'type', '-o', './built', '-f', 'esm', 'type'])
 
-        expect(create).toBeCalledWith({
+        expect(create).toHaveBeenCalledWith({
           name: 'test-lib',
           formats: ['esm', 'type'],
           out: './built',
@@ -280,7 +280,7 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['build'])
 
-      expect(build).toBeCalledWith({
+      expect(build).toHaveBeenCalledWith({
         formats: BUILD_ARGS.formats.default,
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
@@ -291,7 +291,7 @@ describe('run', () => {
       it('parses singular format', () => {
         run(['build', '--formats', 'esm'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['esm'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
@@ -301,7 +301,7 @@ describe('run', () => {
       it('parses singular format (alias)', () => {
         run(['build', '-f', 'cjs'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['cjs'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
@@ -311,7 +311,7 @@ describe('run', () => {
       it('parses plural format', () => {
         run(['build', '--formats', 'esm', 'cjs'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['esm', 'cjs'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
@@ -321,7 +321,7 @@ describe('run', () => {
       it('parses plural format (alias)', () => {
         run(['build', '-f', 'type', 'esm'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['type', 'esm'],
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
@@ -333,7 +333,7 @@ describe('run', () => {
       it('parses relative path', () => {
         run(['build', '--out', './built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: './built',
           watch: BUILD_ARGS.watch.default,
@@ -343,7 +343,7 @@ describe('run', () => {
       it('parses user-relative path', () => {
         run(['build', '--out', '~/github/benmvp-cli/built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: '~/github/benmvp-cli/built',
           watch: BUILD_ARGS.watch.default,
@@ -353,7 +353,7 @@ describe('run', () => {
       it('parses absolute path', () => {
         run(['build', '--out', '/Users/foo.bar/github/benmvp-cli/built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: '/Users/foo.bar/github/benmvp-cli/built',
           watch: BUILD_ARGS.watch.default,
@@ -363,7 +363,7 @@ describe('run', () => {
       it('parses relative path (alias)', () => {
         run(['build', '-o', './built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: './built',
           watch: BUILD_ARGS.watch.default,
@@ -373,7 +373,7 @@ describe('run', () => {
       it('parses user-relative path (alias)', () => {
         run(['build', '-o', '~/github/benmvp-cli/built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: '~/github/benmvp-cli/built',
           watch: BUILD_ARGS.watch.default,
@@ -383,7 +383,7 @@ describe('run', () => {
       it('parses absolute path (alias)', () => {
         run(['build', '-o', '/Users/foo.bar/github/benmvp-cli/built'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: '/Users/foo.bar/github/benmvp-cli/built',
           watch: BUILD_ARGS.watch.default,
@@ -395,7 +395,7 @@ describe('run', () => {
       it('parses when present', () => {
         run(['build', '--watch'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: true,
@@ -405,7 +405,7 @@ describe('run', () => {
       it('parses when present & true', () => {
         run(['build', '--watch', 'true'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: true,
@@ -414,7 +414,7 @@ describe('run', () => {
       it('parses when present & false', () => {
         run(['build', '--watch', 'false'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: false,
@@ -424,7 +424,7 @@ describe('run', () => {
       it('parses when present (alias)', () => {
         run(['build', '-w'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: true,
@@ -434,7 +434,7 @@ describe('run', () => {
       it('parses when present & true (alias)', () => {
         run(['build', '-w', 'true'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: true,
@@ -443,7 +443,7 @@ describe('run', () => {
       it('parses when present & false (alias)', () => {
         run(['build', '-w', 'false'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: BUILD_ARGS.formats.default,
           out: BUILD_ARGS.out.default,
           watch: false,
@@ -455,7 +455,7 @@ describe('run', () => {
       it('parses multiple arguments', () => {
         run(['build', '--out', './output', '--watch', '--formats', 'esm', 'cjs'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['esm', 'cjs'],
           out: './output',
           watch: true,
@@ -465,7 +465,7 @@ describe('run', () => {
       it('parses multiple arguments (aliases)', () => {
         run(['build', '-w', '-o', './built', '-f', 'cjs', 'type'])
 
-        expect(build).toBeCalledWith({
+        expect(build).toHaveBeenCalledWith({
           formats: ['cjs', 'type'],
           out: './built',
           watch: true,
@@ -484,7 +484,7 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['test'])
 
-      expect(testCommand).toBeCalledWith({
+      expect(testCommand).toHaveBeenCalledWith({
         modes: TEST_ARGS.modes.default,
         watch: TEST_ARGS.watch.default,
       })
@@ -494,7 +494,7 @@ describe('run', () => {
       it('parses singular mode', () => {
         run(['test', '--modes', 'lint'])
 
-        expect(testCommand).toBeCalledWith({
+        expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint'],
           watch: TEST_ARGS.watch.default,
         })
@@ -503,7 +503,7 @@ describe('run', () => {
       it('parses multiple modes', () => {
         run(['test', '--modes', 'lint', 'unit'])
 
-        expect(testCommand).toBeCalledWith({
+        expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint', 'unit'],
           watch: TEST_ARGS.watch.default,
         })
@@ -512,13 +512,13 @@ describe('run', () => {
       it('parses singular mode (alias)', () => {
         run(['test', '-m', 'type'])
 
-        expect(testCommand).toBeCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
+        expect(testCommand).toHaveBeenCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
       })
 
       it('parses multiple modes (alias)', () => {
         run(['test', '-m', 'lint', 'unit'])
 
-        expect(testCommand).toBeCalledWith({
+        expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint', 'unit'],
           watch: TEST_ARGS.watch.default,
         })
@@ -527,7 +527,7 @@ describe('run', () => {
       it('parses watch', () => {
         run(['test', '--watch'])
 
-        expect(testCommand).toBeCalledWith({
+        expect(testCommand).toHaveBeenCalledWith({
           modes: TEST_ARGS.modes.default,
           watch: true,
         })
@@ -536,19 +536,19 @@ describe('run', () => {
       it('parses watch (alias)', () => {
         run(['test', '-w'])
 
-        expect(testCommand).toBeCalledWith({modes: TEST_ARGS.modes.default, watch: true})
+        expect(testCommand).toHaveBeenCalledWith({modes: TEST_ARGS.modes.default, watch: true})
       })
 
       it('parses all args', () => {
         run(['test', '--watch', '--modes', 'unit', 'type'])
 
-        expect(testCommand).toBeCalledWith({modes: ['unit', 'type'], watch: true})
+        expect(testCommand).toHaveBeenCalledWith({modes: ['unit', 'type'], watch: true})
       })
 
       it('parses all args (aliases)', () => {
         run(['test', '-m', 'type', 'lint', '-w'])
 
-        expect(testCommand).toBeCalledWith({modes: ['type', 'lint'], watch: true})
+        expect(testCommand).toHaveBeenCalledWith({modes: ['type', 'lint'], watch: true})
       })
     })
   })
@@ -563,32 +563,32 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['start'])
 
-      expect(start).toBeCalledWith({modes: START_ARGS.modes.default})
+      expect(start).toHaveBeenCalledWith({modes: START_ARGS.modes.default})
     })
 
     describe('start modes', () => {
       it('parses singular mode', () => {
         run(['start', '--modes', 'lint'])
 
-        expect(start).toBeCalledWith({modes: ['lint']})
+        expect(start).toHaveBeenCalledWith({modes: ['lint']})
       })
 
       it('parses multiple modes', () => {
         run(['start', '--modes', 'lint', 'unit'])
 
-        expect(start).toBeCalledWith({modes: ['lint', 'unit']})
+        expect(start).toHaveBeenCalledWith({modes: ['lint', 'unit']})
       })
 
       it('parses singular mode (alias)', () => {
         run(['start', '-m', 'type'])
 
-        expect(start).toBeCalledWith({modes: ['type']})
+        expect(start).toHaveBeenCalledWith({modes: ['type']})
       })
 
       it('parses multiple modes (alias)', () => {
         run(['start', '-m', 'lint', 'unit'])
 
-        expect(start).toBeCalledWith({modes: ['lint', 'unit']})
+        expect(start).toHaveBeenCalledWith({modes: ['lint', 'unit']})
       })
     })
   })
