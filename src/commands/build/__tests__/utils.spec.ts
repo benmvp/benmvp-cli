@@ -1,5 +1,5 @@
 import {resolve} from 'path'
-import {getBabelArgs, getBabelConfig, Args} from '../utils'
+import {getBabelArgs, getBabelConfig, BuildArgs} from '../utils'
 import {BUILD_ARGS} from '../../../cli/args'
 import {ModuleFormat} from '../../types'
 
@@ -10,7 +10,7 @@ describe('getBabelArgs', () => {
         getBabelArgs({
           out: BUILD_ARGS.out.default,
           watch: BUILD_ARGS.watch.default,
-        } as Args)
+        } as BuildArgs)
       }
 
       expect(callGetBabelArgs).toThrow()
@@ -127,3 +127,4 @@ describe('getBabelConfig', () => {
     })
   })
 })
+

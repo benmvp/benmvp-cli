@@ -1,5 +1,7 @@
 import {resolve} from 'path'
+import flatten from 'lodash/flatten'
 import {ModuleFormat} from '../types'
+import BASE_TSCONFIG from '../test/tsconfig.json'
 
 interface BabelOptions {
   presets: Array<string>
@@ -42,29 +44,29 @@ interface CLIOptions {
   sourceMapTarget?: string
 }
 
-interface Options {
+interface BabelCLIOptions {
   babelOptions: BabelOptions
   cliOptions: CLIOptions
 }
 
-export interface Args {
+export interface BuildArgs {
   formats: Set<ModuleFormat>
   out: string
   watch: boolean
 }
 
-const VALID_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
+const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
 
 /**
  * Gets an array of options/arguments to pass babel, one for each valid format
- * @param {Object} options
+ * @param {BuildArgs} options
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
  * @param {string} options.out A path (relative or absolute) to the output directory for the built module formats
  * @param {boolean} options.watch A flag indicating whether or not to continuously generate the built module formats whenever source files change
- * @returns {Array<Options>}
+ * @returns {Array<BabelCLIOptions>}
  */
-export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Options> => {
-  const validatedFormats = [...formats].filter((format) => VALID_FORMATS.has(format))
+export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Array<BabelCLIOptions> => {
+  const validatedFormats = [...formats].filter((format) => VALID_BABEL_FORMATS.has(format))
 
   const argsList = validatedFormats.map(
     (format) =>
@@ -72,7 +74,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Opt
         babelOptions: {
           presets: [resolve(__dirname, `babel-config-${format}.js`)],
           babelrc: false,
-          ignore: ['src/**/*.spec.ts'],
+          ignore: [resolve(process.cwd(), 'src/**/*.spec.ts')],
         },
         cliOptions: {
           filenames: [resolve(process.cwd(), 'src')],
@@ -81,7 +83,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: Args): Array<Opt
           watch,
           copyFiles: true,
         },
-      } as Options),
+      } as BabelCLIOptions),
   )
 
   return argsList
@@ -108,3 +110,34 @@ export const getBabelConfig = (moduleType: 'cjs' | 'esm') => ({
     '@babel/plugin-proposal-object-rest-spread',
   ],
 })
+
+/**
+ * Gets a list of arguments to pass Typescript
+ * @param {BuildArgs} options
+ * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
+ * @param {string} options.out A path (relative or absolute) to the output directory for the type definitions
+ * @param {boolean} options.watch A flag indicating whether or not to continuously generate the type definitions whenever source files change
+ * @returns {Array<string> | null}
+ */
+export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): Array<string> | null => {
+  if (!formats.has('type')) {
+    return null
+  }
+
+  const {compilerOptions} = BASE_TSCONFIG
+  const compilerOptionsAsArgs = flatten(
+    Object.entries(compilerOptions).map(([optionName, optionValue]) => ([`--${optionName}`, `${optionValue}`]))
+  )
+
+  const args = [
+    ...compilerOptionsAsArgs,
+    '--declaration',
+    '--declarationDir', resolve(out, 'lib/types'),
+    '--emitDeclarationOnly',
+    '--noEmit', 'false',
+    watch ? '--watch' : '',
+    resolve(process.cwd(), 'src/*.ts'),
+  ]
+
+  return args
+}
