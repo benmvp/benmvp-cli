@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 
-const {run} = require('../lib/cjs')
+(async () => {
+  const {run} = require('../lib/cjs');
 
-const [, , ...args] = process.argv
+  const [, , ...args] = process.argv;
+  const {code, message, error} = await run(args);
 
-run(args)
+  if (code) {
+    console.error(error);
+    console.error(message);
+  }
+
+  process.exit(code)
+})()
