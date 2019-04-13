@@ -33,7 +33,7 @@ export default async ({
 
     if (typeScriptArgsToRun) {
       // when `benmvp-cli` is a module w/in a lib's node_modules, this should
-      // still run the `tsc` script for `brite-cli`, which will run the tsc
+      // still run the `tsc` script for `benmvp-cli`, which will run the tsc
       // binary. This was the easiest way to reliably get to the binary
       // no matter where we put the transpiled lib code
       await execAsync(`npm run tsc -- ${typeScriptArgsToRun.join(' ')}`)

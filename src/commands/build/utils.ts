@@ -49,7 +49,7 @@ interface BabelCLIOptions {
   cliOptions: CLIOptions
 }
 
-export interface BuildArgs {
+interface BuildArgs {
   formats: Set<ModuleFormat>
   out: string
   watch: boolean

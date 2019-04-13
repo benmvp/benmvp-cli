@@ -1,21 +1,13 @@
 import {resolve} from 'path'
-import {getBabelArgs, getBabelConfig, BuildArgs} from '../utils'
+import {getBabelArgs, getBabelConfig, getTypescriptArgs} from '../utils'
 import {BUILD_ARGS} from '../../../cli/args'
 import {ModuleFormat} from '../../types'
+import BASE_TSCONFIG from '../../test/tsconfig.json'
+
+const CWD = process.cwd()
 
 describe('getBabelArgs', () => {
   describe('formats + out', () => {
-    it('throws an error if format is not specified', () => {
-      const callGetBabelArgs = () => {
-        getBabelArgs({
-          out: BUILD_ARGS.out.default,
-          watch: BUILD_ARGS.watch.default,
-        } as BuildArgs)
-      }
-
-      expect(callGetBabelArgs).toThrow()
-    })
-
     it('returns empty array when empty formats are specified', () => {
       const babelArgsToRun = getBabelArgs({
         formats: new Set(),
@@ -34,10 +26,10 @@ describe('getBabelArgs', () => {
       })
 
       expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
-      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/cjs'))
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/cjs'))
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
-      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/esm'))
+      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/esm'))
     })
 
     it('still only generates CJS + ESM when more formats are specified', () => {
@@ -50,10 +42,10 @@ describe('getBabelArgs', () => {
       expect(otherArgs).toHaveLength(0)
 
       expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
-      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/cjs'))
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/cjs'))
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
-      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(process.cwd(), 'lib/esm'))
+      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/esm'))
     })
 
     it('sets correct outDir when `out` is relative', () => {
@@ -128,3 +120,97 @@ describe('getBabelConfig', () => {
   })
 })
 
+describe('getTypescriptArgs', () => {
+  describe('type format not requested', () => {
+    it('returns null if `formats` is empty', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(),
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toBeNull()
+    })
+
+    it('returns null if `formats` does not contain "type"', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['esm'] as Array<ModuleFormat>),
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toBeNull()
+    })
+  })
+
+  describe('type format requested', () => {
+    it('includes all of the args from base config', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['esm', 'type'] as Array<ModuleFormat>),
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      Object.entries(BASE_TSCONFIG.compilerOptions).forEach(([optionName, optionValue]) => {
+        expect(typescriptArgs).toEqual(expect.arrayContaining([`--${optionName}`, `${optionValue}`]))
+      })
+    })
+
+    it('specifies generic declaration information', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['esm', 'type'] as Array<ModuleFormat>),
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toContain('--declaration')
+      expect(typescriptArgs).toContain('--emitDeclarationOnly')
+      expect(typescriptArgs).toEqual(expect.arrayContaining(['--noEmit', 'false']))
+    })
+
+    it('specifies the declaration destination', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['type'] as Array<ModuleFormat>),
+        out: '/out/dir',
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toEqual(expect.arrayContaining([
+        '--declarationDir',
+        '/out/dir/lib/types',
+      ]))
+    })
+
+    describe('watch option', () => {
+      it('includes --watch when `watch` is true', () => {
+        const typescriptArgs = getTypescriptArgs({
+          formats: new Set(['type'] as Array<ModuleFormat>),
+          out: BUILD_ARGS.out.default,
+          watch: true,
+        })
+
+        expect(typescriptArgs).toContain('--watch')
+      })
+
+      it('does not include --watch when `watch` is false', () => {
+        const typescriptArgs = getTypescriptArgs({
+          formats: new Set(['type'] as Array<ModuleFormat>),
+          out: BUILD_ARGS.out.default,
+          watch: false,
+        })
+
+        expect(typescriptArgs).not.toContain('--watch')
+      })
+    })
+
+    it('uses current working director for source files location', () => {
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['type'] as Array<ModuleFormat>),
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toContain(resolve(CWD, 'src/*.ts'))
+    })
+  })
+})
