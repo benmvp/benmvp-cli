@@ -4,9 +4,9 @@
     "moduleResolution": "node",
     "noImplicitAny": true,
     "strict": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "esModuleInterop": true
-  },
-  "include": ["src"]
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "noEmit": true
+  }
 }

@@ -19,7 +19,7 @@ export default async ({
   } catch (error) {
     return {
       code: 1,
-      message: 'Error running test command',
+      message: 'Error running "test" command',
       error,
     }
   }

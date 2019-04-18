@@ -1,6 +1,6 @@
 # `@benmvp/cli`
 
-![module formats: umd](https://img.shields.io/badge/module%20formats-umd-green.svg)
+![module formats: esm & cjs](https://img.shields.io/badge/module%20formats-esm%2C%20cjs-green.svg)
 [![license](https://img.shields.io/github/license/benmvp/benmvp-cli.svg)](LICENSE)
 
 [![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
@@ -77,7 +77,7 @@ Read the API docs for more on [`benmvp start`](API.md#benmvp-start).
 yarn build
 ```
 
-In your continuous integration (CI) environment, run `yarn build` (or `npm build`) to generated transpiled versions of your code in ESM (ECMAScript module), UMD (Unified module definition) & web formats.
+In your continuous integration (CI) environment, run `yarn build` (or `npm build`) to generated transpiled versions of your code in ESM (ECMAScript module) and CJS (CommonJS).
 
 Read the API docs for more on [`benmvp build`](API.md#benmvp-build).
 

@@ -1,5 +1,5 @@
 export type Command = 'create' | 'test' | 'start' | 'build'
-export type ModuleFormat = 'type' | 'esm' | 'umd' | 'dist'
+export type ModuleFormat = 'type' | 'esm' | 'cjs'
 export type TestMode = 'type' | 'lint' | 'unit'
 
 export interface Result {

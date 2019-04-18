@@ -45,7 +45,7 @@ import {create} from '@benmvp/cli'
 create({
   modes: ['type', 'unit'],
   out: './built',
-  formats: ['esm', 'umd'],
+  formats: ['esm', 'cjs'],
 })
 ```
 
@@ -79,12 +79,11 @@ An `Array` of the module formats to build. Available formats:
 
 - `'type'` - Typescript definition files (`.d.ts`) so that clients of your library can use your library fully-typed
 - `'esm'` - ECMAScript module format (everything transpiled to ES5 except for ES2015 `import`/`export` statements enabling [_tree shaking_](https://webpack.js.org/guides/tree-shaking/))
-- `'umd'` - Universal module definition format (Combination of CJS & AMD (asynchronous module definition) fully transpiled to ES5 includes minified version)
-- `'dist'` - Bundled web distribution (`<script>` include fully transpiled to ES5 w/ a minified version)
+- `'cjs'` - CommonJS format (fully transpiled)
 
 Optional. Defaults to all formats.
 
-This will include the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`) and `"browser"` (`dist` minified) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
+This will include the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), and `"jsnext:main"` (`esm`) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
 ### `out`
 
@@ -92,9 +91,9 @@ A path (relative or absolute) to the output directory for where the module forma
 
 If you chose `'esm'` as one of the [`formats`](#formats) and choose `'./built'` as the output directory, the ESM files will live at `./built/esm`.
 
-Optional. Defaults to the current working directory (`.`).
+Optional. Defaults to `./lib`.
 
-This will update the appropriate `"types"`, `"main"` (`umd`), `"module"` (`esm`), `"jsnext:main"` (`esm`), `"browser"` (`dist` minified), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
+This will update the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), `"jsnext:main"` (`esm`), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
 ### `modes`
 
