@@ -39,6 +39,7 @@ export default async ({
         // no matter where we put the transpiled lib code
         await execAsync(`npm run tsc -- ${typeScriptArgsToRun.join(' ')}`)
       } catch(err) {
+        // eslint-disable-next-line no-console
         console.error(err.stdout)
         throw Error('Unable able to generate type definitions')
       }

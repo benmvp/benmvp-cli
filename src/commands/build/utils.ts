@@ -78,7 +78,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Arra
         },
         cliOptions: {
           filenames: [resolve(process.cwd(), 'src')],
-          outDir: resolve(outputPath, `lib/${format}`),
+          outDir: resolve(outputPath, format),
           extensions: '.ts,.js',
           watch,
           copyFiles: true,
@@ -132,7 +132,7 @@ export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): Array<strin
   const args = [
     ...compilerOptionsAsArgs,
     '--declaration',
-    '--declarationDir', resolve(out, 'lib/types'),
+    '--declarationDir', resolve(out, 'types'),
     '--emitDeclarationOnly',
     '--noEmit', 'false',
     watch ? '--watch' : '',

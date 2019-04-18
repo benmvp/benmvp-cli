@@ -56,7 +56,7 @@ describe('getBabelArgs', () => {
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(out, 'lib/esm'))
+      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(out, 'esm'))
     })
 
     it('sets correct outDir when `out` is absolute', () => {
@@ -67,7 +67,7 @@ describe('getBabelArgs', () => {
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(cjsArgs.cliOptions).toHaveProperty('outDir', `${out}/lib/cjs`)
+      expect(cjsArgs.cliOptions).toHaveProperty('outDir', `${out}/cjs`)
     })
   })
 
@@ -168,7 +168,21 @@ describe('getTypescriptArgs', () => {
       expect(typescriptArgs).toEqual(expect.arrayContaining(['--noEmit', 'false']))
     })
 
-    it('specifies the declaration destination', () => {
+    it('specifies the declaration destination when `out` is relative', () => {
+      const out = './built'
+      const typescriptArgs = getTypescriptArgs({
+        formats: new Set(['type'] as Array<ModuleFormat>),
+        out,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(typescriptArgs).toEqual(expect.arrayContaining([
+        '--declarationDir',
+        resolve(out, 'types'),
+      ]))
+    })
+
+    it('specifies the declaration destination when `out` is absolute', () => {
       const typescriptArgs = getTypescriptArgs({
         formats: new Set(['type'] as Array<ModuleFormat>),
         out: '/out/dir',
@@ -177,7 +191,7 @@ describe('getTypescriptArgs', () => {
 
       expect(typescriptArgs).toEqual(expect.arrayContaining([
         '--declarationDir',
-        '/out/dir/lib/types',
+        '/out/dir/types',
       ]))
     })
 

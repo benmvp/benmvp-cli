@@ -66,7 +66,7 @@ A path (relative or absolute) to the output directory for where the module forma
 
 If you chose `'esm'` as one of the [`formats`](#formats) and choose `'./built'` as the output directory, the ESM files will live at `./built/esm`.
 
-Optional. Defaults to the current working directory (`.`).
+Optional. Defaults to `./lib`.
 
 This will update the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), `"jsnext:main"` (`esm`), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 

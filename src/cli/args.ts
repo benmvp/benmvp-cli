@@ -1,3 +1,4 @@
+import {resolve} from 'path'
 import yargs from 'yargs'
 import {ModuleFormat, TestMode, Command} from '../commands/types'
 
@@ -21,7 +22,7 @@ const OUTPUT_PATH = {
   out: {
     describe: 'Path to the output directory for the built formats',
     alias: 'o',
-    default: process.cwd(),
+    default: resolve(process.cwd(), 'lib'),
     string: true,
   },
 }
