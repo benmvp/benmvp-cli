@@ -74,7 +74,6 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Arra
         babelOptions: {
           presets: [resolve(__dirname, `babel-config-${format}.js`)],
           babelrc: false,
-          ignore: [resolve(process.cwd(), 'src/**/*.spec.ts')],
         },
         cliOptions: {
           filenames: [resolve(process.cwd(), 'src')],
@@ -98,6 +97,7 @@ export const getBabelConfig = (moduleType: 'cjs' | 'esm') => ({
     [
       '@babel/preset-env',
       {
+        targets: 'last 2 versions',
         loose: true,
         modules: moduleType === 'esm' ? false : moduleType,
         useBuiltIns: 'usage',

@@ -5,12 +5,15 @@ node_js:
   - '8'
 
 script: yarn test
-# Using semantic-release, deploy a new version of the library
-# We're running multiple node jobs so running on lowest allowed
-# Node version
-# deploy:
-#   skip_cleanup: true
-#   provider: script
-#   script: npx semantic-release
-#   on:
-#     node: "8"
+
+jobs:
+  include:
+    - stage: NPM Release
+      node_js: '10'
+      script: skip
+
+      # Using semantic-release, deploy a new version of the library
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: npx semantic-release
