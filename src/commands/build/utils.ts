@@ -74,7 +74,6 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Arra
         babelOptions: {
           presets: [resolve(__dirname, `babel-config-${format}.js`)],
           babelrc: false,
-          ignore: [resolve(process.cwd(), 'src/**/*.spec.ts')],
         },
         cliOptions: {
           filenames: [resolve(process.cwd(), 'src')],
@@ -88,28 +87,6 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Arra
 
   return argsList
 }
-
-/**
- * Generates a babel configuration for the specified module type
- * @param {'cjs' | 'esm'} moduleType The module type for which to generate a config
- */
-export const getBabelConfig = (moduleType: 'cjs' | 'esm') => ({
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        loose: true,
-        modules: moduleType === 'esm' ? false : moduleType,
-        useBuiltIns: 'usage',
-      },
-    ],
-    '@babel/preset-typescript',
-  ],
-  plugins: [
-    ['@babel/plugin-proposal-class-properties', {loose: true}],
-    '@babel/plugin-proposal-object-rest-spread',
-  ],
-})
 
 /**
  * Gets a list of arguments to pass Typescript

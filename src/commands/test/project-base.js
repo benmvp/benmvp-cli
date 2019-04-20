@@ -11,7 +11,7 @@ module.exports = {
   roots: [REAL_ROOT_DIR],
   moduleFileExtensions: ['ts', 'js'],
   transform: {
-    '^.+\\.(ts|js)$': 'babel-jest',
+    '^.+\\.(ts|js)$': resolve(__dirname, './babel-jest-transform.js'),
   },
   testMatch: [resolve(REAL_ROOT_DIR, 'src/**/*.ts')],
 }

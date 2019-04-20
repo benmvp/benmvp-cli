@@ -1,3 +1,7 @@
-const {getBabelConfig} = require('./utils')
+const {getBabelConfig} = require('./babel-config-utils')
 
-module.exports = () => getBabelConfig('esm')
+module.exports = (api) => {
+  api.cache.forever()
+
+  return getBabelConfig('esm')
+}
