@@ -3,11 +3,12 @@ node_js:
   - 'node'
   - '10'
   - '8'
-
-script: yarn test
+cache: yarn
 
 jobs:
   include:
+    - stage: Test
+      script: yarn test
     - stage: NPM Release
       node_js: '10'
       script: yarn build
