@@ -1,13 +1,13 @@
 language: node_js
-node_js:
-  - 'node'
-  - '10'
-  - '8'
 cache: yarn
 
 jobs:
   include:
     - stage: Test
+      node_js:
+        - 'node'
+        - '10'
+        - '8'
       script: yarn test
     - stage: NPM Release
       node_js: '10'
