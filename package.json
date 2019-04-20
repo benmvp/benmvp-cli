@@ -6,21 +6,20 @@
   "module": "lib/esm/index.js",
   "jsnext:main": "lib/esm/index.js",
   "types": "lib/types/index.d.ts",
-  "bin": "./bin/benmvp",
-  "files": ["/lib"],
+  "bin": "bin/benmvp",
+  "files": ["/lib", "/bin"],
   "repository": "https://github.com/benmvp/benmvp-cli.git",
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "scripts": {
     "prebootstrap": "rm -rf lib",
-    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --copy-files",
-    "prestart": "yarn run build",
+    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --copy-files --presets ./src/commands/build/babel-config-cjs.js",
+    "prestart": "yarn build",
     "start": "./bin/benmvp start",
-    "pretest": "yarn run build",
+    "pretest": "yarn build",
     "test": "./bin/benmvp test",
-    "prebuild": "yarn run bootstrap",
-    "build": "./bin/benmvp build --formats cjs esm type",
-    "tsc": "tsc"
+    "prebuild": "yarn bootstrap",
+    "build": "./bin/benmvp build"
   },
   "engines": {
     "node": ">= 8"

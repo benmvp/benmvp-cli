@@ -10,7 +10,7 @@ jobs:
   include:
     - stage: NPM Release
       node_js: '10'
-      script: skip
+      script: yarn build
 
       # Using semantic-release, deploy a new version of the library
       deploy:
