@@ -14,6 +14,9 @@
   "repository": "https://github.com/benmvp/benmvp-cli.git",
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebootstrap": "rm -rf lib",
     "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --copy-files --presets ./src/commands/build/babel-config-cjs.js",
