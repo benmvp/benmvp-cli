@@ -1,21 +1,23 @@
 # `@benmvp/cli`
 
+[![version](https://img.shields.io/npm/v/@benmvp/cli.svg)](http://npm.im/@benmvp/cli)
+[![downloads](https://img.shields.io/npm/dt/@benmvp/cli.svg)](https://www.npmjs.com/package/@benmvp/cli)
 ![module formats: esm & cjs](https://img.shields.io/badge/module%20formats-esm%2C%20cjs-green.svg)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![license](https://img.shields.io/github/license/benmvp/benmvp-cli.svg)](LICENSE)
 
 [![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
 [![Build Status](https://travis-ci.org/benmvp/benmvp-cli.svg?branch=master)](https://travis-ci.org/benmvp/benmvp-cli)
-[![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
+[![Tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)[![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
 [![Dev Dependencies status](https://img.shields.io/david/dev/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/benmvp/benmvp-cli.svg)](https://greenkeeper.io/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 [![Watch on GitHub](https://img.shields.io/github/watchers/benmvp/benmvp-cli.svg?style=social)](https://github.com/benmvp/benmvp-cli/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/benmvp/benmvp-cli.svg?style=social)](https://github.com/benmvp/benmvp-cli/stargazers)
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/benmvp/benmvp-cli.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20benmvp-cli%20by%20%40benmvp!%0A%0Ahttps%3A%2F%2Fgithub.com%2Fbenmvp%2Fbenmvp-cli)
 
 A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
-
-> NOTE: This CLI is still in initial development.
 
 ## ToC
 
