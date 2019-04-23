@@ -48,12 +48,12 @@ describe('success cases', () => {
   it('calls jest with args and returns success when no options are passed', async () => {
     const result = await testCommand()
 
-    expect(runJest).toHaveBeenCalledWith([
+    expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
       '--projects',
       expect.stringContaining('project-type.js'),
       expect.stringContaining('project-lint.js'),
       expect.stringContaining('project-unit.js'),
-    ])
+    ]))
 
     expect(result).toEqual({code: 0})
   })
@@ -62,12 +62,12 @@ describe('success cases', () => {
     it('calls jest with args and returns success when no modes are passed', async () => {
       const result = await testCommand({})
 
-      expect(runJest).toHaveBeenCalledWith([
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-type.js'),
         expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
-      ])
+      ]))
 
       expect(result).toEqual({code: 0})
     })
@@ -75,10 +75,10 @@ describe('success cases', () => {
     it('calls jest with args and returns success when valid modes are passed', async () => {
       const result = await testCommand({modes: ['unit']})
 
-      expect(runJest).toHaveBeenCalledWith([
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-unit.js'),
-      ])
+      ]))
 
       expect(result).toEqual({code: 0})
     })
@@ -88,10 +88,9 @@ describe('success cases', () => {
     it('calls jest with args and returns success when no watch flag is passed', async () => {
       const result = await testCommand({modes: ['type']})
 
-      expect(runJest).toHaveBeenCalledWith([
-        '--projects',
-        expect.stringContaining('project-type.js'),
-      ])
+      expect(runJest).toHaveBeenCalledWith(expect.not.arrayContaining([
+        '--watch',
+      ]))
 
       expect(result).toEqual({code: 0})
     })
@@ -99,13 +98,29 @@ describe('success cases', () => {
     it('calls jest with args and returns success when watch flag is passed', async () => {
       const result = await testCommand({watch: true, modes: ['lint']})
 
-      expect(runJest).toHaveBeenCalledWith([
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--watch',
-        '--projects',
-        expect.stringContaining('project-lint.js'),
-      ])
+      ]))
 
       expect(result).toEqual({code: 0})
+    })
+  })
+
+  describe('ci', () => {
+    it('calls jest with --ci flag and returns success when CI env is set', async () => {
+      const origEnvCI = process.env.CI
+
+      process.env.CI = 'true'
+
+      const result = await testCommand()
+
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
+        '--ci',
+      ]))
+
+      expect(result).toEqual({ code: 0 })
+
+      process.env.CI = origEnvCI
     })
   })
 })
