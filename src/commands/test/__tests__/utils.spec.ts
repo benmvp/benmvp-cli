@@ -61,4 +61,24 @@ describe('getJestArgs', () => {
       expect(actual).toEqual(['--watch', '--projects', expect.stringContaining('project-unit.js')])
     })
   })
+
+  describe('ci', () => {
+    it('includes --ci flag when process.env.CI is true', () => {
+      const origEnvCI = process.env.CI
+
+      process.env.CI = 'true'
+
+      const actual = getJestArgs({modes: ['unit'], watch: false})
+
+      expect(actual).toContain('--ci')
+
+      process.env.CI = origEnvCI
+    })
+
+    it('does not include --ci flag when process.env.CI is unspecified', () => {
+      const actual = getJestArgs({modes: ['unit'], watch: false})
+
+      expect(actual).not.toContain('--ci')
+    })
+  })
 })

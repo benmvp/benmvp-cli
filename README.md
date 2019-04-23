@@ -8,7 +8,8 @@
 
 [![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
 [![Build Status](https://travis-ci.org/benmvp/benmvp-cli.svg?branch=master)](https://travis-ci.org/benmvp/benmvp-cli)
-[![Tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)[![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
+[![Tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
 [![Dev Dependencies status](https://img.shields.io/david/dev/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/benmvp/benmvp-cli.svg)](https://greenkeeper.io/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)

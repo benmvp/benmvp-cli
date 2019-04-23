@@ -36,6 +36,10 @@ export const getJestArgs = ({modes, watch}: Args): Array<string> => {
     jestArgs = [...jestArgs, '--watch']
   }
 
+  if (process.env.CI === 'true') {
+    jestArgs = [...jestArgs, '--ci']
+  }
+
   const validModes = modes.filter((mode) => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {

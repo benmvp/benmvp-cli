@@ -14,4 +14,8 @@ module.exports = {
     '^.+\\.(ts|js)$': resolve(__dirname, './babel-jest-transform.js'),
   },
   testMatch: [resolve(REAL_ROOT_DIR, 'src/**/*.ts')],
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
 }
