@@ -41,8 +41,8 @@ describe('getJestArgs', () => {
       const actual = getJestArgs({modes: ['type'], watch: false})
 
       expect(actual).toEqual(expect.arrayContaining([
-        '--projects', 
-        expect.stringContaining('project-type.js')
+        '--projects',
+        expect.stringContaining('project-type.js'),
       ]))
     })
 
@@ -65,7 +65,7 @@ describe('getJestArgs', () => {
     })
 
     it('does not include --watch flag when watch option is specified as false', () => {
-      const actual = getJestArgs({ watch: false, modes: ['unit'] })
+      const actual = getJestArgs({watch: false, modes: ['unit']})
 
       expect(actual).not.toContain('--watch')
     })
@@ -89,7 +89,7 @@ describe('getJestArgs', () => {
 
       process.env.CI = 'false'
 
-      const actual = getJestArgs({ modes: ['unit'], watch: false })
+      const actual = getJestArgs({modes: ['unit'], watch: false})
 
       expect(actual).not.toContain('--ci')
 

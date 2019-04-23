@@ -5,6 +5,10 @@ import {TestMode} from '../../types'
 jest.mock('../run-jest')
 
 describe('error cases', () => {
+  afterEach(() => {
+    runJest.mockReset()
+  })
+
   it('returns an error w/ empty modes', async () => {
     const result = await testCommand({modes: []})
 
@@ -35,27 +39,12 @@ describe('error cases', () => {
       message: expect.any(String),
       error: expect.any(Error),
     })
-
-    runJest.mockReset()
   })
 })
 
 describe('success cases', () => {
   afterEach(() => {
     runJest.mockReset()
-  })
-
-  it('calls jest with args and returns success when no options are passed', async () => {
-    const result = await testCommand()
-
-    expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-      '--projects',
-      expect.stringContaining('project-type.js'),
-      expect.stringContaining('project-lint.js'),
-      expect.stringContaining('project-unit.js'),
-    ]))
-
-    expect(result).toEqual({code: 0})
   })
 
   describe('modes', () => {
@@ -86,7 +75,7 @@ describe('success cases', () => {
 
   describe('watch', () => {
     it('calls jest with args and returns success when no watch flag is passed', async () => {
-      const result = await testCommand({modes: ['type']})
+      const result = await testCommand()
 
       expect(runJest).toHaveBeenCalledWith(expect.not.arrayContaining([
         '--watch',
@@ -96,7 +85,7 @@ describe('success cases', () => {
     })
 
     it('calls jest with args and returns success when watch flag is passed', async () => {
-      const result = await testCommand({watch: true, modes: ['lint']})
+      const result = await testCommand({watch: true})
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--watch',
@@ -118,7 +107,7 @@ describe('success cases', () => {
         '--ci',
       ]))
 
-      expect(result).toEqual({ code: 0 })
+      expect(result).toEqual({code: 0})
 
       process.env.CI = origEnvCI
     })
