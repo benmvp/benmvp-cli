@@ -40,17 +40,20 @@ describe('getJestArgs', () => {
     it('returns single project when single valid mode is specified', () => {
       const actual = getJestArgs({modes: ['type'], watch: false})
 
-      expect(actual).toEqual(['--projects', expect.stringContaining('project-type.js')])
+      expect(actual).toEqual(expect.arrayContaining([
+        '--projects',
+        expect.stringContaining('project-type.js'),
+      ]))
     })
 
     it('returns multiple projects when multiple valid modes are specified', () => {
       const actual = getJestArgs({modes: ['lint', 'unit'], watch: false})
 
-      expect(actual).toEqual([
+      expect(actual).toEqual(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
-      ])
+      ]))
     })
   })
 
@@ -58,7 +61,39 @@ describe('getJestArgs', () => {
     it('includes --watch flag when watch option is specified as true', () => {
       const actual = getJestArgs({watch: true, modes: ['unit']})
 
-      expect(actual).toEqual(['--watch', '--projects', expect.stringContaining('project-unit.js')])
+      expect(actual).toContain('--watch')
+    })
+
+    it('does not include --watch flag when watch option is specified as false', () => {
+      const actual = getJestArgs({watch: false, modes: ['unit']})
+
+      expect(actual).not.toContain('--watch')
+    })
+  })
+
+  describe('ci', () => {
+    it('includes --ci flag when process.env.CI is true', () => {
+      const origEnvCI = process.env.CI
+
+      process.env.CI = 'true'
+
+      const actual = getJestArgs({modes: ['unit'], watch: false})
+
+      expect(actual).toContain('--ci')
+
+      process.env.CI = origEnvCI
+    })
+
+    it('does not include --ci flag when process.env.CI is unspecified', () => {
+      const origEnvCI = process.env.CI
+
+      process.env.CI = 'false'
+
+      const actual = getJestArgs({modes: ['unit'], watch: false})
+
+      expect(actual).not.toContain('--ci')
+
+      process.env.CI = origEnvCI
     })
   })
 })
