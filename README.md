@@ -50,7 +50,7 @@ Installs the latest version of `@benmvp/cli` as a dev dependency and updates the
 }
 ```
 
-Read the API docs for more on [`benmvp create`](API.md#benmvp-create).
+Read the API docs for more on [`benmvp create`](docs/cli/create.md).
 
 ## Quick Usage
 
@@ -62,7 +62,7 @@ yarn test
 
 In your continuous integration (CI) environment, run `yarn test` (or `npm test`) to do a one-time pass of Typescript typings, ESLint linting, and Jest tests. This can also be run locally (i.e. for commit hooks).
 
-Read the API docs for more on [`benmvp test`](API.md#benmvp-test).
+Read the API docs for more on [`benmvp test`](docs/cli/test.md).
 
 ### Developing
 
@@ -72,7 +72,7 @@ yarn start
 
 When developing, run `yarn start` (or `npm start`) which will validate Typescript typings, ESLint linting, and Jest tests as you develop and change code.
 
-Read the API docs for more on [`benmvp start`](API.md#benmvp-start).
+Read the API docs for more on [`benmvp start`](docs/cli/start.md).
 
 ### Building
 
@@ -82,11 +82,11 @@ yarn build
 
 In your continuous integration (CI) environment, run `yarn build` (or `npm build`) to generated transpiled versions of your code in ESM (ECMAScript module) and CJS (CommonJS).
 
-Read the API docs for more on [`benmvp build`](API.md#benmvp-build).
+Read the API docs for more on [`benmvp build`](docs/cli/build.md).
 
 ## Docs
 
-`@benmvp/cli` has two interfaces: a CLI and a Node API. View the full [docs](docs/).
+`@benmvp/cli` has two interfaces: a CLI and a Node API. View the [full docs](docs/).
 
 ## Supported Node Versions
 

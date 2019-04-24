@@ -2,7 +2,9 @@
 
 Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
 
-It will add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](../cli/test.md), [`benmvp start`](../cli/start.md), and [`benmvp build`](../cli/build), respectively. After the `package.json` is created or updated, it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/).
+- Add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build), respectively
+- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/)
+- Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
 
 Looking for CLI docs? View companion [`benmvp create` documentation](../cli/create.md).
 
@@ -66,7 +68,7 @@ The optional `Options` object supports the following properties:
 The name of the library to create or update.
 
 When `name` is unspecified:
-- If a `package.json` does not already exist, it creates a new `package.json` with the default name `"my-awesome-lib"`.
+- If a `package.json` does not already exist, it creates a new `package.json` with the name matching the directory it's within.
 - If a `package.json` does exist, it does nothing to the existing `package.json`.
 
 When `name` is specified:
@@ -93,7 +95,7 @@ If you chose `'esm'` as one of the [`formats`](#formats) and choose `'./built'` 
 
 Optional. Defaults to `./lib`.
 
-This will update the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), `"jsnext:main"` (`esm`), and `"types"` (Typescript) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
+This will update the appropriate `"types"`, `"main"` (`cjs`), `"module"` (`esm`), `"jsnext:main"` (`esm`), `"types"` (Typescript), `"files"` (NPM release) properties in the `package.json`. It will also update the `"build"` script to pass the matching argument.
 
 ### `modes`
 
