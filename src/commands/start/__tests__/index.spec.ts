@@ -45,31 +45,17 @@ describe('success cases', () => {
     runJest.mockReset()
   })
 
-  it('calls jest with args and returns success when no options are passed', async () => {
-    const result = await start()
-
-    expect(runJest).toHaveBeenCalledWith([
-      '--watch',
-      '--projects',
-      expect.stringContaining('project-type.js'),
-      expect.stringContaining('project-lint.js'),
-      expect.stringContaining('project-unit.js'),
-    ])
-
-    expect(result).toEqual({code: 0})
-  })
-
   describe('modes', () => {
     it('calls jest with args and returns success when no modes are passed', async () => {
       const result = await start({})
 
-      expect(runJest).toHaveBeenCalledWith([
-        '--watch',
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining(['--watch']))
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-type.js'),
         expect.stringContaining('project-lint.js'),
         expect.stringContaining('project-unit.js'),
-      ])
+      ]))
 
       expect(result).toEqual({code: 0})
     })
@@ -77,11 +63,11 @@ describe('success cases', () => {
     it('calls jest with args and returns success when valid modes are passed', async () => {
       const result = await start({modes: ['unit']})
 
-      expect(runJest).toHaveBeenCalledWith([
-        '--watch',
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining(['--watch']))
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-unit.js'),
-      ])
+      ]))
 
       expect(result).toEqual({code: 0})
     })
