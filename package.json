@@ -1,6 +1,6 @@
 {
   "name": "@benmvp/cli",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
