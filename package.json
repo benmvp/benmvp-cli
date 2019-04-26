@@ -6,7 +6,9 @@
   "module": "lib/esm/index.js",
   "jsnext:main": "lib/esm/index.js",
   "types": "lib/types/index.d.ts",
-  "bin": "bin/benmvp",
+  "bin": {
+    "benmvp": "bin/benmvp"
+  },
   "files": [
     "/lib",
     "/bin"
