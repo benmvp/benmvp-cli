@@ -50,11 +50,13 @@ The optional `Options` object supports the following properties:
 
 An `Array` of the types or modes of tests to run. Available modes:
 
-- `'type'` - Runs Typescript type-checking
-- `'lint'` - Runs ESLint
-- `'unit'` - Runs Jest-based unit tests
+- `'type'` - Runs Typescript type-checking (files ending in `.ts`)
+- `'lint'` - Runs ESLint (files ending in `.ts`)
+- `'unit'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes when unspecified.
+
+> NOTE: [Jest Watch Plugins](https://jestjs.io/docs/en/watch-plugins) are added to make watch mode even more useful. Specifically the [eslint `watch-fix` plugin](https://github.com/jest-community/jest-runner-eslint#toggle---fix-in-watch-mode) is added to enable auto-fixing of lint errors. However, for this to work, `'lint'` has to be the first mode when specified.
 
 ## Return Value
 

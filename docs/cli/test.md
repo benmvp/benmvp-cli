@@ -23,7 +23,7 @@ benmvp test --modes unit
 To run typing & linting:
 
 ```sh
-benmvp start --modes type lint
+benmvp start --modes lint type
 ```
 
 ## Arguments
@@ -32,9 +32,9 @@ benmvp start --modes type lint
 
 A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
 
-- `'type'` - Runs Typescript type-checking (files ending in `.ts`)
-- `'lint'` - Runs ESLint (files ending in `.ts`)
-- `'unit'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
+- `lint` - Runs ESLint (files ending in `.ts`)
+- `type` - Runs Typescript type-checking (files ending in `.ts`)
+- `unit` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes.
 
@@ -43,6 +43,8 @@ Optional. Defaults to all modes.
 A flag indicating whether or not to continuously run the tests whenever source files change. Aliased as `-w`.
 
 Optional. Defaults to `false`.
+
+> NOTE: [Jest Watch Plugins](https://jestjs.io/docs/en/watch-plugins) are added to make watch mode even more useful. Specifically the [eslint `watch-fix` plugin](https://github.com/jest-community/jest-runner-eslint#toggle---fix-in-watch-mode) is added to enable auto-fixing of lint errors. However, for this to work, `lint` has to be the first mode whe specified.
 
 ---
 

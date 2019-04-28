@@ -64,6 +64,8 @@ A flag indicating whether or not to continuously run the tests whenever source f
 
 Optional. Defaults to `false`.
 
+> NOTE: [Jest Watch Plugins](https://jestjs.io/docs/en/watch-plugins) are added to make watch mode even more useful. Specifically the [eslint `watch-fix` plugin](https://github.com/jest-community/jest-runner-eslint#toggle---fix-in-watch-mode) is added to enable auto-fixing of lint errors. However, for this to work, `'lint'` has to be the first mode when specified.
+
 ## Return Value
 
 `test()` returns a `Promise`.
