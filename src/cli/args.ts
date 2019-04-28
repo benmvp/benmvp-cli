@@ -7,7 +7,7 @@ const TEST_MODES = {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['type', 'lint', 'unit'] as Array<TestMode>,
+    default: ['lint', 'type', 'unit'] as Array<TestMode>,
   },
 }
 const BUILD_FORMATS = {
