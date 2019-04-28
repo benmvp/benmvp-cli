@@ -4,5 +4,8 @@ module.exports = {
   ...BASE_CONFIG,
   runner: 'jest-runner-eslint',
   displayName: 'lint',
-  watchPlugins: ['jest-runner-eslint/watch-fix'],
+  watchPlugins: [
+    ...BASE_CONFIG.watchPlugins,
+    'jest-runner-eslint/watch-fix'
+  ],
 }
