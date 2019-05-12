@@ -27,6 +27,7 @@ module.exports = {
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/explicit-function-return-type': ['error', {allowExpressions: true}],
     '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/no-object-literal-type-assertion': ['error', {allowAsParameter: true}],
   },
   settings: {
     'import/resolver': {

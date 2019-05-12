@@ -4,7 +4,6 @@ import {TestMode} from '../../types'
 describe('getJestArgs', () => {
   it('throws an error if no args are specified', () => {
     const tryGet = (): void => {
-      // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
       getJestArgs({} as Args)
     }
 
