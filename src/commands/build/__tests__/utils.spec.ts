@@ -20,7 +20,7 @@ describe('getBabelArgs', () => {
 
     it('generates CJS + ESM w/ default output directory', () => {
       const [cjsArgs, esmArgs] = getBabelArgs({
-        formats: new Set(['cjs', 'esm'] as Array<ModuleFormat>),
+        formats: new Set(['cjs', 'esm'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
@@ -34,7 +34,7 @@ describe('getBabelArgs', () => {
 
     it('still only generates CJS + ESM when more formats are specified', () => {
       const [cjsArgs, esmArgs, ...otherArgs] = getBabelArgs({
-        formats: new Set(['cjs', 'esm', 'type'] as Array<ModuleFormat>),
+        formats: new Set(['cjs', 'esm', 'type'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
@@ -51,7 +51,7 @@ describe('getBabelArgs', () => {
     it('sets correct outDir when `out` is relative', () => {
       const out = './built'
       const [esmArgs] = getBabelArgs({
-        formats: new Set(['esm'] as Array<ModuleFormat>),
+        formats: new Set(['esm'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
       })
@@ -62,7 +62,7 @@ describe('getBabelArgs', () => {
     it('sets correct outDir when `out` is absolute', () => {
       const out = '/path/to/built'
       const [cjsArgs] = getBabelArgs({
-        formats: new Set(['cjs'] as Array<ModuleFormat>),
+        formats: new Set(['cjs'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
       })
@@ -112,7 +112,7 @@ describe('getTypescriptArgs', () => {
 
     it('returns null if `formats` does not contain "type"', () => {
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['esm'] as Array<ModuleFormat>),
+        formats: new Set(['esm'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
@@ -124,7 +124,7 @@ describe('getTypescriptArgs', () => {
   describe('type format requested', () => {
     it('includes all of the args from base config', () => {
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['esm', 'type'] as Array<ModuleFormat>),
+        formats: new Set(['esm', 'type'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
@@ -136,7 +136,7 @@ describe('getTypescriptArgs', () => {
 
     it('specifies generic declaration information', () => {
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['esm', 'type'] as Array<ModuleFormat>),
+        formats: new Set(['esm', 'type'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })
@@ -149,7 +149,7 @@ describe('getTypescriptArgs', () => {
     it('specifies the declaration destination when `out` is relative', () => {
       const out = './built'
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['type'] as Array<ModuleFormat>),
+        formats: new Set(['type'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
       })
@@ -162,7 +162,7 @@ describe('getTypescriptArgs', () => {
 
     it('specifies the declaration destination when `out` is absolute', () => {
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['type'] as Array<ModuleFormat>),
+        formats: new Set(['type'] as ModuleFormat[]),
         out: '/out/dir',
         watch: BUILD_ARGS.watch.default,
       })
@@ -176,7 +176,7 @@ describe('getTypescriptArgs', () => {
     describe('watch option', () => {
       it('includes --watch when `watch` is true', () => {
         const typescriptArgs = getTypescriptArgs({
-          formats: new Set(['type'] as Array<ModuleFormat>),
+          formats: new Set(['type'] as ModuleFormat[]),
           out: BUILD_ARGS.out.default,
           watch: true,
         })
@@ -186,7 +186,7 @@ describe('getTypescriptArgs', () => {
 
       it('does not include --watch when `watch` is false', () => {
         const typescriptArgs = getTypescriptArgs({
-          formats: new Set(['type'] as Array<ModuleFormat>),
+          formats: new Set(['type'] as ModuleFormat[]),
           out: BUILD_ARGS.out.default,
           watch: false,
         })
@@ -197,7 +197,7 @@ describe('getTypescriptArgs', () => {
 
     it('uses current working director for source files location', () => {
       const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['type'] as Array<ModuleFormat>),
+        formats: new Set(['type'] as ModuleFormat[]),
         out: BUILD_ARGS.out.default,
         watch: BUILD_ARGS.watch.default,
       })

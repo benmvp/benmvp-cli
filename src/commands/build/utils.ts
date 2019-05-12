@@ -4,58 +4,58 @@ import {ModuleFormat} from '../types'
 import BASE_TSCONFIG from '../test/tsconfig.json'
 
 interface BabelOptions {
-  presets: Array<string>
-  plugins?: Array<string>
-  rootMode?: 'root' | 'upward' | 'upward-optional'
-  configFile?: string
-  envName?: string
-  sourceType?: 'script' | 'module'
-  ignore: Array<string>
-  only?: Array<string>
-  retainLines?: boolean
-  compact?: true | false | 'auto'
-  minified?: boolean
-  auxiliaryCommentBefore?: string
-  auxiliaryCommentAfter?: string
-  sourceMaps?: boolean
-  sourceFileName?: string
-  sourceRoot?: string
-  moduleRoot?: string
-  moduleIds?: Array<string>
-  moduleId?: string
-  babelrc?: boolean
-  highlightCode?: boolean
-  comments?: boolean
+  presets: string[];
+  plugins?: string[];
+  rootMode?: 'root' | 'upward' | 'upward-optional';
+  configFile?: string;
+  envName?: string;
+  sourceType?: 'script' | 'module';
+  ignore?: string[];
+  only?: string[];
+  retainLines?: boolean;
+  compact?: true | false | 'auto';
+  minified?: boolean;
+  auxiliaryCommentBefore?: string;
+  auxiliaryCommentAfter?: string;
+  sourceMaps?: boolean;
+  sourceFileName?: string;
+  sourceRoot?: string;
+  moduleRoot?: string;
+  moduleIds?: string[];
+  moduleId?: string;
+  babelrc?: boolean;
+  highlightCode?: boolean;
+  comments?: boolean;
 }
 interface CLIOptions {
-  filename?: string
-  filenames: Array<string>
-  extensions?: string
-  keepFileExtension?: boolean
-  watch?: boolean
-  skipInitialBuild?: boolean
-  outFile?: string
-  outDir?: string
-  relative?: boolean
-  copyFiles?: boolean
-  includeDotfiles?: boolean
-  verbose?: boolean
-  deleteDirOnStart?: boolean
-  sourceMapTarget?: string
+  filename?: string;
+  filenames: string[];
+  extensions?: string;
+  keepFileExtension?: boolean;
+  watch?: boolean;
+  skipInitialBuild?: boolean;
+  outFile?: string;
+  outDir?: string;
+  relative?: boolean;
+  copyFiles?: boolean;
+  includeDotfiles?: boolean;
+  verbose?: boolean;
+  deleteDirOnStart?: boolean;
+  sourceMapTarget?: string;
 }
 
 interface BabelCLIOptions {
-  babelOptions: BabelOptions
-  cliOptions: CLIOptions
+  babelOptions: BabelOptions;
+  cliOptions: CLIOptions;
 }
 
 interface BuildArgs {
-  formats: Set<ModuleFormat>
-  out: string
-  watch: boolean
+  formats: Set<ModuleFormat>;
+  out: string;
+  watch: boolean;
 }
 
-const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
+const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as ModuleFormat[])
 
 /**
  * Gets an array of options/arguments to pass babel, one for each valid format
@@ -65,24 +65,23 @@ const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as Array<ModuleFormat>)
  * @param {boolean} options.watch A flag indicating whether or not to continuously generate the built module formats whenever source files change
  * @returns {Array<BabelCLIOptions>}
  */
-export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Array<BabelCLIOptions> => {
+export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): BabelCLIOptions[] => {
   const validatedFormats = [...formats].filter((format) => VALID_BABEL_FORMATS.has(format))
 
   const argsList = validatedFormats.map(
-    (format) =>
-      ({
-        babelOptions: {
-          presets: [resolve(__dirname, `babel-config-${format}.js`)],
-          babelrc: false,
-        },
-        cliOptions: {
-          filenames: [resolve(process.cwd(), 'src')],
-          outDir: resolve(outputPath, format),
-          extensions: '.ts,.js',
-          watch,
-          copyFiles: true,
-        },
-      } as BabelCLIOptions),
+    (format) => ({
+      babelOptions: {
+        presets: [resolve(__dirname, `babel-config-${format}.js`)],
+        babelrc: false,
+      },
+      cliOptions: {
+        filenames: [resolve(process.cwd(), 'src')],
+        outDir: resolve(outputPath, format),
+        extensions: '.ts,.js',
+        watch,
+        copyFiles: true,
+      },
+    }),
   )
 
   return argsList
@@ -96,7 +95,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Arra
  * @param {boolean} options.watch A flag indicating whether or not to continuously generate the type definitions whenever source files change
  * @returns {Array<string> | null}
  */
-export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): Array<string> | null => {
+export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | null => {
   if (!formats.has('type')) {
     return null
   }

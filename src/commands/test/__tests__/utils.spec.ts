@@ -3,7 +3,8 @@ import {TestMode} from '../../types'
 
 describe('getJestArgs', () => {
   it('throws an error if no args are specified', () => {
-    const tryGet = () => {
+    const tryGet = (): void => {
+      // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
       getJestArgs({} as Args)
     }
 
@@ -14,7 +15,7 @@ describe('getJestArgs', () => {
     const DUMMY_MODE = 'foo' as TestMode
 
     it('throws an error if empty modes are specified', () => {
-      const tryGet = () => {
+      const tryGet = (): void => {
         getJestArgs({modes: [], watch: false})
       }
 
@@ -22,7 +23,7 @@ describe('getJestArgs', () => {
     })
 
     it('throws an error if specified mode does not exist', () => {
-      const tryGet = () => {
+      const tryGet = (): void => {
         getJestArgs({modes: [DUMMY_MODE], watch: false})
       }
 
@@ -30,7 +31,7 @@ describe('getJestArgs', () => {
     })
 
     it('throws an error if modes has a mix of valid and invalid', () => {
-      const tryGet = () => {
+      const tryGet = (): void => {
         getJestArgs({modes: ['type', DUMMY_MODE], watch: false})
       }
 

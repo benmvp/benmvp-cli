@@ -10,6 +10,9 @@ const getBabelConfig = (moduleType) => ({
         targets: 'last 2 versions',
         modules: moduleType === 'esm' ? false : moduleType,
         useBuiltIns: 'usage',
+        corejs: {
+          version: 3,
+        }
       },
     ],
     '@babel/preset-typescript',

@@ -1,41 +1,32 @@
+const {resolve} = require('path');
+
 module.exports = {
-  extends: 'eventbrite',
+  extends: ['eventbrite', 'plugin:@typescript-eslint/recommended'],
   env: {
     jest: true,
     browser: true,
     node: true,
   },
-  parser: 'typescript-eslint-parser',
-  plugins: ['typescript'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    project: resolve(__dirname, 'tsconfig.json'),
+  },
   rules: {
     // overrides of eslint-config-eventbrite
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-      },
-    ],
+    indent: ['error', 2, {SwitchCase: 1}],
     'prefer-const': 'error',
     semi: ['error', 'never'],
     'space-before-function-paren': ['error', {asyncArrow: 'always'}],
 
-    // need to be turned off for eslint-plugin-typescript below
+    // need to be turned off for rules in plugin:@typescript-eslint/recommended
     'no-undef': 'off',
     camelcase: 'off',
 
-    // eslint-plugin-typescript settings
-    'typescript/adjacent-overload-signatures': 'error',
-    'typescript/class-name-casing': 'error',
-    'typescript/interface-name-prefix': 'error',
-    'typescript/member-delimiter-style': ['error', {delimiter: 'none'}],
-    'typescript/no-unused-vars': 'error',
-    'typescript/member-ordering': 'error',
-    'typescript/no-angle-bracket-type-assertion': 'error',
-    'typescript/no-array-constructor': 'error',
-    'typescript/no-empty-interface': 'error',
-    'typescript/no-use-before-define': 'error',
-    'typescript/type-annotation-spacing': 'error',
+    // @typescript-eslint/eslint-plugin settings
+    '@typescript-eslint/await-thenable': 'error',
+    '@typescript-eslint/explicit-function-return-type': ['error', {allowExpressions: true}],
+    '@typescript-eslint/indent': 'off',
   },
   settings: {
     'import/resolver': {

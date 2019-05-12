@@ -2,12 +2,22 @@ import {resolve} from 'path'
 import yargs from 'yargs'
 import {ModuleFormat, TestMode, Command} from '../commands/types'
 
+interface CommandOptions {
+  [key: string]: yargs.Options;
+}
+
+interface YargsArgv {
+  [x: string]: unknown;
+  _: string[];
+  $0: string;
+}
+
 const TEST_MODES = {
   modes: {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['lint', 'type', 'unit'] as Array<TestMode>,
+    default: ['lint', 'type', 'unit'] as TestMode[],
   },
 }
 const BUILD_FORMATS = {
@@ -15,7 +25,7 @@ const BUILD_FORMATS = {
     describe: 'The module formats to build',
     alias: 'f',
     array: true,
-    default: ['type', 'esm', 'cjs'] as Array<ModuleFormat>,
+    default: ['type', 'esm', 'cjs'] as ModuleFormat[],
   },
 }
 const OUTPUT_PATH = {
@@ -35,7 +45,7 @@ export const CREATE_POS_ARGS = {
     string: true,
   },
 }
-export const TEST_ARGS = {
+export const TEST_ARGS: CommandOptions = {
   ...TEST_MODES,
   watch: {
     describe: 'Re-run tests when source files change',
@@ -43,11 +53,11 @@ export const TEST_ARGS = {
     type: 'boolean',
     default: false,
   },
-} as {[key: string]: yargs.Options}
-export const START_ARGS = {
+}
+export const START_ARGS: CommandOptions = {
   ...TEST_MODES,
-} as {[key: string]: yargs.Options}
-export const BUILD_ARGS = {
+}
+export const BUILD_ARGS: CommandOptions = {
   ...BUILD_FORMATS,
   ...OUTPUT_PATH,
   watch: {
@@ -56,7 +66,7 @@ export const BUILD_ARGS = {
     type: 'boolean',
     default: false,
   },
-} as {[key: string]: yargs.Options}
+}
 
 export const CREATE_COMMAND = 'create' as Command
 export const TEST_COMMAND = 'test' as Command
@@ -65,20 +75,20 @@ export const BUILD_COMMAND = 'build' as Command
 
 export const DEFAULT_COMMAND = CREATE_COMMAND
 
-export const parseArgs = (args: Array<string>) =>
+export const parseArgs = (args: string[]): YargsArgv =>
   yargs(args)
     .version()
-    .command<{[key: string]: yargs.Options}>(
+    .command<CommandOptions>(
       TEST_COMMAND,
       'Runs linting, typing & unit tests for the library',
       TEST_ARGS,
     )
-    .command<{[key: string]: yargs.Options}>(
+    .command<CommandOptions>(
       START_COMMAND,
       'Runs the lib\'s tests in watch mode',
       START_ARGS,
     )
-    .command<{[key: string]: yargs.Options}>(
+    .command<CommandOptions>(
       BUILD_COMMAND,
       'Builds the library into desired module formats',
       BUILD_ARGS,
