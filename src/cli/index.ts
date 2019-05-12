@@ -16,7 +16,7 @@ import {Command, Result} from '../commands/types'
  * @param {Array<string>} [args] An array of CLI arguments similar to the arguments received by `process.argv` (after the first two elements)
  * @returns Promise<Result> The result of the executing the command
  */
-export const run = (args: Array<string> = []): Promise<Result> => {
+export const run = (args: string[] = []): Promise<Result> => {
   const parsedArgs = parseArgs(args)
   const [firstCommand = DEFAULT_COMMAND] = parsedArgs._
   const command = firstCommand as Command

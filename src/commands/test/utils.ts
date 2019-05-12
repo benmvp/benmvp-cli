@@ -2,25 +2,25 @@ import {resolve} from 'path'
 import {TestMode} from '../types'
 
 interface ValidTestModes {
-  type: string
-  lint: string
-  unit: string
-  [index: string]: string
+  type: string;
+  lint: string;
+  unit: string;
+  [index: string]: string;
 }
 export interface Args {
-  modes: Array<TestMode>
-  watch: boolean
+  modes: TestMode[];
+  watch: boolean;
 }
 
 // NOTE: Ideally we'd point to project configuration objects for
 // each type instead of files that contain the configuration, but
 // Jest kept throwing an error even though it says it supports the
 // functionality. See: https://github.com/facebook/jest/issues/7415
-const VALID_TEST_MODES = {
+const VALID_TEST_MODES: ValidTestModes = {
   type: resolve(__dirname, 'project-type.js'),
   lint: resolve(__dirname, 'project-lint.js'),
   unit: resolve(__dirname, 'project-unit.js'),
-} as ValidTestModes
+}
 
 /**
  * Retrieves the arguments to pass to Jest based on the specified options
@@ -29,8 +29,8 @@ const VALID_TEST_MODES = {
  * @param {boolean} options.watch Whether or not to re-run tests as source files change
  * @returns {Array<string>} The array of arguments
  */
-export const getJestArgs = ({modes, watch}: Args): Array<string> => {
-  let jestArgs = [] as Array<string>
+export const getJestArgs = ({modes, watch}: Args): string[] => {
+  let jestArgs = [] as string[]
 
   if (watch) {
     jestArgs = [...jestArgs, '--watch']

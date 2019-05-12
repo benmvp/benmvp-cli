@@ -4,9 +4,11 @@ import {TestMode} from '../../types'
 
 jest.mock('../run-jest')
 
+const mockedRunJest = runJest as jest.Mock
+
 describe('error cases', () => {
   afterEach(() => {
-    runJest.mockReset()
+    mockedRunJest.mockReset()
   })
 
   it('returns an error w/ empty modes', async () => {
@@ -31,7 +33,7 @@ describe('error cases', () => {
   })
 
   it('returns an error if jest fails (for some reason)', async () => {
-    runJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
+    mockedRunJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
     const result = await testCommand({modes: ['unit']})
 
     expect(result).toEqual({
@@ -44,7 +46,7 @@ describe('error cases', () => {
 
 describe('success cases', () => {
   afterEach(() => {
-    runJest.mockReset()
+    mockedRunJest.mockReset()
   })
 
   describe('modes', () => {
