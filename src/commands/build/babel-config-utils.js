@@ -9,10 +9,6 @@ const getBabelConfig = (moduleType) => ({
       {
         targets: 'last 2 versions',
         modules: moduleType === 'esm' ? false : moduleType,
-        useBuiltIns: 'usage',
-        corejs: {
-          version: 3,
-        }
       },
     ],
     '@babel/preset-typescript',
@@ -20,6 +16,15 @@ const getBabelConfig = (moduleType) => ({
   plugins: [
     ['@babel/plugin-proposal-class-properties', {loose: true}],
     '@babel/plugin-proposal-object-rest-spread',
+    ['@babel/plugin-transform-runtime', {
+      corejs: false,
+      helpers: true,
+      regenerator: true,
+
+      // NOTE: May need to point this to a specific one, see
+      // https://github.com/facebook/create-react-app/blob/695ca7576a6d27912bcf9d992b00ef7316232555/packages/babel-preset-react-app/create.js#L181
+      absoluteRuntime: false,
+    }]
   ],
 })
 
