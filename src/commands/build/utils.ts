@@ -57,6 +57,11 @@ interface BuildArgs {
 
 const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as ModuleFormat[])
 
+const BUILT_FILES_TO_REMOVE = [
+  '**/__tests__/',
+  '**/*.spec.*',
+]
+
 /**
  * Gets an array of options/arguments to pass babel, one for each valid format
  * @param {BuildArgs} options
@@ -117,3 +122,12 @@ export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | 
 
   return args
 }
+
+/**
+ * Gets list of glob patterns of copied files that should be deleted after building
+ * @param {string} outputPath A path (relative or absolute) to the output directory for the type definitions
+ * @returns {string[]}
+ */
+export const getCopiedFilesToDelete = (outputPath: string): string[] => (
+  BUILT_FILES_TO_REMOVE.map((glob) => resolve(`${outputPath}/${glob}`))
+)

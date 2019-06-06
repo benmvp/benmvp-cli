@@ -3,7 +3,11 @@ import {exec} from 'child_process'
 import runBabel from './run-babel'
 import {BUILD_ARGS} from '../../cli/args'
 import {Result, ModuleFormat} from '../types'
-import {getBabelArgs, getTypescriptArgs} from './utils'
+import {
+  getBabelArgs,
+  getTypescriptArgs,
+  getCopiedFilesToDelete,
+} from './utils'
 
 const execAsync = promisify(exec)
 
@@ -44,6 +48,9 @@ export default async ({
         throw Error('Unable able to generate type definitions')
       }
     }
+
+    // remove all of the copied files that we don't want in built directory
+    await execAsync(`npx rimraf ${getCopiedFilesToDelete(out).join(' ')}`)
   } catch (error) {
     return {
       code: error.code || 1,
