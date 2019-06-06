@@ -1,5 +1,9 @@
 import {resolve} from 'path'
-import {getBabelArgs, getTypescriptArgs} from '../utils'
+import {
+  getBabelArgs,
+  getTypescriptArgs,
+  getCopiedFilesToDelete,
+} from '../utils'
 import {BUILD_ARGS} from '../../../cli/args'
 import {ModuleFormat} from '../../types'
 import BASE_TSCONFIG from '../../test/tsconfig.json'
@@ -7,6 +11,18 @@ import BASE_TSCONFIG from '../../test/tsconfig.json'
 const CWD = process.cwd()
 
 describe('getBabelArgs', () => {
+  describe('source files', () => {
+    it('uses current working directory for source files location', () => {
+      const [firstSetOfArgs] = getBabelArgs({
+        formats: BUILD_ARGS.formats.default,
+        out: BUILD_ARGS.out.default,
+        watch: BUILD_ARGS.watch.default,
+      })
+
+      expect(firstSetOfArgs.cliOptions.filenames).toEqual([resolve(CWD, 'src')])
+    })
+  })
+
   describe('formats + out', () => {
     it('returns empty array when empty formats are specified', () => {
       const babelArgsToRun = getBabelArgs({
@@ -195,14 +211,34 @@ describe('getTypescriptArgs', () => {
       })
     })
 
-    it('uses current working director for source files location', () => {
-      const typescriptArgs = getTypescriptArgs({
-        formats: new Set(['type'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
-        watch: BUILD_ARGS.watch.default,
-      })
+    describe('source files', () => {
+      it('uses current working directory for source files location', () => {
+        const typescriptArgs = getTypescriptArgs({
+          formats: new Set(['type'] as ModuleFormat[]),
+          out: BUILD_ARGS.out.default,
+          watch: BUILD_ARGS.watch.default,
+        })
 
-      expect(typescriptArgs).toContain(resolve(CWD, 'src/*.ts'))
+        expect(typescriptArgs).toContain(resolve(CWD, 'src/*.ts'))
+      })
+    })
+  })
+})
+
+describe('getCopiedFilesToDelete', () => {
+  it('prepends the passed in output path to the glob patterns (when relative)', () => {
+    const files = getCopiedFilesToDelete('./built')
+
+    files.forEach((globPattern) => {
+      expect(globPattern).toMatch(new RegExp(`^${resolve(CWD, 'built')}/`))
+    })
+  })
+
+  it('prepends the passed in output path to the glob patterns (when absolute)', () => {
+    const files = getCopiedFilesToDelete('/path/to/built')
+
+    files.forEach((globPattern) => {
+      expect(globPattern).toMatch(new RegExp('/path/to/built/'))
     })
   })
 })
