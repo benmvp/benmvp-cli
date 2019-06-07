@@ -486,6 +486,7 @@ describe('run', () => {
 
       expect(testCommand).toHaveBeenCalledWith({
         modes: TEST_ARGS.modes.default,
+        pattern: TEST_ARGS.pattern.default,
         watch: TEST_ARGS.watch.default,
       })
     })
@@ -496,6 +497,7 @@ describe('run', () => {
 
         expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint'],
+          pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
       })
@@ -505,6 +507,7 @@ describe('run', () => {
 
         expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint', 'unit'],
+          pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
       })
@@ -512,7 +515,11 @@ describe('run', () => {
       it('parses singular mode (alias)', () => {
         run(['test', '-m', 'type'])
 
-        expect(testCommand).toHaveBeenCalledWith({modes: ['type'], watch: TEST_ARGS.watch.default})
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: ['type'],
+          pattern: TEST_ARGS.pattern.default,
+          watch: TEST_ARGS.watch.default,
+        })
       })
 
       it('parses multiple modes (alias)', () => {
@@ -520,6 +527,31 @@ describe('run', () => {
 
         expect(testCommand).toHaveBeenCalledWith({
           modes: ['lint', 'unit'],
+          pattern: TEST_ARGS.pattern.default,
+          watch: TEST_ARGS.watch.default,
+        })
+      })
+
+      it('parses pattern', () => {
+        const pattern = 'api/'
+
+        run(['test', '--pattern', pattern])
+
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: TEST_ARGS.modes.default,
+          pattern,
+          watch: TEST_ARGS.watch.default,
+        })
+      })
+
+      it('parses pattern (alias)', () => {
+        const pattern = 'api/'
+
+        run(['test', '-p', pattern])
+
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: TEST_ARGS.modes.default,
+          pattern,
           watch: TEST_ARGS.watch.default,
         })
       })
@@ -529,6 +561,7 @@ describe('run', () => {
 
         expect(testCommand).toHaveBeenCalledWith({
           modes: TEST_ARGS.modes.default,
+          pattern: TEST_ARGS.pattern.default,
           watch: true,
         })
       })
@@ -536,19 +569,31 @@ describe('run', () => {
       it('parses watch (alias)', () => {
         run(['test', '-w'])
 
-        expect(testCommand).toHaveBeenCalledWith({modes: TEST_ARGS.modes.default, watch: true})
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: TEST_ARGS.modes.default,
+          pattern: TEST_ARGS.pattern.default,
+          watch: true,
+        })
       })
 
       it('parses all args', () => {
-        run(['test', '--watch', '--modes', 'unit', 'type'])
+        run(['test', '--watch', '--modes', 'unit', 'type', '--pattern', 'utils/'])
 
-        expect(testCommand).toHaveBeenCalledWith({modes: ['unit', 'type'], watch: true})
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: ['unit', 'type'],
+          pattern: 'utils/',
+          watch: true,
+        })
       })
 
       it('parses all args (aliases)', () => {
-        run(['test', '-m', 'type', 'lint', '-w'])
+        run(['test', '-p', 'utils/', '-m', 'type', 'lint', '-w'])
 
-        expect(testCommand).toHaveBeenCalledWith({modes: ['type', 'lint'], watch: true})
+        expect(testCommand).toHaveBeenCalledWith({
+          modes: ['type', 'lint'],
+          pattern: 'utils/',
+          watch: true,
+        })
       })
     })
   })
@@ -563,32 +608,70 @@ describe('run', () => {
     it('defaults args when none are passed', () => {
       run(['start'])
 
-      expect(start).toHaveBeenCalledWith({modes: START_ARGS.modes.default})
+      expect(start).toHaveBeenCalledWith({
+        modes: START_ARGS.modes.default,
+        pattern: START_ARGS.pattern.default,
+      })
     })
 
     describe('start modes', () => {
       it('parses singular mode', () => {
         run(['start', '--modes', 'lint'])
 
-        expect(start).toHaveBeenCalledWith({modes: ['lint']})
+        expect(start).toHaveBeenCalledWith({
+          modes: ['lint'],
+          pattern: START_ARGS.pattern.default,
+        })
       })
 
       it('parses multiple modes', () => {
         run(['start', '--modes', 'lint', 'unit'])
 
-        expect(start).toHaveBeenCalledWith({modes: ['lint', 'unit']})
+        expect(start).toHaveBeenCalledWith({
+          modes: ['lint', 'unit'],
+          pattern: START_ARGS.pattern.default,
+        })
       })
 
       it('parses singular mode (alias)', () => {
         run(['start', '-m', 'type'])
 
-        expect(start).toHaveBeenCalledWith({modes: ['type']})
+        expect(start).toHaveBeenCalledWith({
+          modes: ['type'],
+          pattern: START_ARGS.pattern.default,
+        })
       })
 
       it('parses multiple modes (alias)', () => {
         run(['start', '-m', 'lint', 'unit'])
 
-        expect(start).toHaveBeenCalledWith({modes: ['lint', 'unit']})
+        expect(start).toHaveBeenCalledWith({
+          modes: ['lint', 'unit'],
+          pattern: START_ARGS.pattern.default,
+        })
+      })
+
+
+      it('parses pattern', () => {
+        const pattern = 'api/'
+
+        run(['start', '--pattern', pattern])
+
+        expect(start).toHaveBeenCalledWith({
+          modes: START_ARGS.modes.default,
+          pattern,
+        })
+      })
+
+      it('parses pattern (alias)', () => {
+        const pattern = 'api/'
+
+        run(['start', '-p', pattern])
+
+        expect(start).toHaveBeenCalledWith({
+          modes: START_ARGS.modes.default,
+          pattern,
+        })
       })
     })
   })

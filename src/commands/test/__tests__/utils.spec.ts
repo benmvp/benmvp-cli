@@ -15,7 +15,7 @@ describe('getJestArgs', () => {
 
     it('throws an error if empty modes are specified', () => {
       const tryGet = (): void => {
-        getJestArgs({modes: [], watch: false})
+        getJestArgs({modes: [], pattern: '', watch: false})
       }
 
       expect(tryGet).toThrow()
@@ -23,7 +23,7 @@ describe('getJestArgs', () => {
 
     it('throws an error if specified mode does not exist', () => {
       const tryGet = (): void => {
-        getJestArgs({modes: [DUMMY_MODE], watch: false})
+        getJestArgs({modes: [DUMMY_MODE], pattern: '', watch: false})
       }
 
       expect(tryGet).toThrow()
@@ -31,14 +31,14 @@ describe('getJestArgs', () => {
 
     it('throws an error if modes has a mix of valid and invalid', () => {
       const tryGet = (): void => {
-        getJestArgs({modes: ['type', DUMMY_MODE], watch: false})
+        getJestArgs({modes: ['type', DUMMY_MODE], pattern: '', watch: false})
       }
 
       expect(tryGet).toThrow()
     })
 
     it('returns single project when single valid mode is specified', () => {
-      const actual = getJestArgs({modes: ['type'], watch: false})
+      const actual = getJestArgs({modes: ['type'], pattern: '', watch: false})
 
       expect(actual).toEqual(expect.arrayContaining([
         '--projects',
@@ -47,7 +47,7 @@ describe('getJestArgs', () => {
     })
 
     it('returns multiple projects when multiple valid modes are specified', () => {
-      const actual = getJestArgs({modes: ['lint', 'unit'], watch: false})
+      const actual = getJestArgs({modes: ['lint', 'unit'], pattern: '', watch: false})
 
       expect(actual).toEqual(expect.arrayContaining([
         '--projects',
@@ -57,15 +57,33 @@ describe('getJestArgs', () => {
     })
   })
 
+  describe('pattern', () => {
+    it('includes --testPathPattern flag when pattern option is specified', () => {
+      const pattern = 'api/'
+      const actual = getJestArgs({pattern, modes: ['lint'], watch: false})
+
+      expect(actual).toEqual(expect.arrayContaining([
+        '--testPathPattern',
+        pattern,
+      ]))
+    })
+
+    it('does not include --testPathPattern flag when pattern option is empty string', () => {
+      const actual = getJestArgs({pattern: '', modes: ['lint'], watch: false})
+
+      expect(actual).not.toContain('--testPathPattern')
+    })
+  })
+
   describe('watch', () => {
     it('includes --watch flag when watch option is specified as true', () => {
-      const actual = getJestArgs({watch: true, modes: ['unit']})
+      const actual = getJestArgs({watch: true, modes: ['unit'], pattern: ''})
 
       expect(actual).toContain('--watch')
     })
 
     it('does not include --watch flag when watch option is specified as false', () => {
-      const actual = getJestArgs({watch: false, modes: ['unit']})
+      const actual = getJestArgs({watch: false, modes: ['unit'], pattern: ''})
 
       expect(actual).not.toContain('--watch')
     })
@@ -77,7 +95,7 @@ describe('getJestArgs', () => {
 
       process.env.CI = 'true'
 
-      const actual = getJestArgs({modes: ['unit'], watch: false})
+      const actual = getJestArgs({modes: ['unit'], pattern: '', watch: false})
 
       expect(actual).toContain('--ci')
 
@@ -89,7 +107,7 @@ describe('getJestArgs', () => {
 
       process.env.CI = 'false'
 
-      const actual = getJestArgs({modes: ['unit'], watch: false})
+      const actual = getJestArgs({modes: ['unit'], pattern: '', watch: false})
 
       expect(actual).not.toContain('--ci')
 

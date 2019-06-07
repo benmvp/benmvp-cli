@@ -6,7 +6,7 @@ Looking for CLI docs? View companion [`benmvp start` documentation](../cli/start
 
 ## Examples
 
-To run all modes (default behavior):
+To continuously run all modes on all files (default behavior):
 
 ```js
 import {start} from '@benmvp/cli'
@@ -14,7 +14,7 @@ import {start} from '@benmvp/cli'
 start()
 ```
 
-To run just type-checking:
+To continuously run just type-checking on all files:
 
 ```js
 import {start} from '@benmvp/cli'
@@ -24,7 +24,7 @@ start({
 })
 ```
 
-To run linting & unit tests:
+To continuously run linting & unit tests on all files:
 
 ```sh
 import {start} from '@benmvp/cli'
@@ -34,12 +34,39 @@ start({
 })
 ```
 
-## Type
+To continuously run all modes only on files within `utils/` directories:
+
+```js
+import {test} from '@benmvp/cli'
+
+start({
+  pattern: 'utils/',
+})
+```
+
+To continuously run just linting on files within `api/` directories:
+
+```js
+import {test} from '@benmvp/cli'
+
+start({
+  modes: ['lint'],
+  pattern: 'api/',
+})
+```
+
+## Signature
 
 `start()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([options]: Options): Promise<Result>
+type Mode = 'type' | 'lint' | 'unit'
+namespace TestOptions {
+  modes: Mode[];
+  pattern: string;
+}
+
+([options]: TestOptions): Promise<Result>
 ```
 
 ## Options
@@ -57,6 +84,12 @@ An `Array` of the types or modes of tests to run. Available modes:
 Optional. Defaults to all modes when unspecified.
 
 > NOTE: [Jest Watch Plugins](https://jestjs.io/docs/en/watch-plugins) are added to make watch mode even more useful. Specifically the [eslint `watch-fix` plugin](https://github.com/jest-community/jest-runner-eslint#toggle---fix-in-watch-mode) is added to enable auto-fixing of lint errors. However, for this to work, `'lint'` has to be the first mode when specified.
+
+### `pattern`
+
+A regexp pattern string that is matched against all tests paths before executing the test.
+
+Optional. Defaults to `''` (signifying no filter)
 
 ## Return Value
 

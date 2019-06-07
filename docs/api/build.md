@@ -44,7 +44,7 @@ build({
 })
 ```
 
-## Type
+## Signature
 
 `build()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
