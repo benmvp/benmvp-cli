@@ -8,7 +8,7 @@ Looking for CLI docs? View companion [`benmvp test` documentation](../cli/test.m
 
 ## Examples
 
-To run all modes (default behavior):
+To run all modes on all files (default behavior):
 
 ```js
 import {test} from '@benmvp/cli'
@@ -16,7 +16,7 @@ import {test} from '@benmvp/cli'
 test()
 ```
 
-To run just unit tests:
+To run just unit tests on all files:
 
 ```js
 import {test} from '@benmvp/cli'
@@ -26,27 +26,56 @@ test({
 })
 ```
 
-To run typing & linting:
+To run linting & typing on all files:
 
 ```js
 import {test} from '@benmvp/cli'
 
 test({
-  modes: ['type', 'lint'],
+  modes: ['lint', 'type'],
 })
 ```
 
-## Type
+To run all modes only on files within `utils/` directories:
+
+```js
+import {test} from '@benmvp/cli'
+
+test({
+  pattern: 'utils/',
+})
+```
+
+To just run linting on files within `api/` directories while continuously watching for changes:
+
+```js
+import {test} from '@benmvp/cli'
+
+test({
+  modes: ['lint'],
+  pattern: 'api/',
+  watch: true,
+})
+```
+
+## Signature
 
 `test()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([options]: Options): Promise<Result>
+type Mode = 'type' | 'lint' | 'unit'
+namespace TestOptions {
+  modes: Mode[];
+  pattern: string;
+  watch: boolean;
+}
+
+([options]: TestOptions): Promise<Result>
 ```
 
 ## Options
 
-The optional `Options` object supports the following properties:
+The optional `TestOptions` object supports the following properties:
 
 ### `modes`
 
@@ -57,6 +86,12 @@ An `Array` of the types or modes of tests to run. Available modes:
 - `'unit'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes when unspecified. 
+
+### `pattern`
+
+A regexp pattern string that is matched against all tests paths before executing the test.
+
+Optional. Defaults to `''` (signifying no filter)
 
 ### `watch`
 

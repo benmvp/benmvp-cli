@@ -20,6 +20,14 @@ const TEST_MODES = {
     default: ['lint', 'type', 'unit'] as TestMode[],
   },
 }
+const TEST_PATTERN = {
+  pattern: {
+    describe: 'Regexp pattern string that is matched against all tests paths before executing the test',
+    alias: 'p',
+    string: true,
+    default: '',
+  },
+}
 const BUILD_FORMATS = {
   formats: {
     describe: 'The module formats to build',
@@ -47,6 +55,7 @@ export const CREATE_POS_ARGS = {
 }
 export const TEST_ARGS: CommandOptions = {
   ...TEST_MODES,
+  ...TEST_PATTERN,
   watch: {
     describe: 'Re-run tests when source files change',
     alias: 'w',
@@ -56,6 +65,7 @@ export const TEST_ARGS: CommandOptions = {
 }
 export const START_ARGS: CommandOptions = {
   ...TEST_MODES,
+  ...TEST_PATTERN,
 }
 export const BUILD_ARGS: CommandOptions = {
   ...BUILD_FORMATS,

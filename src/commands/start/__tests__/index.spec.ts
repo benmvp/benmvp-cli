@@ -74,4 +74,28 @@ describe('success cases', () => {
       expect(result).toEqual({code: 0})
     })
   })
+
+  describe('pattern', () => {
+    it('calls jest with args and returns success when no pattern is passed', async () => {
+      const result = await start()
+
+      expect(runJest).toHaveBeenCalledWith(expect.not.arrayContaining([
+        '--pattern',
+      ]))
+
+      expect(result).toEqual({code: 0})
+    })
+
+    it('calls jest with args and returns success when pattern flag is passed', async () => {
+      const pattern = 'utils/'
+      const result = await start({pattern})
+
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
+        '--testPathPattern',
+        pattern,
+      ]))
+
+      expect(result).toEqual({code: 0})
+    })
+  })
 })

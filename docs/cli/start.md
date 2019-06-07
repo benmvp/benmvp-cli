@@ -8,22 +8,34 @@ Looking for Node API docs? View companion [`start()` documentation](../api/start
 
 ## Examples
 
-To run all modes (default behavior):
+To continuously run all modes on all files (default behavior):
 
 ```sh
 benmvp start
 ```
 
-To run just type-checking:
+To continuously run just type-checking on all files:
 
 ```sh
 benmvp start --modes type
 ```
 
-To run linting & unit tests:
+To continuously run linting & unit tests on all files:
 
 ```sh
 benmvp start --modes lint unit
+```
+
+To continuously run all modes only on files within `utils/` directories:
+
+```sh
+benmvp start --pattern utils/
+```
+
+To continuously run just linting on files within `api/` directories:
+
+```sh
+benmvp start --modes lint --pattern api/
 ```
 
 ## Arguments
@@ -39,6 +51,12 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 Optional. Defaults to all modes.
 
 > NOTE: [Jest Watch Plugins](https://jestjs.io/docs/en/watch-plugins) are added to make watch mode even more useful. Specifically the [eslint `watch-fix` plugin](https://github.com/jest-community/jest-runner-eslint#toggle---fix-in-watch-mode) is added to enable auto-fixing of lint errors. However, for this to work, `lint` has to be the first mode when specified.
+
+### `--pattern`
+
+A regexp pattern string that is matched against all tests paths before executing the test. Aliased as `-p`.
+
+Optional. Defaults to `''` (signifying no filter)
 
 ---
 
