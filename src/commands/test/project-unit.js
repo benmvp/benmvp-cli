@@ -12,7 +12,4 @@ module.exports = {
   testMatch: [resolve(ROOT_DIR, 'src/**/*.spec.ts')],
 
   setupFilesAfterEnv: [resolve(__dirname, 'unit-setup.js')],
-
-  // TODO: Use setupTestFrameworkScriptFile to ensure an expect runs for each test
-  // Possibly also prevent console.error / console.warn
 }

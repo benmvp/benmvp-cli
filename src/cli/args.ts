@@ -77,11 +77,16 @@ export const BUILD_ARGS: CommandOptions = {
     default: false,
   },
 }
+export const INTEGRATE_ARGS: CommandOptions = {
+  ...TEST_MODES,
+  ...TEST_PATTERN,
+}
 
 export const CREATE_COMMAND = 'create' as Command
 export const TEST_COMMAND = 'test' as Command
 export const START_COMMAND = 'start' as Command
 export const BUILD_COMMAND = 'build' as Command
+export const INTEGRATE_COMMAND = 'integrate' as Command
 
 export const DEFAULT_COMMAND = CREATE_COMMAND
 
@@ -102,6 +107,11 @@ export const parseArgs = (args: string[]): YargsArgv =>
       BUILD_COMMAND,
       'Builds the library into desired module formats',
       BUILD_ARGS,
+    )
+    .command<CommandOptions>(
+      INTEGRATE_COMMAND,
+      'Runs integration tests for the library',
+      INTEGRATE_ARGS,
     )
     .command(
       [`${CREATE_COMMAND} [name]`, '$0'],

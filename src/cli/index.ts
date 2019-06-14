@@ -1,11 +1,18 @@
 import pick from 'lodash/pick'
-import {create, test as testCommand, start, build} from '..'
+import {
+  create,
+  test as testCommand,
+  start,
+  build,
+  integrate,
+} from '..'
 import {
   CREATE_ARGS,
   CREATE_POS_ARGS,
   TEST_ARGS,
   START_ARGS,
   BUILD_ARGS,
+  INTEGRATE_ARGS,
   DEFAULT_COMMAND,
   parseArgs,
 } from './args'
@@ -13,7 +20,7 @@ import {Command, Result} from '../commands/types'
 
 /**
  * Parses the specified array of CLI arguments to run the desired command
- * @param {Array<string>} [args] An array of CLI arguments similar to the arguments received by `process.argv` (after the first two elements)
+ * @param {string[]} [args] An array of CLI arguments similar to the arguments received by `process.argv` (after the first two elements)
  * @returns Promise<Result> The result of the executing the command
  */
 export const run = (args: string[] = []): Promise<Result> => {
@@ -30,6 +37,8 @@ export const run = (args: string[] = []): Promise<Result> => {
       return build(pick(parsedArgs, Object.keys(BUILD_ARGS)))
     case 'test':
       return testCommand(pick(parsedArgs, Object.keys(TEST_ARGS)))
+    case 'integrate':
+      return integrate(pick(parsedArgs, Object.keys(INTEGRATE_ARGS)))
     case 'start':
       return start(pick(parsedArgs, Object.keys(START_ARGS)))
     default:

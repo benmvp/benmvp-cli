@@ -1,6 +1,19 @@
 import {run} from '..'
-import {create, build, test as testCommand, start} from '../../commands'
-import {CREATE_ARGS, CREATE_POS_ARGS, BUILD_ARGS, TEST_ARGS, START_ARGS} from '../args'
+import {
+  create,
+  build,
+  test as testCommand,
+  start,
+  integrate,
+} from '../../commands'
+import {
+  CREATE_ARGS,
+  CREATE_POS_ARGS,
+  BUILD_ARGS,
+  TEST_ARGS,
+  START_ARGS,
+  INTEGRATE_ARGS,
+} from '../args'
 
 jest.mock('../../commands')
 
@@ -670,6 +683,84 @@ describe('run', () => {
 
         expect(start).toHaveBeenCalledWith({
           modes: START_ARGS.modes.default,
+          pattern,
+        })
+      })
+    })
+  })
+
+  describe('integrate command', () => {
+    afterEach(() => {
+      const integrateMock = integrate as jest.Mock
+
+      integrateMock.mockReset()
+    })
+
+    it('defaults args when none are passed', () => {
+      run(['integrate'])
+
+      expect(integrate).toHaveBeenCalledWith({
+        modes: INTEGRATE_ARGS.modes.default,
+        pattern: INTEGRATE_ARGS.pattern.default,
+      })
+    })
+
+    describe('integrate modes', () => {
+      it('parses singular mode', () => {
+        run(['integrate', '--modes', 'lint'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses multiple modes', () => {
+        run(['integrate', '--modes', 'lint', 'unit'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint', 'unit'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses singular mode (alias)', () => {
+        run(['integrate', '-m', 'type'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['type'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses multiple modes (alias)', () => {
+        run(['integrate', '-m', 'lint', 'unit'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint', 'unit'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+
+      it('parses pattern', () => {
+        const pattern = 'api/'
+
+        run(['integrate', '--pattern', pattern])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: INTEGRATE_ARGS.modes.default,
+          pattern,
+        })
+      })
+
+      it('parses pattern (alias)', () => {
+        const pattern = 'api/'
+
+        run(['integrate', '-p', pattern])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: INTEGRATE_ARGS.modes.default,
           pattern,
         })
       })

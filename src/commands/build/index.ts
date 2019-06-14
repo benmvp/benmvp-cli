@@ -14,7 +14,7 @@ const execAsync = promisify(exec)
 /**
  * Builds the library into the desired module formats at the specified location
  * @param {Object} [options] The configuration options for building the library
- * @param {Array<ModuleFormat>} [options.formats] A list of the module formats to build
+ * @param {ModuleFormat[]} [options.formats] A list of the module formats to build
  * @param {string} [options.out] A path (relative or absolute) to the output directory for the built module formats
  * @param {boolean} [options.watch] A flag indicating whether or not to continuously generate the built module formats whenever source files change
  * @returns {Promise<Result>} The result of executing the build

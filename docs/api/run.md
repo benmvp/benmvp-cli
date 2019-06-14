@@ -37,7 +37,7 @@ run(['test', '--modes', 'unit'])
 `run()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([args]: Array<string>): Promise<Result>
+([args]: string[]): Promise<Result>
 ```
 
 ## Arguments

@@ -68,7 +68,7 @@ const BUILT_FILES_TO_REMOVE = [
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
  * @param {string} options.out A path (relative or absolute) to the output directory for the built module formats
  * @param {boolean} options.watch A flag indicating whether or not to continuously generate the built module formats whenever source files change
- * @returns {Array<BabelCLIOptions>}
+ * @returns {BabelCLIOptions[]}
  */
 export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): BabelCLIOptions[] => {
   const validatedFormats = [...formats].filter((format) => VALID_BABEL_FORMATS.has(format))
@@ -98,7 +98,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Babe
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
  * @param {string} options.out A path (relative or absolute) to the output directory for the type definitions
  * @param {boolean} options.watch A flag indicating whether or not to continuously generate the type definitions whenever source files change
- * @returns {Array<string> | null}
+ * @returns {string[] | null}
  */
 export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | null => {
   if (!formats.has('type')) {
