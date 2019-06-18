@@ -53,12 +53,12 @@ export default async ({
 
     const testArgs = getTestArgs({modes, pattern})
 
-    // Run `npx benmvp test` in $tempIntegration to use @benmvp/cli
+    // Run `npx @benmvp/cli test` in $tempIntegration to use @benmvp/cli
     // to run the integration tests
     // NOTE: For integration test *for* @benmvp/cli this will use the .tgz version
     // that would've been added above
     // TODO: Figure out how to use the same version of @benmvp/cli already installed
-    await execAndLog(`npx benmvp test ${testArgs}`, tempIntegration.name)
+    await execAndLog(`npx @benmvp/cli test ${testArgs}`, tempIntegration.name)
   } catch (error) {
     return {
       code: 1,
