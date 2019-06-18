@@ -66,11 +66,10 @@ export default async ({
       error,
     }
   } finally {
-
     if (tempIntegration) {
       // clean up temp directory
       await execAndLog(`npx rimraf ${tempIntegration.name}`)
-      
+
       tempIntegration.removeCallback()
 
       // eslint-disable-next-line no-console

@@ -11,6 +11,7 @@ script: yarn test
 jobs:
   include:
     - stage: "Integration tests"
+      node_js: '10'
       script: yarn integrate
 
 
