@@ -10,8 +10,7 @@ script: yarn test
 
 jobs:
   include:
-    - stage: "Tests"
-      name: "Integration tests"
+    - stage: "Integration tests"
       script: yarn integrate
 
 
