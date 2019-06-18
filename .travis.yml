@@ -6,11 +6,18 @@ node_js:
   - '8'
 cache: yarn
 
-script: yarn test
+# script: yarn test
 
 jobs:
   include:
-    - stage: NPM Release
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: yarn test
+    - script: yarn integrate
+      name: "Integration tests"
+
+    - stage: deploy
+      name: "NPM Release"
       node_js: '10'
       script: yarn build
 
