@@ -1,9 +1,9 @@
 language: node_js
-node_js:
-  - 'node'
-  - '12'
-  - '10'
-  - '8'
+# node_js:
+#   - 'node'
+#   - '12'
+#   - '10'
+#   - '8'
 cache: yarn
 
 # script: yarn test
@@ -13,8 +13,18 @@ jobs:
     - stage: "Tests"
       name: "Unit Tests"
       script: yarn test
+      node_js:
+        - 'node'
+        - '12'
+        - '10'
+        - '8'
     - script: yarn integrate
       name: "Integration tests"
+      node_js:
+        - 'node'
+        - '12'
+        - '10'
+        - '8'
 
     - stage: deploy
       name: "NPM Release"
