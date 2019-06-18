@@ -67,7 +67,7 @@ export default async ({
     }
   } finally {
     // clean up temp directory
-    await execAndLog(`npx rimraf ${tempIntegration}`)
+    await execAndLog(`npx rimraf ${tempIntegration.name}`)
 
     if (tempIntegration) {
       tempIntegration.removeCallback()
