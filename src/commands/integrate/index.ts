@@ -47,7 +47,7 @@ export default async ({
     // This will also install all missing dependencies from `package.json`
     await execAndLog(`yarn add --dev ${tempGzipFilePath}`, tempIntegration.name)
 
-    if (!pathExists(await resolve(tempIntegration.name, 'node_modules'))) {
+    if (!await pathExists(resolve(tempIntegration.name, 'node_modules'))) {
       throw new Error(`Node modules not successfully installed at ${tempIntegration.name}`)
     }
 
