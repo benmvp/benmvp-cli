@@ -28,7 +28,7 @@
     "test": "./bin/benmvp test",
     "prebuild": "yarn bootstrap",
     "build": "./bin/benmvp build",
-    "preintegrate": "yarn bootstrap",
+    "preintegrate": "yarn build",
     "integrate": "./bin/benmvp integrate"
   },
   "engines": {
@@ -45,6 +45,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@babel/runtime": "^7.4.5",
     "@types/jest": "^24.0.11",
+    "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^1.8.0",
     "@typescript-eslint/parser": "^1.7.0",
     "babel-eslint": "^8.2.3",
@@ -69,7 +70,6 @@
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/lodash-es": "^4.17.1",
-    "@types/node": "^12.0.0",
     "@types/tmp": "^0.1.0",
     "@types/typescript": "^2.0.0",
     "@types/yargs": "^13.0.0"

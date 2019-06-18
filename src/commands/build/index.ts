@@ -30,6 +30,15 @@ export default async ({
     const babelArgsToRun = getBabelArgs(buildOptions)
     const typeScriptArgsToRun = getTypescriptArgs(buildOptions)
 
+    // eslint-disable-next-line no-console
+    console.log(
+      '\n\nBuilding...', 
+      '\n\tformats:', formats.toString(), 
+      '\n\toutput dir:', out, 
+      '\n\twatching?', watch ? 'yes' : 'no',
+      '\n\n',
+    )
+
     for (const babelArgs of babelArgsToRun) {
       // eslint-disable-next-line no-await-in-loop
       await runBabel(babelArgs)

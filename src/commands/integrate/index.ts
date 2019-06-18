@@ -45,7 +45,7 @@ export default async ({
 
     // Add .tgz file as dependency
     // This will also install all missing dependencies from `package.json`
-    await execAndLog(`yarn add ${tempGzipFilePath}`, tempIntegration.name)
+    await execAndLog(`yarn add --dev ${tempGzipFilePath}`, tempIntegration.name)
 
     if (!pathExists(resolve(tempIntegration.name, 'node_modules'))) {
       throw new Error(`Node module not successfully installed at ${tempIntegration.name}`)
@@ -53,12 +53,12 @@ export default async ({
 
     const testArgs = getTestArgs({modes, pattern})
 
-    // Run `npx @benmvp/cli test` in $tempIntegration to use @benmvp/cli
+    // Run `npx benmvp test` in $tempIntegration to use @benmvp/cli
     // to run the integration tests
     // NOTE: For integration test *for* @benmvp/cli this will use the .tgz version
     // that would've been added above
     // TODO: Figure out how to use the same version of @benmvp/cli already installed
-    await execAndLog(`npx @benmvp/cli test ${testArgs}`, tempIntegration.name)
+    await execAndLog(`npx benmvp test ${testArgs}`, tempIntegration.name)
   } catch (error) {
     return {
       code: 1,
