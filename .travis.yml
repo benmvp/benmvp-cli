@@ -6,15 +6,10 @@ node_js:
   - '8'
 cache: yarn
 
-script: yarn test
+script: yarn test && yarn integrate
 
 jobs:
   include:
-    - stage: "Integration tests"
-      node_js: '10'
-      script: yarn integrate
-
-
     - stage: deploy
       name: "NPM Release"
       node_js: '10'
