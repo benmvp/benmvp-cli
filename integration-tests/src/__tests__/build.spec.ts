@@ -17,7 +17,7 @@ test('builds default formats/typing with no arguments passed', async () => {
   expect(await pathExists(resolve(CWD, 'lib/esm/index.js'))).toBe(true)
 
   // typescript definition file gets generated
-  expect(await pathExists(resolve(CWD, 'lib/types/index.d.js'))).toBe(true)
+  expect(await pathExists(resolve(CWD, 'lib/types/index.d.ts'))).toBe(true)
 
   // js files get copied
   expect(await pathExists(resolve(CWD, 'lib/cjs/config.js'))).toBe(true)
@@ -30,24 +30,24 @@ test('builds default formats/typing with no arguments passed', async () => {
   const esmFile = await readFile(resolve(CWD, 'lib/esm/index.js'))
 
   // ensure full transpiling happens
-  expect(cjsFile).not.toMatch('const ');
-  expect(cjsFile).not.toMatch('export ');
-  expect(cjsFile).not.toMatch('import ');
-  expect(cjsFile).toMatch('var ');
-  expect(cjsFile).toMatch('exports.');
-  expect(cjsFile).toMatch('require(');
+  expect(cjsFile).not.toMatch('const ')
+  expect(cjsFile).not.toMatch('export ')
+  expect(cjsFile).not.toMatch('import ')
+  expect(cjsFile).toMatch('var ')
+  expect(cjsFile).toMatch('exports.')
+  expect(cjsFile).toMatch('require(')
 
   // ensure ESM modules are still left
-  expect(esmFile).not.toMatch('const ');
-  expect(esmFile).not.toMatch('exports.');
-  expect(esmFile).not.toMatch('require(');
-  expect(esmFile).toMatch('var ');
-  expect(esmFile).toMatch('export ');
-  expect(esmFile).toMatch('import ');
+  expect(esmFile).not.toMatch('const ')
+  expect(esmFile).not.toMatch('exports.')
+  expect(esmFile).not.toMatch('require(')
+  expect(esmFile).toMatch('var ')
+  expect(esmFile).toMatch('export ')
+  expect(esmFile).toMatch('import ')
 
   // clean up
   // await execAsync('npx rimraf lib')
-  execSync('npx rimraf lib')
+  execSync(`npx rimraf ${resolve(CWD, 'lib')}`)
 })
 
 test('builds esm/typing in specified output directory', async () => {
@@ -56,7 +56,7 @@ test('builds esm/typing in specified output directory', async () => {
 
   expect(await pathExists(resolve(CWD, 'built/esm/index.js'))).toBe(true)
   expect(await pathExists(resolve(CWD, 'built/esm/config.js'))).toBe(true)
-  expect(await pathExists(resolve(CWD, 'built/types/index.d.js'))).toBe(true)
+  expect(await pathExists(resolve(CWD, 'built/types/index.d.ts'))).toBe(true)
 
   // ensure CJS format was not created
   expect(await pathExists(resolve(CWD, 'built/cjs/index.js'))).toBe(false)
@@ -71,5 +71,5 @@ test('builds esm/typing in specified output directory', async () => {
 
   // clean up
   // await execAsync('npx rimraf built')
-  execSync('npx rimraf built')
+  execSync(`npx rimraf ${resolve(CWD, 'built')}`)
 })

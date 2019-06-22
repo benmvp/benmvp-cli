@@ -32,11 +32,13 @@ export const execAndLog = async (command: string, cwd?: string): Promise<void> =
     // eslint-disable-next-line no-console
     if (stdout) {
       // eslint-disable-next-line no-console
-      console.log(stdout)
+      console.log(stdout.toString())
     }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(err)
+    console.error(err.stderr.toString())
+
+    throw err;
   }
 }
 
