@@ -17,7 +17,7 @@ export interface Args {
 // each type instead of files that contain the configuration, but
 // Jest kept throwing an error even though it says it supports the
 // functionality. See: https://github.com/facebook/jest/issues/7415
-const VALID_TEST_MODES: ValidTestModes = {
+export const VALID_TEST_MODES: ValidTestModes = {
   type: resolve(__dirname, 'project-type.js'),
   lint: resolve(__dirname, 'project-lint.js'),
   unit: resolve(__dirname, 'project-unit.js'),

@@ -82,5 +82,3 @@ export default async ({
   }
 }
 
-// /var/folders/dq/x9y69hm90wl4f_y0w97jgth40000gp/T/tmp-20897XSqDmu6wz3Yk
-// /var/folders/dq/x9y69hm90wl4f_y0w97jgth40000gp/T/tmp-20897U0meVhh11znC

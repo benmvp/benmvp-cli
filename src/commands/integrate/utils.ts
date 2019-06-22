@@ -1,9 +1,10 @@
-import {promisify} from 'util'
-import {exec} from 'child_process'
+// import {promisify} from 'util'
+import {/*exec, */execSync} from 'child_process'
 
 import {TestMode} from '../types'
+import {VALID_TEST_MODES} from '../test/utils'
 
-const execAsync = promisify(exec)
+// const execAsync = promisify(exec)
 
 /**
  * Executes the specified command, logging out stdout & stderr
@@ -12,17 +13,30 @@ const execAsync = promisify(exec)
  */
 export const execAndLog = async (command: string, cwd?: string): Promise<void> => {
   // eslint-disable-next-line no-console
-  console.log(`Running: ${command}`)
+  console.log('\nRunning:', command, '\n')
 
-  const {stdout, stderr} = await execAsync(command, {cwd})
+  // const {stdout, stderr} = await execAsync(command, {cwd})
 
-  if (stdout) {
+  // if (stdout) {
+  //   // eslint-disable-next-line no-console
+  //   console.log(stdout)
+  // }
+  // if (stderr) {
+  //   // eslint-disable-next-line no-console
+  //   console.error(stderr)
+  // }
+
+  try {
+    const stdout = execSync(command, {cwd})
+
     // eslint-disable-next-line no-console
-    console.log(stdout)
-  }
-  if (stderr) {
+    if (stdout) {
+      // eslint-disable-next-line no-console
+      console.log(stdout)
+    }
+  } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(stderr)
+    console.error(err)
   }
 }
 
@@ -30,6 +44,8 @@ export interface IntegrateParams {
   modes: TestMode[];
   pattern: string;
 }
+
+const VALID_TEST_MODE_NAMES = new Set(Object.keys(VALID_TEST_MODES))
 
 /**
  * Retrieves the command-line arguments to pass to `benmvp test` based on the specified parameters
@@ -45,9 +61,13 @@ export const getTestArgs = ({modes, pattern}: IntegrateParams): string => {
     testArgs = [...testArgs, '--pattern', pattern]
   }
 
-  if (modes.length > 0) {
-    testArgs = [...testArgs, '--modes', ...modes]
+  const validSelectedModes = modes.filter((mode) => VALID_TEST_MODE_NAMES.has(mode))
+
+  if (!validSelectedModes.length || validSelectedModes.length < modes.length) {
+    throw new Error(`Invalid test modes specified: ${modes}`)
   }
+
+  testArgs = [...testArgs, '--modes', ...validSelectedModes]
 
   return testArgs.join(' ')
 }

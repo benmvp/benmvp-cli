@@ -119,5 +119,7 @@ export const parseArgs = (args: string[]): YargsArgv =>
       (commandYargs: yargs.Argv) =>
         commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name),
     )
+    .completion()
     .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
-    .help().argv
+    .help()
+    .argv

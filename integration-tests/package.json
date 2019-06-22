@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "benmvp start",
+    "test": "benmvp test",
+    "build": "benmvp build",
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^7.0.0",
+    "fs-extra": "^8.0.1",
+    "rimraf": "^2.6.3",    
+  }
+}
