@@ -9,9 +9,9 @@ echo -e "Created temp integration path: $TEMP_INTEGRATION_PATH\n"
 
 TARBALL_FILE_PATH="$TEMP_INTEGRATION_PATH/test-package.tgz"
 
-# yarn pack to tarball library into file path
-echo -e "yarn pack --filename $TARBALL_FILE_PATH\n"
-yarn pack --filename $TARBALL_FILE_PATH
+# npm pack to tarball library into integration directory
+echo -e "npm pack && mv *.tgz $TARBALL_FILE_PATH\n"
+npm pack && mv *.tgz $TARBALL_FILE_PATH
 
 if [ ! -f $TARBALL_FILE_PATH ]; then
   echo -e "Unable to create archive $TARBALL_FILE_PATH"
