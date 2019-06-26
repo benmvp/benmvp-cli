@@ -219,7 +219,7 @@ describe('getTypescriptArgs', () => {
           watch: BUILD_ARGS.watch.default,
         })
 
-        expect(typescriptArgs).toContain(resolve(CWD, 'src/**/*.ts'))
+        expect(typescriptArgs).toContain(resolve(CWD, 'src/*.ts'))
       })
     })
   })
