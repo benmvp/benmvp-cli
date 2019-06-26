@@ -1,46 +1,6 @@
-// import {promisify} from 'util'
-import {/*exec, */execSync} from 'child_process'
-
 import {TestMode} from '../types'
 import {VALID_TEST_MODES} from '../test/utils'
 
-// const execAsync = promisify(exec)
-
-/**
- * Executes the specified command, logging out stdout & stderr
- * @param {string} command The command to execute
- * @param {string} [cwd] Current working directory of the child process
- */
-export const execAndLog = async (command: string, cwd?: string): Promise<void> => {
-  // eslint-disable-next-line no-console
-  console.log('\nRunning:', command, '\n')
-
-  // const {stdout, stderr} = await execAsync(command, {cwd})
-
-  // if (stdout) {
-  //   // eslint-disable-next-line no-console
-  //   console.log(stdout)
-  // }
-  // if (stderr) {
-  //   // eslint-disable-next-line no-console
-  //   console.error(stderr)
-  // }
-
-  try {
-    const stdout = execSync(command, {cwd})
-
-    // eslint-disable-next-line no-console
-    if (stdout) {
-      // eslint-disable-next-line no-console
-      console.log(stdout.toString())
-    }
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err.stderr.toString())
-
-    throw err
-  }
-}
 
 export interface IntegrateParams {
   modes: TestMode[];

@@ -32,11 +32,11 @@ export default async ({
 
     // eslint-disable-next-line no-console
     console.log(
-      '\n\nBuilding...',
-      '\n\tformats:', formats.toString(),
-      '\n\toutput dir:', out,
-      '\n\twatching?', watch ? 'yes' : 'no',
-      '\n\n',
+      '\nBuilding...',
+      '\n  formats:', formats.toString(),
+      '\n  output dir:', out,
+      '\n  watching?', watch ? 'yes' : 'no',
+      '\n',
     )
 
     for (const babelArgs of babelArgsToRun) {

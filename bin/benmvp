@@ -7,7 +7,7 @@
   const {code, message, error} = await run(args);
 
   if (code) {
-    console.error(error);
+    // console.error(error);
     console.error(message);
   }
 

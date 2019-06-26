@@ -1,11 +1,13 @@
 import {resolve} from 'path'
-import {dirSync} from 'tmp'
-import {copy, pathExists} from 'fs-extra'
+import {exec} from 'child_process'
+import {promisify} from 'util'
 import {INTEGRATE_ARGS} from '../../cli/args'
 import {Result} from '../types'
-import {execAndLog, getTestArgs} from './utils'
+import {getTestArgs} from './utils'
 
-const INTEGRATION_PATH = resolve(process.cwd(), 'integration-tests')
+const execAsync = promisify(exec)
+
+const SCRIPT_PATH = resolve(__dirname, 'run.sh')
 
 /**
  * Runs a one-time pass of the specified integration tests
@@ -18,62 +20,29 @@ export default async ({
   modes = INTEGRATE_ARGS.modes.default,
   pattern = INTEGRATE_ARGS.pattern.default,
 }): Promise<Result> => {
-  let tempIntegration
-
   try {
-    // Create temp directory where we'll copy integration tests
-    // in order to run them
-    tempIntegration = dirSync({unsafeCleanup: true})
-
-    // eslint-disable-next-line no-console
-    console.log(`Created temp integration path: ${tempIntegration.name}`)
-
-    // yarn pack and move to $tempIntegration
-    const tempGzipFilePath = resolve(tempIntegration.name, 'lib.tgz')
-
-    await execAndLog(`yarn pack --filename ${tempGzipFilePath}`)
-
-    if (!pathExists(tempGzipFilePath)) {
-      throw new Error(`Unable to create archive ${tempGzipFilePath}`)
-    }
-
-    // cp -r ./integration-tests $tempIntegration
-    await copy(INTEGRATION_PATH, tempIntegration.name)
-
-    // eslint-disable-next-line no-console
-    console.log(`Copied ${INTEGRATION_PATH} to temp integration path`)
-
-    // Add .tgz file as dependency
-    // This will also install all missing dependencies from `package.json`
-    await execAndLog(`yarn add --dev ${tempGzipFilePath}`, tempIntegration.name)
-
-    if (!await pathExists(resolve(tempIntegration.name, 'node_modules'))) {
-      throw new Error(`Node modules not successfully installed at ${tempIntegration.name}`)
-    }
-
     const testArgs = getTestArgs({modes, pattern})
 
-    // Run `npx benmvp test` in $tempIntegration to use @benmvp/cli
-    // to run the integration tests
-    // NOTE: For integration test *for* @benmvp/cli this will use the .tgz version
-    // that would've been added above
-    // TODO: Figure out how to use the same version of @benmvp/cli already installed
-    await execAndLog(`npx benmvp test ${testArgs}`, tempIntegration.name)
+    const {stdout} = await execAsync(`${SCRIPT_PATH} ${testArgs}`)
+
+    if (stdout) {
+      // eslint-disable-next-line no-console
+      console.log(stdout)
+    }
   } catch (error) {
+    if (error.stdout) {
+      // eslint-disable-next-line no-console
+      console.log(error.stdout)
+    }
+    if (error.stderr) {
+      // eslint-disable-next-line no-console
+      console.error(error.stderr)
+    }
+
     return {
       code: 1,
       message: 'Error running "integrate" command',
       error,
-    }
-  } finally {
-    if (tempIntegration) {
-      // clean up temp directory
-      await execAndLog(`npx rimraf ${tempIntegration.name}`)
-
-      tempIntegration.removeCallback()
-
-      // eslint-disable-next-line no-console
-      console.log(`Removed: ${tempIntegration.name}`)
     }
   }
 

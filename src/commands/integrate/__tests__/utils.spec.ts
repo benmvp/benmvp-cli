@@ -1,27 +1,6 @@
-import {/*exec, */execSync} from 'child_process'
-import {execAndLog, getTestArgs, IntegrateParams} from '../utils'
+import {getTestArgs, IntegrateParams} from '../utils'
 import {TestMode} from '../../types'
 
-jest.mock('child_process')
-
-describe('execAndLog', () => {
-  it('calls `exec` with specified command', () => {
-    const command = 'fake_test_script'
-
-    execAndLog(command)
-
-    expect(execSync).toHaveBeenCalledWith(command, {cwd: undefined})
-  })
-
-  it('calls `exec` with specified command & cwd when specified', () => {
-    const command = 'fake_test_script'
-    const cwd = '/path/to/something'
-
-    execAndLog(command, cwd)
-
-    expect(execSync).toHaveBeenCalledWith(command, {cwd})
-  })
-})
 
 describe('getTestArgs', () => {
   it('throws an error if no args are specified', () => {
