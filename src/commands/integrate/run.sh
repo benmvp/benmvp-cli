@@ -26,11 +26,11 @@ cp -r ./integration-tests/* $TEMP_INTEGRATION_PATH
 pushd $TEMP_INTEGRATION_PATH
 
 # Add .tgz file as dependency
-# This will also install all missing dependencies from `yarn.lock`
-# echo -e "yarn add --dev file:$TARBALL_FILE_PATH\n"
-# yarn add --dev "file:$TARBALL_FILE_PATH"
+# This will also install all missing dependencies from `package-lock.json`
 echo -e "npm install && npm install --save-dev $TARBALL_FILE_PATH\n"
 npm install && npm install --save-dev $TARBALL_FILE_PATH
+# echo -e "yarn add --dev file:$TARBALL_FILE_PATH\n"
+# yarn add --dev "file:$TARBALL_FILE_PATH"
 
 # Verify node modules were installed
 if [ ! -d "$TEMP_INTEGRATION_PATH/node_modules" ]; then

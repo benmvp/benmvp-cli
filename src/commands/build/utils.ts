@@ -117,7 +117,7 @@ export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | 
     '--emitDeclarationOnly',
     '--noEmit', 'false',
     watch ? '--watch' : '',
-    resolve(process.cwd(), 'src/**/*.ts'),
+    resolve(process.cwd(), 'src/*.ts'),
   ]
 
   return args
