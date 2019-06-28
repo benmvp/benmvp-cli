@@ -10,7 +10,7 @@ jest.setTimeout(30000)
 
 describe('when no arguments are passed', () => {
   beforeAll(async () => {
-    await execAsync('npm run build')
+    await execAsync('npx benmvp build')
   })
   afterAll(async () => {
     // clean up
@@ -64,7 +64,7 @@ describe('when no arguments are passed', () => {
 
 describe('when format & output directory are specified', () => {
   beforeAll(async () => {
-    await execAsync('npm run build -- --formats esm type --out ./built')
+    await execAsync('npx benmvp build --formats esm type --out ./built')
   })
   afterAll(async () => {
     // clean up
