@@ -9,6 +9,12 @@ echo -e "Created temp integration path: $TEMP_INTEGRATION_PATH\n"
 
 TARBALL_FILE_PATH="$TEMP_INTEGRATION_PATH/test-package.tgz"
 
+# build library before packing in order to be able to reference built files
+# this step will fail within benmvp-cli repo since the `benmvp` bin doesn't
+# exist yet, but that's ok because we always `build` before `integrate`
+echo -e "npx benmvp build\n"
+npx benmvp build
+
 # npm pack to tarball library into integration directory
 echo -e "npm pack && mv *.tgz $TARBALL_FILE_PATH\n"
 npm pack && mv *.tgz $TARBALL_FILE_PATH
@@ -40,7 +46,7 @@ if [ ! -d "$TEMP_INTEGRATION_PATH/node_modules" ]; then
   exit 1
 fi
 
-# Run `npx benmvp test` in $tempIntegration to use @benmvp/cli
+# Run `npx benmvp test` in $TEMP_INTEGRATION_PATH to use @benmvp/cli
 # to run the integration tests
 # NOTE: For integration test *for* @benmvp/cli this will use the .tgz version
 # that would've been added above

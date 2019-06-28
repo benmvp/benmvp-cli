@@ -8,7 +8,7 @@ The integration tests generally are run in your continuous integration (CI) envi
 
 The integration test process is as follows:
 
-1. [`npm pack`](https://docs.npmjs.com/cli/pack.html) the library to create the _same_ `.tgz` tarball that would be published in the registry
+1. [`npm pack`](https://docs.npmjs.com/cli/pack.html) the built library to create the _same_ `.tgz` tarball that would be published in the registry
 1. Copy the integration tests "project" at `integration-tests/` over to a temporary directory
 1. `npm install` the packed library (from Step 1), `@benmvp/cli`, and any other dependencies specified in the `package.json` of the project
 1. Run `npx benmvp test` on the project to use `@benmvp/cli` to run the tests
