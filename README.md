@@ -92,6 +92,8 @@ npm run integrate
 
 In your continuous integration (CI) environment, run `npm run integrate` (or `yarn integrate`) to run additional integration tests for the library. The integration "project" will also be typed and linted. This can also be run locally (i.e. for commit hooks but is not recommended).
 
+Read the API docs for more on [`benmvp integrate`](docs/cli/integrate.md).
+
 ## Docs
 
 `@benmvp/cli` has two interfaces: a CLI and a Node API. View the [full docs](docs/).
