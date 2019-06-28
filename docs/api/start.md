@@ -66,7 +66,7 @@ namespace TestOptions {
   pattern: string;
 }
 
-([options]: TestOptions): Promise<Result>
+(options?: TestOptions): Promise<Result>
 ```
 
 ## Options

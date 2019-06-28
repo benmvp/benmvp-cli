@@ -56,7 +56,7 @@ create({
 `create()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([options]: Options): Promise<Result>
+(options?: Options): Promise<Result>
 ```
 
 ## Options

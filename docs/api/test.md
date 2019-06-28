@@ -70,7 +70,7 @@ namespace TestOptions {
   watch: boolean;
 }
 
-([options]: TestOptions): Promise<Result>
+(options?: TestOptions): Promise<Result>
 ```
 
 ## Options
