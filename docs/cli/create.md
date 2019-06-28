@@ -84,7 +84,7 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 Optional. Defaults to all modes. 
 
-This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
+This will initialize the `"start"`, `"test"` and `"integrate"` scripts in the `package.json` to pass the matching argument.
 
 ## Manual installation
 

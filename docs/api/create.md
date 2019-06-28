@@ -107,7 +107,7 @@ An `Array` of the types or modes of tests to run. Available modes:
 
 Optional. Defaults to all modes when unspecified.
 
-This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
+This will initialize the `"start"`, `"test"` and `"integrate"` scripts in the `package.json` to pass the matching argument.
 
 
 ## Return Value
