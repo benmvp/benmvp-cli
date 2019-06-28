@@ -2,7 +2,7 @@
 
 Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
 
-- Add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build), respectively
+- Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
 - After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
 - Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
 
