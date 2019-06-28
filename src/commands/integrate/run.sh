@@ -30,7 +30,7 @@ pushd $TEMP_INTEGRATION_PATH
 # Note for integration tests for @benmvp/cli specifically this *should* overwrite
 # @benmvp/cli dependency from registry with the tarball
 echo -e "npm install && npm install --save-dev @benmvp/cli $TARBALL_FILE_PATH\n"
-npm install && npm install --save-dev $TARBALL_FILE_PATH
+npm install && npm install --save-dev @benmvp/cli $TARBALL_FILE_PATH
 
 # Verify node modules were installed
 if [ ! -d "$TEMP_INTEGRATION_PATH/node_modules" ]; then
