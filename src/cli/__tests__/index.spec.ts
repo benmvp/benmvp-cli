@@ -215,13 +215,13 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['create', '--modes', 'lint', 'unit'])
+        run(['create', '--modes', 'lint', 'spec'])
 
         expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
 
@@ -237,13 +237,13 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['create', '-m', 'lint', 'unit'])
+        run(['create', '-m', 'lint', 'spec'])
 
         expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
     })
@@ -255,7 +255,7 @@ describe('run', () => {
           'new-lib',
           '--modes',
           'lint',
-          'unit',
+          'spec',
           '--out',
           './output',
           '--formats',
@@ -267,7 +267,7 @@ describe('run', () => {
           name: 'new-lib',
           formats: ['esm', 'cjs'],
           out: './output',
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
 
@@ -516,10 +516,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['test', '--modes', 'lint', 'unit'])
+        run(['test', '--modes', 'lint', 'spec'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
@@ -536,10 +536,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['test', '-m', 'lint', 'unit'])
+        run(['test', '-m', 'lint', 'spec'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
@@ -590,10 +590,10 @@ describe('run', () => {
       })
 
       it('parses all args', () => {
-        run(['test', '--watch', '--modes', 'unit', 'type', '--pattern', 'utils/'])
+        run(['test', '--watch', '--modes', 'spec', 'type', '--pattern', 'utils/'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['unit', 'type'],
+          modes: ['spec', 'type'],
           pattern: 'utils/',
           watch: true,
         })
@@ -638,10 +638,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['start', '--modes', 'lint', 'unit'])
+        run(['start', '--modes', 'lint', 'spec'])
 
         expect(start).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: START_ARGS.pattern.default,
         })
       })
@@ -656,10 +656,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['start', '-m', 'lint', 'unit'])
+        run(['start', '-m', 'lint', 'spec'])
 
         expect(start).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: START_ARGS.pattern.default,
         })
       })
@@ -716,10 +716,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['integrate', '--modes', 'lint', 'unit'])
+        run(['integrate', '--modes', 'lint', 'spec'])
 
         expect(integrate).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: INTEGRATE_ARGS.pattern.default,
         })
       })
@@ -734,10 +734,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['integrate', '-m', 'lint', 'unit'])
+        run(['integrate', '-m', 'lint', 'spec'])
 
         expect(integrate).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: INTEGRATE_ARGS.pattern.default,
         })
       })

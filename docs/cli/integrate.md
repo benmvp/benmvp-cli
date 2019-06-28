@@ -26,7 +26,7 @@ benmvp integrate
 To run just the integration tests themselves (excluding linting & typing) on all files:
 
 ```sh
-benmvp integrate --modes unit
+benmvp integrate --modes spec
 ```
 
 To run just linting & typing on all files in the integration tests project:
@@ -53,7 +53,7 @@ benmvp integrate --modes lint --pattern api/
 
 A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
 
-- `unit` - Runs Jest-based tests (files ending in `.spec.ts` or in `__tests__` folder)
+- `spec` - Runs Jest-based tests (files ending in `.spec.ts` or in `__tests__` folder)
 - `lint` - Runs ESLint (files ending in `.ts`)
 - `type` - Runs Typescript type-checking (files ending in `.ts`)
 

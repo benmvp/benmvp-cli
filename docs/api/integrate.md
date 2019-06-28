@@ -31,7 +31,7 @@ To run just the integration tests themselves (excluding linting & typing) on all
 import {integrate} from '@benmvp/cli'
 
 integrate({
-  modes: ['unit'],
+  modes: ['spec'],
 })
 ```
 
@@ -71,7 +71,7 @@ integrate({
 `integrate()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-type Mode = 'type' | 'lint' | 'unit'
+type Mode = 'spec' | 'type' | 'lint'
 namespace TestOptions {
   modes: Mode[];
   pattern: string;
@@ -88,7 +88,7 @@ The optional `TestOptions` object supports the following properties:
 
 An `Array` of the types or modes of tests to run. Available modes:
 
-- `'unit'` - Runs Jest-based tests (files ending in `.spec.ts` or in `__tests__` folder)
+- `'spec'` - Runs Jest-based tests (files ending in `.spec.ts` or in `__tests__` folder)
 - `'type'` - Runs Typescript type-checking (files ending in `.ts`)
 - `'lint'` - Runs ESLint (files ending in `.ts`)
 

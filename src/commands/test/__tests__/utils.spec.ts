@@ -47,12 +47,12 @@ describe('getJestArgs', () => {
     })
 
     it('returns multiple projects when multiple valid modes are specified', () => {
-      const actual = getJestArgs({modes: ['lint', 'unit'], pattern: '', watch: false})
+      const actual = getJestArgs({modes: ['lint', 'spec'], pattern: '', watch: false})
 
       expect(actual).toEqual(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-lint.js'),
-        expect.stringContaining('project-unit.js'),
+        expect.stringContaining('project-spec.js'),
       ]))
     })
   })
@@ -77,13 +77,13 @@ describe('getJestArgs', () => {
 
   describe('watch', () => {
     it('includes --watch flag when watch option is specified as true', () => {
-      const actual = getJestArgs({watch: true, modes: ['unit'], pattern: ''})
+      const actual = getJestArgs({watch: true, modes: ['spec'], pattern: ''})
 
       expect(actual).toContain('--watch')
     })
 
     it('does not include --watch flag when watch option is specified as false', () => {
-      const actual = getJestArgs({watch: false, modes: ['unit'], pattern: ''})
+      const actual = getJestArgs({watch: false, modes: ['spec'], pattern: ''})
 
       expect(actual).not.toContain('--watch')
     })
@@ -95,7 +95,7 @@ describe('getJestArgs', () => {
 
       process.env.CI = 'true'
 
-      const actual = getJestArgs({modes: ['unit'], pattern: '', watch: false})
+      const actual = getJestArgs({modes: ['spec'], pattern: '', watch: false})
 
       expect(actual).toContain('--ci')
 
@@ -107,7 +107,7 @@ describe('getJestArgs', () => {
 
       process.env.CI = 'false'
 
-      const actual = getJestArgs({modes: ['unit'], pattern: '', watch: false})
+      const actual = getJestArgs({modes: ['spec'], pattern: '', watch: false})
 
       expect(actual).not.toContain('--ci')
 

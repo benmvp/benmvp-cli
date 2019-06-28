@@ -17,7 +17,7 @@ const TEST_MODES = {
     describe: 'The types/modes of tests to run',
     alias: 'm',
     array: true,
-    default: ['lint', 'type', 'unit'] as TestMode[],
+    default: ['lint', 'type', 'spec'] as TestMode[],
   },
 }
 const TEST_PATTERN = {
@@ -95,7 +95,7 @@ export const parseArgs = (args: string[]): YargsArgv =>
     .version()
     .command<CommandOptions>(
       TEST_COMMAND,
-      'Runs linting, typing & unit tests for the library',
+      'Runs linting, typing & Jest tests for the library',
       TEST_ARGS,
     )
     .command<CommandOptions>(

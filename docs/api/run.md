@@ -29,7 +29,7 @@ To run just unit tests:
 ```js
 const {run} = require('@benmvp/cli');
 
-run(['test', '--modes', 'unit'])
+run(['test', '--modes', 'spec'])
 ```
 
 ## Type

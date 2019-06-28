@@ -35,7 +35,7 @@ npx @benmvp/cli create my-lib --formats esm
 Add custom setup to an existing library:
 
 ```sh
-npx @benmvp/cli create --modes type unit --out ./built --formats esm cjs
+npx @benmvp/cli create --modes type spec --out ./built --formats esm cjs
 ```
 
 ## Arguments
@@ -80,7 +80,7 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 - `type` - Runs Typescript type-checking
 - `lint` - Runs ESLint
-- `unit` - Runs Jest-based unit tests
+- `spec` - Runs Jest-based tests
 
 Optional. Defaults to all modes. 
 

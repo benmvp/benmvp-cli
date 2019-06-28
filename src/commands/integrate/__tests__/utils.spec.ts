@@ -45,9 +45,9 @@ describe('getTestArgs', () => {
     })
 
     it('returns multiple args when multiple valid modes are specified', () => {
-      const actual = getTestArgs({modes: ['lint', 'unit'], pattern: ''})
+      const actual = getTestArgs({modes: ['lint', 'spec'], pattern: ''})
 
-      expect(actual).toEqual(expect.stringContaining('--modes lint unit'))
+      expect(actual).toEqual(expect.stringContaining('--modes lint spec'))
     })
   })
 

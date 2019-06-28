@@ -4,7 +4,7 @@ import {TestMode} from '../types'
 interface ValidTestModes {
   type: string;
   lint: string;
-  unit: string;
+  spec: string;
   [index: string]: string;
 }
 export interface Args {
@@ -20,7 +20,7 @@ export interface Args {
 export const VALID_TEST_MODES: ValidTestModes = {
   type: resolve(__dirname, 'project-type.js'),
   lint: resolve(__dirname, 'project-lint.js'),
-  unit: resolve(__dirname, 'project-unit.js'),
+  spec: resolve(__dirname, 'project-spec.js'),
 }
 
 /**

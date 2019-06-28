@@ -45,7 +45,7 @@ Add custom setup to an existing library:
 import {create} from '@benmvp/cli'
 
 create({
-  modes: ['type', 'unit'],
+  modes: ['type', 'spec'],
   out: './built',
   formats: ['esm', 'cjs'],
 })
@@ -103,7 +103,7 @@ An `Array` of the types or modes of tests to run. Available modes:
 
 - `'type'` - Runs Typescript type-checking
 - `'lint'` - Runs ESLint
-- `'unit'` - Runs Jest-based unit tests
+- `'spec'` - Runs Jest-based tests
 
 Optional. Defaults to all modes when unspecified.
 

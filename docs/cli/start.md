@@ -23,7 +23,7 @@ benmvp start --modes type
 To continuously run linting & unit tests on all files:
 
 ```sh
-benmvp start --modes lint unit
+benmvp start --modes lint spec
 ```
 
 To continuously run all modes only on files within `utils/` directories:
@@ -46,7 +46,7 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 - `lint` - Runs ESLint (files ending in `.ts`)
 - `type` - Runs Typescript type-checking (files ending in `.ts`)
-- `unit` - Runs Jest-based unit tests (files ending in `.spec.ts`)
+- `spec` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes.
 
