@@ -1,11 +1,13 @@
 # `benmvp create` Documentation
 
+> NOTE: `benmvp create` is still under development
+
 Creates a new library set up with infrastructure using `@benmvp/cli`. 
 
 It will:
 
-- Add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build), respectively
-- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/)
+- Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
+- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
 - Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
 
 Looking for Node API docs? View companion [`create()` documentation](../api/create.md).
@@ -35,7 +37,7 @@ npx @benmvp/cli create my-lib --formats esm
 Add custom setup to an existing library:
 
 ```sh
-npx @benmvp/cli create --modes type unit --out ./built --formats esm cjs
+npx @benmvp/cli create --modes type spec --out ./built --formats esm cjs
 ```
 
 ## Arguments
@@ -80,26 +82,26 @@ A space-separated list of the types or modes of tests to run. Aliased as `-m`. A
 
 - `type` - Runs Typescript type-checking
 - `lint` - Runs ESLint
-- `unit` - Runs Jest-based unit tests
+- `spec` - Runs Jest-based tests
 
 Optional. Defaults to all modes. 
 
-This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
+This will initialize the `"start"`, `"test"` and `"integrate"` scripts in the `package.json` to pass the matching argument.
 
 ## Manual installation
 
 `benmvp create` will automatically add the latest version of `@benmvp/cli` as a dev dependency to your library, even if a `package.json` exists. However, you can manually install it.
 
+Install via [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+npm install --save-dev @benmvp/cli
+```
+
 Install via [Yarn](https://yarnpkg.com/lang/en/docs/managing-dependencies/):
 
 ```sh
 yarn add --dev @benmvp/cli
-```
-
-Install via [NPM](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
-
-```sh
-npm install --save-dev @benmvp/cli
 ```
 
 You will want to create scripts to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build.md) for ease of use.

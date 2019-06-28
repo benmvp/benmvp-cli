@@ -49,7 +49,7 @@ build({
 `build()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([options]: Options): Promise<Result>
+(options?: Options): Promise<Result>
 ```
 
 ## Options
@@ -76,7 +76,7 @@ Optional. Defaults to `./lib`.
 
 ### `watch`
 
-A flag indicating whether or not to continuously generate the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/) or [`npm link`](https://docs.npmjs.com/cli/link)).
+A flag indicating whether or not to continuously generate the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`npm link`](https://docs.npmjs.com/cli/link) or [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/)).
 
 Optional. Defaults to `false`.
 

@@ -54,7 +54,7 @@ Optional. Defaults to `./lib`.
 
 ### `--watch`
 
-A flag indicating whether or not to continuously generate the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/) or [`npm link`](https://docs.npmjs.com/cli/link)). Aliased as `-w`.
+A flag indicating whether or not to continuously generate the built module formats whenever source files change. This is most useful if you've linked your library into a host application (with [`npm link`](https://docs.npmjs.com/cli/link) or [`yarn link`](https://yarnpkg.com/lang/en/docs/cli/link/)). Aliased as `-w`.
 
 Optional. Defaults to `false`.
 

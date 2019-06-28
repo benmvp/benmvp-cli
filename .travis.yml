@@ -4,15 +4,16 @@ node_js:
   - '12'
   - '10'
   - '8'
-cache: yarn
+cache: npm
 
-script: yarn test
+script: npm run test && npm run integrate
 
 jobs:
   include:
-    - stage: NPM Release
+    - stage: deploy
+      name: "NPM Release"
       node_js: '10'
-      script: yarn build
+      script: npm run build
 
       # Using semantic-release, deploy a new version of the library
       deploy:

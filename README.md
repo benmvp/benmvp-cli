@@ -54,35 +54,43 @@ Read the API docs for more on [`benmvp create`](docs/cli/create.md).
 
 ## Quick Usage
 
-### Testing
+### Unit Testing
 
 ```sh
-yarn test
+npm test
 ```
 
-In your continuous integration (CI) environment, run `yarn test` (or `npm test`) to do a one-time pass of Typescript typings, ESLint linting, and Jest tests. This can also be run locally (i.e. for commit hooks).
+In your continuous integration (CI) environment, run `npm test` (or `yarn test`) to do a one-time pass of Typescript typings, ESLint linting, and Jest unit tests. This can also be run locally (i.e. for commit hooks).
 
 Read the API docs for more on [`benmvp test`](docs/cli/test.md).
 
 ### Developing
 
 ```sh
-yarn start
+npm start
 ```
 
-When developing, run `yarn start` (or `npm start`) which will validate Typescript typings, ESLint linting, and Jest tests as you develop and change code.
+When developing, run `npm start` (or `yarn start`) which will validate Typescript typings, ESLint linting, and Jest unit tests as you develop and change code.
 
 Read the API docs for more on [`benmvp start`](docs/cli/start.md).
 
 ### Building
 
 ```sh
-yarn build
+npm run build
 ```
 
-In your continuous integration (CI) environment, run `yarn build` (or `npm build`) to generated transpiled versions of your code in ESM (ECMAScript module) and CJS (CommonJS).
+In your continuous integration (CI) environment, run `npm run build` (or `yarn build`) to generate transpiled versions of your code in ESM (ECMAScript module) and CJS (CommonJS), as well as TypeScript definition files.
 
 Read the API docs for more on [`benmvp build`](docs/cli/build.md).
+
+### Integration Testing
+
+```sh
+npm run integrate
+```
+
+In your continuous integration (CI) environment, run `npm run integrate` (or `yarn integrate`) to run additional integration tests for the library. The integration "project" will also be typed and linted. This can also be run locally (i.e. for commit hooks but is not recommended).
 
 ## Docs
 

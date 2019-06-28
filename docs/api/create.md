@@ -1,9 +1,12 @@
 # `create()` Documentation
 
+> NOTE: `create()` is still under development
+
+
 Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
 
-- Add `"test"`, `"start"`, and `"build"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), and [`benmvp build`](build), respectively
-- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [NPM](https://docs.npmjs.com/)
+- Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
+- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
 - Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
 
 Looking for CLI docs? View companion [`benmvp create` documentation](../cli/create.md).
@@ -45,7 +48,7 @@ Add custom setup to an existing library:
 import {create} from '@benmvp/cli'
 
 create({
-  modes: ['type', 'unit'],
+  modes: ['type', 'spec'],
   out: './built',
   formats: ['esm', 'cjs'],
 })
@@ -56,7 +59,7 @@ create({
 `create()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([options]: Options): Promise<Result>
+(options?: Options): Promise<Result>
 ```
 
 ## Options
@@ -103,11 +106,11 @@ An `Array` of the types or modes of tests to run. Available modes:
 
 - `'type'` - Runs Typescript type-checking
 - `'lint'` - Runs ESLint
-- `'unit'` - Runs Jest-based unit tests
+- `'spec'` - Runs Jest-based tests
 
 Optional. Defaults to all modes when unspecified.
 
-This will initialize the `"start"` and `"test"` scripts in the `package.json` to pass the matching argument.
+This will initialize the `"start"`, `"test"` and `"integrate"` scripts in the `package.json` to pass the matching argument.
 
 
 ## Return Value

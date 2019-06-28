@@ -34,7 +34,7 @@ describe('error cases', () => {
 
   it('returns an error if jest fails (for some reason)', async () => {
     mockedRunJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
-    const result = await testCommand({modes: ['unit']})
+    const result = await testCommand({modes: ['spec']})
 
     expect(result).toEqual({
       code: 1,
@@ -57,18 +57,18 @@ describe('success cases', () => {
         '--projects',
         expect.stringContaining('project-type.js'),
         expect.stringContaining('project-lint.js'),
-        expect.stringContaining('project-unit.js'),
+        expect.stringContaining('project-spec.js'),
       ]))
 
       expect(result).toEqual({code: 0})
     })
 
     it('calls jest with args and returns success when valid modes are passed', async () => {
-      const result = await testCommand({modes: ['unit']})
+      const result = await testCommand({modes: ['spec']})
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
-        expect.stringContaining('project-unit.js'),
+        expect.stringContaining('project-spec.js'),
       ]))
 
       expect(result).toEqual({code: 0})

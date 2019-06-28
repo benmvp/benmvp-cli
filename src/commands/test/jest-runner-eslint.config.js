@@ -4,5 +4,6 @@ module.exports = {
   cliOptions: {
     config: resolve(__dirname, 'eslint.config.js'),
     cache: true,
+    maxWarnings: 0,
   },
 }

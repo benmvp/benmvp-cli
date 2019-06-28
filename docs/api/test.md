@@ -22,7 +22,7 @@ To run just unit tests on all files:
 import {test} from '@benmvp/cli'
 
 test({
-  modes: ['unit'],
+  modes: ['spec'],
 })
 ```
 
@@ -63,14 +63,14 @@ test({
 `test()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-type Mode = 'type' | 'lint' | 'unit'
+type Mode = 'type' | 'lint' | 'spec'
 namespace TestOptions {
   modes: Mode[];
   pattern: string;
   watch: boolean;
 }
 
-([options]: TestOptions): Promise<Result>
+(options?: TestOptions): Promise<Result>
 ```
 
 ## Options
@@ -83,7 +83,7 @@ An `Array` of the types or modes of tests to run. Available modes:
 
 - `'type'` - Runs Typescript type-checking (files ending in `.ts`)
 - `'lint'` - Runs ESLint (files ending in `.ts`)
-- `'unit'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
+- `'spec'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes when unspecified. 
 

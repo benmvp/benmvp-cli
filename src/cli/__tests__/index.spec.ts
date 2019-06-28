@@ -1,6 +1,19 @@
 import {run} from '..'
-import {create, build, test as testCommand, start} from '../../commands'
-import {CREATE_ARGS, CREATE_POS_ARGS, BUILD_ARGS, TEST_ARGS, START_ARGS} from '../args'
+import {
+  create,
+  build,
+  test as testCommand,
+  start,
+  integrate,
+} from '../../commands'
+import {
+  CREATE_ARGS,
+  CREATE_POS_ARGS,
+  BUILD_ARGS,
+  TEST_ARGS,
+  START_ARGS,
+  INTEGRATE_ARGS,
+} from '../args'
 
 jest.mock('../../commands')
 
@@ -202,13 +215,13 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['create', '--modes', 'lint', 'unit'])
+        run(['create', '--modes', 'lint', 'spec'])
 
         expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
 
@@ -224,13 +237,13 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['create', '-m', 'lint', 'unit'])
+        run(['create', '-m', 'lint', 'spec'])
 
         expect(create).toHaveBeenCalledWith({
           name: CREATE_POS_ARGS.name.default,
           formats: CREATE_ARGS.formats.default,
           out: CREATE_ARGS.out.default,
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
     })
@@ -242,7 +255,7 @@ describe('run', () => {
           'new-lib',
           '--modes',
           'lint',
-          'unit',
+          'spec',
           '--out',
           './output',
           '--formats',
@@ -254,7 +267,7 @@ describe('run', () => {
           name: 'new-lib',
           formats: ['esm', 'cjs'],
           out: './output',
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
         })
       })
 
@@ -503,10 +516,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['test', '--modes', 'lint', 'unit'])
+        run(['test', '--modes', 'lint', 'spec'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
@@ -523,10 +536,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['test', '-m', 'lint', 'unit'])
+        run(['test', '-m', 'lint', 'spec'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: TEST_ARGS.pattern.default,
           watch: TEST_ARGS.watch.default,
         })
@@ -577,10 +590,10 @@ describe('run', () => {
       })
 
       it('parses all args', () => {
-        run(['test', '--watch', '--modes', 'unit', 'type', '--pattern', 'utils/'])
+        run(['test', '--watch', '--modes', 'spec', 'type', '--pattern', 'utils/'])
 
         expect(testCommand).toHaveBeenCalledWith({
-          modes: ['unit', 'type'],
+          modes: ['spec', 'type'],
           pattern: 'utils/',
           watch: true,
         })
@@ -625,10 +638,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes', () => {
-        run(['start', '--modes', 'lint', 'unit'])
+        run(['start', '--modes', 'lint', 'spec'])
 
         expect(start).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: START_ARGS.pattern.default,
         })
       })
@@ -643,10 +656,10 @@ describe('run', () => {
       })
 
       it('parses multiple modes (alias)', () => {
-        run(['start', '-m', 'lint', 'unit'])
+        run(['start', '-m', 'lint', 'spec'])
 
         expect(start).toHaveBeenCalledWith({
-          modes: ['lint', 'unit'],
+          modes: ['lint', 'spec'],
           pattern: START_ARGS.pattern.default,
         })
       })
@@ -670,6 +683,84 @@ describe('run', () => {
 
         expect(start).toHaveBeenCalledWith({
           modes: START_ARGS.modes.default,
+          pattern,
+        })
+      })
+    })
+  })
+
+  describe('integrate command', () => {
+    afterEach(() => {
+      const integrateMock = integrate as jest.Mock
+
+      integrateMock.mockReset()
+    })
+
+    it('defaults args when none are passed', () => {
+      run(['integrate'])
+
+      expect(integrate).toHaveBeenCalledWith({
+        modes: INTEGRATE_ARGS.modes.default,
+        pattern: INTEGRATE_ARGS.pattern.default,
+      })
+    })
+
+    describe('integrate modes', () => {
+      it('parses singular mode', () => {
+        run(['integrate', '--modes', 'lint'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses multiple modes', () => {
+        run(['integrate', '--modes', 'lint', 'spec'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint', 'spec'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses singular mode (alias)', () => {
+        run(['integrate', '-m', 'type'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['type'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+      it('parses multiple modes (alias)', () => {
+        run(['integrate', '-m', 'lint', 'spec'])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: ['lint', 'spec'],
+          pattern: INTEGRATE_ARGS.pattern.default,
+        })
+      })
+
+
+      it('parses pattern', () => {
+        const pattern = 'api/'
+
+        run(['integrate', '--pattern', pattern])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: INTEGRATE_ARGS.modes.default,
+          pattern,
+        })
+      })
+
+      it('parses pattern (alias)', () => {
+        const pattern = 'api/'
+
+        run(['integrate', '-p', pattern])
+
+        expect(integrate).toHaveBeenCalledWith({
+          modes: INTEGRATE_ARGS.modes.default,
           pattern,
         })
       })

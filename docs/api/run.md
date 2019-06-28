@@ -29,7 +29,7 @@ To run just unit tests:
 ```js
 const {run} = require('@benmvp/cli');
 
-run(['test', '--modes', 'unit'])
+run(['test', '--modes', 'spec'])
 ```
 
 ## Type
@@ -37,7 +37,7 @@ run(['test', '--modes', 'unit'])
 `run()` has the following [TypeScript](https://www.typescriptlang.org/) signature:
 
 ```js
-([args]: Array<string>): Promise<Result>
+(args?: string[]): Promise<Result>
 ```
 
 ## Arguments

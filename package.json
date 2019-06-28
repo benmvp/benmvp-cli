@@ -22,12 +22,14 @@
   "scripts": {
     "prebootstrap": "rm -rf lib",
     "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --copy-files --presets ./src/commands/build/babel-config-cjs.js",
-    "prestart": "yarn build",
+    "prestart": "npm run build",
     "start": "./bin/benmvp start",
-    "pretest": "yarn build",
+    "pretest": "npm run build",
     "test": "./bin/benmvp test",
-    "prebuild": "yarn bootstrap",
-    "build": "./bin/benmvp build"
+    "prebuild": "npm run bootstrap",
+    "build": "./bin/benmvp build",
+    "preintegrate": "npm run build",
+    "integrate": "./bin/benmvp integrate"
   },
   "engines": {
     "node": ">= 8"
@@ -43,11 +45,11 @@
     "@babel/preset-typescript": "^7.1.0",
     "@babel/runtime": "^7.4.5",
     "@types/jest": "^24.0.11",
+    "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^1.8.0",
     "@typescript-eslint/parser": "^1.7.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^24.8.0",
-    "core-js": "^3.0.1",
     "eslint": "^5.14.0",
     "eslint-config-eventbrite": "^5.0.0",
     "eslint-plugin-babel": "^5.1.0",
@@ -64,8 +66,6 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.1",
-    "@types/node": "^12.0.0",
-    "@types/typescript": "^2.0.0",
     "@types/yargs": "^13.0.0"
   }
 }
