@@ -50,7 +50,6 @@
     "@typescript-eslint/parser": "^1.7.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^24.8.0",
-    "core-js": "^3.0.1",
     "eslint": "^5.14.0",
     "eslint-config-eventbrite": "^5.0.0",
     "eslint-plugin-babel": "^5.1.0",
