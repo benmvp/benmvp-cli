@@ -25,9 +25,11 @@ cp -r ./integration-tests/* $TEMP_INTEGRATION_PATH
 
 pushd $TEMP_INTEGRATION_PATH
 
-# Add .tgz file as dependency
+# Add @benmvp/cli & tarball file as dependencies
 # This will also install all missing dependencies from `package-lock.json`
-echo -e "npm install && npm install --save-dev $TARBALL_FILE_PATH\n"
+# Note for integration tests for @benmvp/cli specifically this *should* overwrite
+# @benmvp/cli dependency from registry with the tarball
+echo -e "npm install && npm install --save-dev @benmvp/cli $TARBALL_FILE_PATH\n"
 npm install && npm install --save-dev $TARBALL_FILE_PATH
 
 # Verify node modules were installed
