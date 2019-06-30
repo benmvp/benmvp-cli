@@ -18,7 +18,7 @@ const getBabelConfig = (moduleType) => ({
     '@babel/plugin-proposal-object-rest-spread',
     ['@babel/plugin-transform-runtime', {
       corejs: false,
-      helpers: true,
+      helpers: false,
       regenerator: true,
 
       // NOTE: May need to point this to a specific one, see
