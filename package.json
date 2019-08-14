@@ -60,7 +60,7 @@
     "jest-runner-tsc": "^1.3.2",
     "jest-watch-typeahead": "^0.3.0",
     "lodash": "^4.17.15",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "typescript": "^3.2.1",
     "yargs": "^13.1.0"
   },
