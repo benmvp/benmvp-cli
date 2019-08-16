@@ -11,6 +11,7 @@ const getBabelConfig = (moduleType) => ({
         modules: moduleType === 'esm' ? false : moduleType,
       },
     ],
+    '@babel/preset-react',
     '@babel/preset-typescript',
   ],
   plugins: [
