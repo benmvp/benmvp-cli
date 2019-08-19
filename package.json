@@ -62,7 +62,7 @@
     "lodash": "^4.17.15",
     "rimraf": "^3.0.0",
     "typescript": "^3.2.1",
-    "yargs": "^13.1.0"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.136",
