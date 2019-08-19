@@ -82,7 +82,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Babe
       cliOptions: {
         filenames: [resolve(process.cwd(), 'src')],
         outDir: resolve(outputPath, format),
-        extensions: '.ts,.js',
+        extensions: '.ts,.tsx,.js,.jsx',
         watch,
         copyFiles: true,
       },

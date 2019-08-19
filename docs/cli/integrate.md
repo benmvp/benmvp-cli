@@ -54,8 +54,8 @@ benmvp integrate --modes lint --pattern api/
 A space-separated list of the types or modes of tests to run. Aliased as `-m`. Available modes:
 
 - `spec` - Runs Jest-based tests (files ending in `.spec.ts` or in `__tests__` folder)
-- `lint` - Runs ESLint (files ending in `.ts`)
-- `type` - Runs Typescript type-checking (files ending in `.ts`)
+- `lint` - Runs ESLint (files ending in `.ts` or `.tsx`)
+- `type` - Runs Typescript type-checking (files ending in `.ts` or `.tsx`)
 
 Optional. Defaults to all modes.
 

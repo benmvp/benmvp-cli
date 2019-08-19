@@ -63,7 +63,7 @@ export default async ({
   } catch (error) {
     return {
       code: error.code || 1,
-      message: 'Error running "build" command',
+      message: `Error running "build" command (formats=${formats.toString()}; out=${out})`,
       error,
     }
   }

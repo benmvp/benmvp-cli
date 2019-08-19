@@ -7,8 +7,8 @@
   const {code, message, error} = await run(args);
 
   if (code) {
-    // console.error(error);
     console.error(message);
+    console.error(error);
   }
 
   process.exit(code)

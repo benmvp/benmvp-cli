@@ -62,6 +62,3 @@ typings/
 
 # built directory
 lib/
-
-# editor stuffs
-.vscode/

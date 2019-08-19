@@ -1,7 +1,7 @@
 const {resolve} = require('path');
 
 module.exports = {
-  extends: ['eventbrite', 'plugin:@typescript-eslint/recommended'],
+  extends: ['eventbrite-react', 'plugin:@typescript-eslint/recommended'],
   env: {
     jest: true,
     browser: true,
@@ -15,9 +15,14 @@ module.exports = {
   rules: {
     // overrides of eslint-config-eventbrite
     indent: ['error', 2, {SwitchCase: 1}],
+    'react/jsx-indent': ['error', 2],
     'prefer-const': 'error',
     semi: ['error', 'never'],
     'space-before-function-paren': ['error', {asyncArrow: 'always'}],
+
+    // overrides of eslint-config-eventbrite-react
+    'react/jsx-no-bind': 'off',
+
 
     // need to be turned off for rules in plugin:@typescript-eslint/recommended
     'no-undef': 'off',
@@ -25,14 +30,19 @@ module.exports = {
 
     // @typescript-eslint/eslint-plugin settings
     '@typescript-eslint/await-thenable': 'error',
-    '@typescript-eslint/explicit-function-return-type': ['error', {allowExpressions: true}],
+    '@typescript-eslint/explicit-function-return-type': ['error', {
+      allowExpressions: true,
+      allowTypedFunctionExpressions: true,
+    }],
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-object-literal-type-assertion': ['error', {allowAsParameter: true}],
+
+
   },
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
       },
     },
   },
