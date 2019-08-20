@@ -8,7 +8,7 @@
 
   if (code) {
     console.error(message);
-    console.error(error);
+    // console.error(error);
   }
 
   process.exit(code)

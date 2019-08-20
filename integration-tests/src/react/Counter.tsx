@@ -3,7 +3,7 @@ import React, {FunctionComponent, useState} from 'react'
 import Button from './Button'
 
 interface Props {
-  initialCount: number;
+  initialCount?: number;
 }
 
 const Counter: FunctionComponent<Props> = ({

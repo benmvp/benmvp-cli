@@ -12,6 +12,9 @@ module.exports = {
   parserOptions: {
     project: resolve(__dirname, 'tsconfig.json'),
   },
+  settings: {
+    react: 'detect',
+  },
   rules: {
     // overrides of eslint-config-eventbrite
     indent: ['error', 2, {SwitchCase: 1}],
@@ -29,10 +32,11 @@ module.exports = {
     camelcase: 'off',
 
     // @typescript-eslint/eslint-plugin settings
-    '@typescript-eslint/await-thenable': 'error',
+    '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/explicit-function-return-type': ['error', {
       allowExpressions: true,
       allowTypedFunctionExpressions: true,
+      // allowHigherOrderFunctions: true,
     }],
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-object-literal-type-assertion': ['error', {allowAsParameter: true}],

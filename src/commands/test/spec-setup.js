@@ -1,3 +1,5 @@
+import 'jest-enzyme';
+
 beforeEach(() => {
   expect.hasAssertions()
 })

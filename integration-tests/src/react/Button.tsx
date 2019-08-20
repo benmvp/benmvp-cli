@@ -2,8 +2,8 @@ import React, {FunctionComponent, ReactNode} from 'react'
 
 
 interface Props {
-  onClick: () => void;
   children: ReactNode;
+  onClick?: () => void;
 }
 
 const Button: FunctionComponent<Props> = ({
