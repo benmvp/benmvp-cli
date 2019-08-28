@@ -1,13 +1,34 @@
-import {resolve} from 'path'
-import {exec} from 'child_process'
-import {promisify} from 'util'
+import {resolve as pathResolve} from 'path'
+import {spawn} from 'child_process'
 import {INTEGRATE_ARGS} from '../../cli/args'
 import {Result} from '../types'
 import {getTestArgs} from './utils'
 
-const execAsync = promisify(exec)
 
-const SCRIPT_PATH = resolve(__dirname, 'run.sh')
+const SCRIPT_PATH = pathResolve(__dirname, 'run.sh')
+
+const spawnAsync = (command: string, args: string[]): Promise<void> => (
+  new Promise((resolve, reject) => {
+    const childProcess = spawn(command, args)
+
+    childProcess.stdout.on('data', (data) => {
+      // eslint-disable-next-line no-console
+      console.log(`${data}`)
+    })
+    childProcess.stderr.on('data', (data) => {
+      // eslint-disable-next-line no-console
+      console.error(`${data}`)
+    })
+    childProcess.on('close', (code) => {
+      if (code !== 0) {
+        reject(`"${command} ${args.join(' ')}" exited with code ${code}`)
+      } else {
+        resolve()
+      }
+    })
+  })
+)
+
 
 /**
  * Runs a one-time pass of the specified integration tests
@@ -23,22 +44,8 @@ export default async ({
   try {
     const testArgs = getTestArgs({modes, pattern})
 
-    const {stdout} = await execAsync(`${SCRIPT_PATH} ${testArgs}`)
-
-    if (stdout) {
-      // eslint-disable-next-line no-console
-      console.log(stdout)
-    }
+    await spawnAsync(SCRIPT_PATH, testArgs)
   } catch (error) {
-    if (error.stdout) {
-      // eslint-disable-next-line no-console
-      console.log(error.stdout)
-    }
-    if (error.stderr) {
-      // eslint-disable-next-line no-console
-      console.error(error.stderr)
-    }
-
     return {
       code: 1,
       message: 'Error running "integrate" command',

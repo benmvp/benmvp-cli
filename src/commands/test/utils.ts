@@ -32,20 +32,6 @@ export const VALID_TEST_MODES: ValidTestModes = {
  * @returns {string[]} The array of arguments
  */
 export const getJestArgs = ({modes, pattern, watch}: Args): string[] => {
-  let jestArgs = [] as string[]
-
-  if (pattern) {
-    jestArgs = [...jestArgs, '--testPathPattern', pattern]
-  }
-
-  if (watch) {
-    jestArgs = [...jestArgs, '--watch']
-  }
-
-  if (process.env.CI === 'true') {
-    jestArgs = [...jestArgs, '--ci']
-  }
-
   const validModes = modes.filter((mode) => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {
@@ -53,8 +39,20 @@ export const getJestArgs = ({modes, pattern, watch}: Args): string[] => {
   }
 
   const projects = validModes.map((mode) => VALID_TEST_MODES[mode])
+  const jestArgs = ['--projects', ...projects]
 
-  jestArgs = [...jestArgs, '--projects', ...projects]
+  if (pattern) {
+    jestArgs.push('--testPathPattern', pattern)
+  }
+
+  if (watch) {
+    jestArgs.push('--watch')
+  }
+
+  if (process.env.CI === 'true') {
+    jestArgs.push('--ci')
+  }
+
 
   return jestArgs
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import {mount} from 'enzyme'
+import {act} from 'react-dom/test-utils'
 
 import Counter from '../Counter'
 import Button from '../Button'
@@ -18,11 +20,14 @@ test('can have a different initial value', () => {
 test('updates count when Button is clicked', () => {
   const counter = mount(<Counter initialCount={5} />)
   const button = counter.find(Button)
+  const buttonOnClick = button.prop('onClick')
 
-  // simulate clicking the button by trigger onClick prop of <Button />
-  button.prop('onClick')()
-
-  counter.update()
+  if (buttonOnClick) {
+    // simulate clicking the button by trigger onClick prop of <Button />
+    act(() => {
+      buttonOnClick()
+    })
+  }
 
   expect(counter).toIncludeText('You clicked 6 times')
 })

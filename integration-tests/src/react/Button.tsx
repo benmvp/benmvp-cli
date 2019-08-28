@@ -10,7 +10,7 @@ const Button: FunctionComponent<Props> = ({
   onClick,
   children,
 }) => (
-  <button type="button" onClick={onClick}>
+  <button type="button" onClick={() => onClick && onClick()}>
     {children}
   </button>
 )

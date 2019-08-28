@@ -25,6 +25,7 @@ module.exports = {
 
     // overrides of eslint-config-eventbrite-react
     'react/jsx-no-bind': 'off',
+    'import/no-extraneous-dependencies': 'off',
 
 
     // need to be turned off for rules in plugin:@typescript-eslint/recommended
@@ -40,14 +41,15 @@ module.exports = {
     }],
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-object-literal-type-assertion': ['error', {allowAsParameter: true}],
-
-
   },
   settings: {
     'import/resolver': {
       node: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 }

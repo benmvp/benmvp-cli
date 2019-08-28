@@ -9,7 +9,7 @@ module.exports = {
 
   // test files end in *.spec.ts. The base `testMatch`
   // is just looking at *.ts
-  testMatch: [resolve(ROOT_DIR, 'src/**/*.spec.ts')],
+  testMatch: [resolve(ROOT_DIR, 'src/**/*.spec.ts?(x)')],
 
   setupFilesAfterEnv: [resolve(__dirname, 'spec-setup.js')],
   testEnvironment: 'enzyme',

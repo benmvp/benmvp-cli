@@ -11,7 +11,7 @@ const Counter: FunctionComponent<Props> = ({
 }) => {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(initialCount)
-  const onClick = () => setCount(count + 1)
+  const onClick = (): void => setCount(count + 1)
 
   return (
     <div>

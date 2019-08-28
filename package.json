@@ -21,7 +21,7 @@
   },
   "scripts": {
     "prebootstrap": "rm -rf lib",
-    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.js' --copy-files --presets ./src/commands/build/babel-config-cjs.js",
+    "bootstrap": "babel src --out-dir lib/cjs --extensions '.ts,.tsx,.js,.jsx' --copy-files --presets ./src/commands/build/babel-config-cjs.js",
     "prestart": "npm run build",
     "start": "./bin/benmvp start",
     "pretest": "npm run build",
@@ -54,7 +54,6 @@
     "babel-jest": "^24.8.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "enzyme-to-json": "^3.4.0",
     "eslint": "^5.14.0",
     "eslint-config-eventbrite-react": "^6.0.0",
     "eslint-plugin-babel": "^5.1.0",
