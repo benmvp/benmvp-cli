@@ -81,8 +81,8 @@ The optional `TestOptions` object supports the following properties:
 
 An `Array` of the types or modes of tests to run. Available modes:
 
-- `'type'` - Runs Typescript type-checking (files ending in `.ts`)
-- `'lint'` - Runs ESLint (files ending in `.ts`)
+- `'type'` - Runs Typescript type-checking (files ending in `.ts` or `.tsx`)
+- `'lint'` - Runs ESLint (files ending in `.ts` or `.tsx`)
 - `'spec'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
 Optional. Defaults to all modes when unspecified. 

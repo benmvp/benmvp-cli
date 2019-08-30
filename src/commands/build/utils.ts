@@ -82,7 +82,7 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Babe
       cliOptions: {
         filenames: [resolve(process.cwd(), 'src')],
         outDir: resolve(outputPath, format),
-        extensions: '.ts,.js',
+        extensions: '.ts,.tsx,.js,.jsx',
         watch,
         copyFiles: true,
       },
@@ -112,12 +112,13 @@ export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | 
 
   const args = [
     ...compilerOptionsAsArgs,
+    '--pretty',
     '--declaration',
     '--declarationDir', resolve(out, 'types'),
     '--emitDeclarationOnly',
     '--noEmit', 'false',
     watch ? '--watch' : '',
-    resolve(process.cwd(), 'src/*.ts'),
+    resolve(process.cwd(), 'src/index.ts'),
   ]
 
   return args

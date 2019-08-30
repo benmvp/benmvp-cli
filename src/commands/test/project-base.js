@@ -9,11 +9,11 @@ const REAL_ROOT_DIR = process.cwd()
 module.exports = {
   rootDir: __dirname,
   roots: [REAL_ROOT_DIR],
-  moduleFileExtensions: ['ts', 'js'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   transform: {
-    '^.+\\.(ts|js)$': resolve(__dirname, './babel-jest-transform.js'),
+    '^.+\\.(ts|js)x?$': resolve(__dirname, './babel-jest-transform.js'),
   },
-  testMatch: [resolve(REAL_ROOT_DIR, 'src/**/*.ts')],
+  testMatch: [resolve(REAL_ROOT_DIR, 'src/**/*.ts?(x)')],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

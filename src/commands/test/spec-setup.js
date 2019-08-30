@@ -1,3 +1,8 @@
+// to get additional jest matchers for enzyme
+require('jest-enzyme')
+
+// ensure every test case has an assertion
+// (particularly useful for async tests)
 beforeEach(() => {
   expect.hasAssertions()
 })

@@ -41,13 +41,13 @@ describe('getTestArgs', () => {
     it('returns single arg when single valid mode is specified', () => {
       const actual = getTestArgs({modes: ['type'], pattern: ''})
 
-      expect(actual).toEqual(expect.stringContaining('--modes type'))
+      expect(actual).toEqual(expect.arrayContaining(['--modes', 'type']))
     })
 
     it('returns multiple args when multiple valid modes are specified', () => {
       const actual = getTestArgs({modes: ['lint', 'spec'], pattern: ''})
 
-      expect(actual).toEqual(expect.stringContaining('--modes lint spec'))
+      expect(actual).toEqual(expect.arrayContaining(['--modes', 'lint', 'spec']))
     })
   })
 
@@ -56,7 +56,7 @@ describe('getTestArgs', () => {
       const pattern = 'api/'
       const actual = getTestArgs({pattern, modes: ['lint']})
 
-      expect(actual).toEqual(expect.stringContaining(`--pattern ${pattern}`))
+      expect(actual).toEqual(expect.arrayContaining(['--pattern', pattern]))
     })
 
     it('does not include --testPathPattern flag when pattern option is empty string', () => {
