@@ -1,6 +1,6 @@
 import testCommand from '..'
 import runJest from '../run-jest'
-import {TestMode} from '../../types'
+import { TestMode } from '../../types'
 
 jest.mock('../run-jest')
 
@@ -12,7 +12,7 @@ describe('error cases', () => {
   })
 
   it('returns an error w/ empty modes', async () => {
-    const result = await testCommand({modes: []})
+    const result = await testCommand({ modes: [] })
 
     expect(result).toEqual({
       code: 1,
@@ -23,7 +23,7 @@ describe('error cases', () => {
 
   it('returns an error w/ invalid mode', async () => {
     const DUMMY_MODE = 'foo' as TestMode
-    const result = await testCommand({modes: [DUMMY_MODE]})
+    const result = await testCommand({ modes: [DUMMY_MODE] })
 
     expect(result).toEqual({
       code: 1,
@@ -34,7 +34,7 @@ describe('error cases', () => {
 
   it('returns an error if jest fails (for some reason)', async () => {
     mockedRunJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
-    const result = await testCommand({modes: ['spec']})
+    const result = await testCommand({ modes: ['spec'] })
 
     expect(result).toEqual({
       code: 1,
@@ -60,18 +60,18 @@ describe('success cases', () => {
         expect.stringContaining('project-spec.js'),
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
 
     it('calls jest with args and returns success when valid modes are passed', async () => {
-      const result = await testCommand({modes: ['spec']})
+      const result = await testCommand({ modes: ['spec'] })
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--projects',
         expect.stringContaining('project-spec.js'),
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
   })
 
@@ -83,19 +83,19 @@ describe('success cases', () => {
         '--pattern',
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
 
     it('calls jest with args and returns success when pattern flag is passed', async () => {
       const pattern = 'utils/'
-      const result = await testCommand({pattern})
+      const result = await testCommand({ pattern })
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--testPathPattern',
         pattern,
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
   })
 
@@ -107,17 +107,17 @@ describe('success cases', () => {
         '--watch',
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
 
     it('calls jest with args and returns success when watch flag is passed', async () => {
-      const result = await testCommand({watch: true})
+      const result = await testCommand({ watch: true })
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--watch',
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
   })
 
@@ -133,7 +133,7 @@ describe('success cases', () => {
         '--ci',
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
 
       process.env.CI = origEnvCI
     })

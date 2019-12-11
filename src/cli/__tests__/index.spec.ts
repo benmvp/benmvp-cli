@@ -1,4 +1,4 @@
-import {run} from '..'
+import { run } from '..'
 import {
   create,
   build,

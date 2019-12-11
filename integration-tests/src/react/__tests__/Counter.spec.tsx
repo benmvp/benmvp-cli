@@ -1,6 +1,6 @@
 import React from 'react'
-import {mount} from 'enzyme'
-import {act} from 'react-dom/test-utils'
+import { mount } from 'enzyme'
+import { act } from 'react-dom/test-utils'
 
 import Counter from '../Counter'
 import Button from '../Button'

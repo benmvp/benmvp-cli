@@ -12,5 +12,4 @@ module.exports = {
   testMatch: [resolve(ROOT_DIR, 'src/**/*.spec.ts?(x)')],
 
   setupFilesAfterEnv: [resolve(__dirname, 'spec-setup.js')],
-  testEnvironment: 'enzyme',
 }
