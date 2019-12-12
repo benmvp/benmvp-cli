@@ -1,6 +1,6 @@
-import {resolve} from 'path'
+import { resolve } from 'path'
 import flatten from 'lodash/flatten'
-import {ModuleFormat} from '../types'
+import { ModuleFormat } from '../types'
 import BASE_TSCONFIG from '../test/tsconfig.json'
 
 interface BabelOptions {
@@ -66,11 +66,13 @@ const BUILT_FILES_TO_REMOVE = [
  * Gets an array of options/arguments to pass babel, one for each valid format
  * @param {BuildArgs} options
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
- * @param {string} options.out A path (relative or absolute) to the output directory for the built module formats
- * @param {boolean} options.watch A flag indicating whether or not to continuously generate the built module formats whenever source files change
+ * @param {string} options.out A path (relative or absolute) to the output directory
+ *  for the built module formats
+ * @param {boolean} options.watch A flag indicating whether or not to continuously
+ *  generate the built module formats whenever source files change
  * @returns {BabelCLIOptions[]}
  */
-export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): BabelCLIOptions[] => {
+export const getBabelArgs = ({ formats, out: outputPath, watch }: BuildArgs): BabelCLIOptions[] => {
   const validatedFormats = [...formats].filter((format) => VALID_BABEL_FORMATS.has(format))
 
   const argsList = validatedFormats.map(
@@ -96,18 +98,20 @@ export const getBabelArgs = ({formats, out: outputPath, watch}: BuildArgs): Babe
  * Gets a list of arguments to pass Typescript
  * @param {BuildArgs} options
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
- * @param {string} options.out A path (relative or absolute) to the output directory for the type definitions
- * @param {boolean} options.watch A flag indicating whether or not to continuously generate the type definitions whenever source files change
+ * @param {string} options.out A path (relative or absolute) to the output directory
+ *  for the type definitions
+ * @param {boolean} options.watch A flag indicating whether or not to continuously
+ *  generate the type definitions whenever source files change
  * @returns {string[] | null}
  */
-export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | null => {
+export const getTypescriptArgs = ({ formats, out, watch }: BuildArgs): string[] | null => {
   if (!formats.has('type')) {
     return null
   }
 
-  const {compilerOptions} = BASE_TSCONFIG
+  const { compilerOptions } = BASE_TSCONFIG
   const compilerOptionsAsArgs = flatten(
-    Object.entries(compilerOptions).map(([optionName, optionValue]) => ([`--${optionName}`, `${optionValue}`]))
+    Object.entries(compilerOptions).map(([optionName, optionValue]) => ([`--${optionName}`, `${optionValue}`])),
   )
 
   const args = [
@@ -126,7 +130,8 @@ export const getTypescriptArgs = ({formats, out, watch}: BuildArgs): string[] | 
 
 /**
  * Gets list of glob patterns of copied files that should be deleted after building
- * @param {string} outputPath A path (relative or absolute) to the output directory for the type definitions
+ * @param {string} outputPath A path (relative or absolute) to the output directory
+ *  for the type definitions
  * @returns {string[]}
  */
 export const getCopiedFilesToDelete = (outputPath: string): string[] => (

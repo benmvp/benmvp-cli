@@ -1,31 +1,64 @@
-const {resolve} = require('path');
+const { resolve } = require('path');
 
 module.exports = {
-  extends: ['eventbrite-react', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jest/recommended',
+  ],
   env: {
     jest: true,
     browser: true,
     node: true,
+    'jest/globals': true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  parserOptions: {
-    project: resolve(__dirname, 'tsconfig.json'),
-  },
+  plugins: [
+    '@typescript-eslint',
+    'jest',
+  ],
+  // parserOptions: {
+  //   project: resolve(__dirname, 'tsconfig.json'),
+  // },
   settings: {
     react: 'detect',
   },
   rules: {
-    // overrides of eslint-config-eventbrite
-    indent: ['error', 2, {SwitchCase: 1}],
-    'react/jsx-indent': ['error', 2],
-    'prefer-const': 'error',
+    // overrides of eslint-config-airbnb
+    'import/extensions': ['error', 'ignorePackages', {
+      ts: 'never',
+      tsx: 'never',
+      js: 'never',
+      jsx: 'never',
+    }],
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': ['error', {
+      packageDir: [
+        resolve(__dirname, '../../../../'),
+        './',
+      ],
+    }],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ForInStatement',
+        message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+      },
+      {
+        selector: 'LabeledStatement',
+        message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
+      },
+      {
+        selector: 'WithStatement',
+        message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+      },
+    ],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
+    'react/jsx-one-expression-per-line': 'off',
+    'react/prop-types': 'off',
     semi: ['error', 'never'],
-    'space-before-function-paren': ['error', {asyncArrow: 'always'}],
-
-    // overrides of eslint-config-eventbrite-react
-    'react/jsx-no-bind': 'off',
-    'import/no-extraneous-dependencies': 'off',
 
 
     // need to be turned off for rules in plugin:@typescript-eslint/recommended
@@ -37,10 +70,21 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': ['error', {
       allowExpressions: true,
       allowTypedFunctionExpressions: true,
-      // allowHigherOrderFunctions: true,
+      allowHigherOrderFunctions: true,
     }],
     '@typescript-eslint/indent': 'off',
-    '@typescript-eslint/no-object-literal-type-assertion': ['error', {allowAsParameter: true}],
+    '@typescript-eslint/consistent-type-assertions': ['error', {
+      assertionStyle: 'as',
+      objectLiteralTypeAssertions: 'allow-as-parameter',
+    }],
+
+    // eslint-plugin-jest settings
+    'jest/consistent-test-it': 'error',
+    'jest/lowercase-name': 'error',
+    'jest/prefer-to-be-null': 'error',
+    'jest/prefer-to-be-undefined': 'error',
+    'jest/valid-describe': 'error',
+    'jest/valid-expect-in-promise': 'error',
   },
   settings: {
     'import/resolver': {

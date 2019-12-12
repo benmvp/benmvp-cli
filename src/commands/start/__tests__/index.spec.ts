@@ -1,6 +1,6 @@
 import start from '..'
 import runJest from '../../test/run-jest'
-import {TestMode} from '../../types'
+import { TestMode } from '../../types'
 
 jest.mock('../../test/run-jest')
 
@@ -8,7 +8,7 @@ const mockedRunJest = runJest as jest.Mock
 
 describe('error cases', () => {
   it('returns an error w/ empty modes', async () => {
-    const result = await start({modes: []})
+    const result = await start({ modes: [] })
 
     expect(result).toEqual({
       code: 1,
@@ -19,7 +19,7 @@ describe('error cases', () => {
 
   it('returns an error w/ invalid mode', async () => {
     const DUMMY_MODE = 'foo' as TestMode
-    const result = await start({modes: [DUMMY_MODE]})
+    const result = await start({ modes: [DUMMY_MODE] })
 
     expect(result).toEqual({
       code: 1,
@@ -30,7 +30,7 @@ describe('error cases', () => {
 
   it('returns an error if jest fails (for some reason)', async () => {
     mockedRunJest.mockResolvedValue(Promise.reject(new Error('Jest failed!')))
-    const result = await start({modes: ['spec']})
+    const result = await start({ modes: ['spec'] })
 
     expect(result).toEqual({
       code: 1,
@@ -59,11 +59,11 @@ describe('success cases', () => {
         expect.stringContaining('project-spec.js'),
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
 
     it('calls jest with args and returns success when valid modes are passed', async () => {
-      const result = await start({modes: ['spec']})
+      const result = await start({ modes: ['spec'] })
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining(['--watch']))
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
@@ -71,7 +71,7 @@ describe('success cases', () => {
         expect.stringContaining('project-spec.js'),
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
   })
 
@@ -83,19 +83,19 @@ describe('success cases', () => {
         '--pattern',
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
 
     it('calls jest with args and returns success when pattern flag is passed', async () => {
       const pattern = 'utils/'
-      const result = await start({pattern})
+      const result = await start({ pattern })
 
       expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
         '--testPathPattern',
         pattern,
       ]))
 
-      expect(result).toEqual({code: 0})
+      expect(result).toEqual({ code: 0 })
     })
   })
 })

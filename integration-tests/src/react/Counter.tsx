@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from 'react'
+import React, { useState, FunctionComponent } from 'react'
 
 import Button from './Button'
 

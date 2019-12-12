@@ -16,11 +16,12 @@ import {
   DEFAULT_COMMAND,
   parseArgs,
 } from './args'
-import {Command, Result} from '../commands/types'
+import { Command, Result } from '../commands/types'
 
 /**
  * Parses the specified array of CLI arguments to run the desired command
- * @param {string[]} [args] An array of CLI arguments similar to the arguments received by `process.argv` (after the first two elements)
+ * @param {string[]} [args] An array of CLI arguments similar to the arguments
+ *  received by `process.argv` (after the first two elements)
  * @returns Promise<Result> The result of the executing the command
  */
 export const run = (args: string[] = []): Promise<Result> => {

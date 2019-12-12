@@ -1,7 +1,7 @@
-import {resolve} from 'path'
-import {readFileSync} from 'fs-extra'
-import React from 'react'
-import {renderToStaticMarkup} from 'react-dom/server'
+import { resolve } from 'path'
+import { readFileSync } from 'fs-extra'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 import Animal from './objects/animal'
 import Snake from './objects/snake'
@@ -22,5 +22,5 @@ export const run = (): void => {
   console.log(PACKAGE_JSON)
 
   // eslint-disable-next-line no-console
-  console.log(renderToStaticMarkup(React.createElement(Counter)))
+  console.log(renderToStaticMarkup(createElement(Counter)))
 }

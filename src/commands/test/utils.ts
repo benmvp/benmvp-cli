@@ -1,5 +1,5 @@
-import {resolve} from 'path'
-import {TestMode} from '../types'
+import { resolve } from 'path'
+import { TestMode } from '../types'
 
 interface ValidTestModes {
   type: string;
@@ -27,11 +27,12 @@ export const VALID_TEST_MODES: ValidTestModes = {
  * Retrieves the arguments to pass to Jest based on the specified options
  * @param {Args} options The configuration options for testing the library
  * @param {TestMode[]} options.modes List of the types or modes of tests to run
- * @param {string} options.pattern  Regexp pattern string that is matched against all tests paths before executing the test
+ * @param {string} options.pattern  Regexp pattern string that is matched against all
+ *  tests paths before executing the test
  * @param {boolean} options.watch Whether or not to re-run tests as source files change
  * @returns {string[]} The array of arguments
  */
-export const getJestArgs = ({modes, pattern, watch}: Args): string[] => {
+export const getJestArgs = ({ modes, pattern, watch }: Args): string[] => {
   const validModes = modes.filter((mode) => mode in VALID_TEST_MODES)
 
   if (!validModes.length || validModes.length < modes.length) {

@@ -1,2 +1,2 @@
 export * from './commands'
-export {run} from './cli'
+export { run } from './cli'
