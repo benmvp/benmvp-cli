@@ -1,11 +1,11 @@
-import {resolve} from 'path'
+import { resolve } from 'path'
 import {
   getBabelArgs,
   getTypescriptArgs,
   getCopiedFilesToDelete,
 } from '../utils'
-import {BUILD_ARGS} from '../../../cli/args'
-import {ModuleFormat} from '../../types'
+import { BUILD_ARGS } from '../../../cli/args'
+import { ModuleFormat } from '../../types'
 import BASE_TSCONFIG from '../../test/tsconfig.json'
 
 const CWD = process.cwd()
@@ -95,7 +95,7 @@ describe('getBabelArgs', () => {
         watch: true,
       })
 
-      babelArgsToRun.forEach(({cliOptions}) => {
+      babelArgsToRun.forEach(({ cliOptions }) => {
         expect(cliOptions).toHaveProperty('watch', true)
       })
     })
@@ -107,7 +107,7 @@ describe('getBabelArgs', () => {
         watch: false,
       })
 
-      babelArgsToRun.forEach(({cliOptions}) => {
+      babelArgsToRun.forEach(({ cliOptions }) => {
         expect(cliOptions).toHaveProperty('watch', false)
       })
     })

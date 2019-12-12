@@ -2,7 +2,5 @@
   "jest.enableInlineErrorMessages": false,
   "jest.enableSnapshotPreviews": false,
   "jest.enableSnapshotUpdateMessages": false,
-  "jest.autoEnable": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
+  "jest.autoEnable": false
 }

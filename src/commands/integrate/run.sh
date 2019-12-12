@@ -46,7 +46,7 @@ fi
 # This will also install all missing dependencies from `package-lock.json`
 # Note for integration tests for @benmvp/cli specifically this *should* overwrite
 # @benmvp/cli dependency from registry with the tarball
-echo -e "npm install && npm install --save-dev @benmvp/cli && npm install --save-dev $TARBALL_FILENAME\n" 
+echo -e "npm install && npm install --save-dev @benmvp/cli && npm install --save-dev $TARBALL_FILENAME\n"
 npm install && npm install --save-dev @benmvp/cli && npm install --save-dev $TARBALL_FILENAME
 
 # Verify @benmvp/cli binary (named "benmvp") exists

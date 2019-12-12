@@ -1,7 +1,7 @@
-import {resolve} from 'path'
-import {promisify} from 'util'
-import {exec} from 'child_process'
-import {pathExists, readFile} from 'fs-extra'
+import { resolve } from 'path'
+import { promisify } from 'util'
+import { exec } from 'child_process'
+import { pathExists, readFile } from 'fs-extra'
 
 const execAsync = promisify(exec)
 const CWD = process.cwd()
