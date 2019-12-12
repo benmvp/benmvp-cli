@@ -8,6 +8,6 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "jsx": "preserve",
-    "types": ["node", "jest", "jest-enzyme"]
+    "types": ["node", "jest", "@testing-library/jest-dom/extend-expect"]
   }
 }

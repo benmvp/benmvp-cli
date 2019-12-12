@@ -107,7 +107,7 @@ The CLI has been tested to work in Node 8+.
 - [TypeScript](https://www.typescriptlang.org/) (type-checking)
 - [Babel](https://babeljs.io/) (transpiling)
 - [Jest](https://jestjs.io/en) (testing & code coverage)
-- [Enzyme](https://github.com/airbnb/enzyme) (testing React components)
+- [React testing library](https://testing-library.com/docs/react-testing-library/intro) (testing React components)
 - [ESLint](http://eslint.org/) (linting)
 - [Yargs](https://github.com/yargs/yargs) (command line argument parsing)
 
