@@ -1,13 +1,13 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, fireEvent } from '@testing-library/react'
 
 import Button from '../Button'
 
 test('calls onClick prop when <button> is clicked', () => {
   const onClick = jest.fn()
-  const button = mount(<Button onClick={onClick}>Go!</Button>)
+  const { getByText } = render(<Button onClick={onClick}>Go!</Button>)
 
-  button.simulate('click')
+  fireEvent.click(getByText('Go!'))
 
   expect(onClick).toHaveBeenCalledWith()
   expect(onClick).toHaveBeenCalledTimes(1)

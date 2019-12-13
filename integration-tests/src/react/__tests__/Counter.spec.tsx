@@ -1,33 +1,24 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+import { render, fireEvent } from '@testing-library/react'
 
 import Counter from '../Counter'
-import Button from '../Button'
 
 test('starts off at 0 by default', () => {
-  const counter = mount(<Counter />)
+  const { queryByText } = render(<Counter />)
 
-  expect(counter).toIncludeText('You clicked 0 times')
+  expect(queryByText('You clicked 0 times')).toBeInTheDocument()
 })
 
 test('can have a different initial value', () => {
-  const counter = mount(<Counter initialCount={14} />)
+  const { queryByText } = render(<Counter initialCount={14} />)
 
-  expect(counter).toIncludeText('You clicked 14 times')
+  expect(queryByText('You clicked 14 times')).toBeInTheDocument()
 })
 
 test('updates count when Button is clicked', () => {
-  const counter = mount(<Counter initialCount={5} />)
-  const button = counter.find(Button)
-  const buttonOnClick = button.prop('onClick')
+  const { queryByText, getByText } = render(<Counter initialCount={5} />)
 
-  if (buttonOnClick) {
-    // simulate clicking the button by trigger onClick prop of <Button />
-    act(() => {
-      buttonOnClick()
-    })
-  }
+  fireEvent.click(getByText('Click me'))
 
-  expect(counter).toIncludeText('You clicked 6 times')
+  expect(queryByText('You clicked 6 times')).toBeInTheDocument()
 })
