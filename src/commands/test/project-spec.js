@@ -11,5 +11,8 @@ module.exports = {
   // is just looking at *.ts
   testMatch: [resolve(ROOT_DIR, 'src/**/*.spec.ts?(x)')],
 
-  setupFilesAfterEnv: [resolve(__dirname, 'spec-setup.js')],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    resolve(__dirname, 'spec-setup.js')
+  ],
 }

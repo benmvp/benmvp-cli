@@ -1,12 +1,3 @@
-const {configure} = require('enzyme')
-const Adapter = require('enzyme-adapter-react-16')
-
-// configure enzyme to use react 16 adapter
-configure({ adapter: new Adapter() });
-
-// to get additional jest matchers for enzyme
-require('jest-enzyme')
-
 // ensure every test case has an assertion
 // (particularly useful for async tests)
 beforeEach(() => {
