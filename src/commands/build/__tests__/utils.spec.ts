@@ -42,10 +42,16 @@ describe('getBabelArgs', () => {
       })
 
       expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
-      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/cjs'))
+      expect(cjsArgs.cliOptions).toHaveProperty(
+        'outDir',
+        resolve(CWD, 'lib/cjs'),
+      )
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
-      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/esm'))
+      expect(esmArgs.cliOptions).toHaveProperty(
+        'outDir',
+        resolve(CWD, 'lib/esm'),
+      )
     })
 
     it('still only generates CJS + ESM when more formats are specified', () => {
@@ -58,10 +64,16 @@ describe('getBabelArgs', () => {
       expect(otherArgs).toHaveLength(0)
 
       expect(cjsArgs.babelOptions.presets[0]).toMatch('babel-config-cjs.js')
-      expect(cjsArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/cjs'))
+      expect(cjsArgs.cliOptions).toHaveProperty(
+        'outDir',
+        resolve(CWD, 'lib/cjs'),
+      )
 
       expect(esmArgs.babelOptions.presets[0]).toMatch('babel-config-esm.js')
-      expect(esmArgs.cliOptions).toHaveProperty('outDir', resolve(CWD, 'lib/esm'))
+      expect(esmArgs.cliOptions).toHaveProperty(
+        'outDir',
+        resolve(CWD, 'lib/esm'),
+      )
     })
 
     it('sets correct outDir when `out` is relative', () => {
@@ -145,9 +157,13 @@ describe('getTypescriptArgs', () => {
         watch: BUILD_ARGS.watch.default,
       })
 
-      Object.entries(BASE_TSCONFIG.compilerOptions).forEach(([optionName, optionValue]) => {
-        expect(typescriptArgs).toEqual(expect.arrayContaining([`--${optionName}`, `${optionValue}`]))
-      })
+      Object.entries(BASE_TSCONFIG.compilerOptions).forEach(
+        ([optionName, optionValue]) => {
+          expect(typescriptArgs).toEqual(
+            expect.arrayContaining([`--${optionName}`, `${optionValue}`]),
+          )
+        },
+      )
     })
 
     it('specifies generic declaration information', () => {
@@ -159,7 +175,9 @@ describe('getTypescriptArgs', () => {
 
       expect(typescriptArgs).toContain('--declaration')
       expect(typescriptArgs).toContain('--emitDeclarationOnly')
-      expect(typescriptArgs).toEqual(expect.arrayContaining(['--noEmit', 'false']))
+      expect(typescriptArgs).toEqual(
+        expect.arrayContaining(['--noEmit', 'false']),
+      )
     })
 
     it('specifies the declaration destination when `out` is relative', () => {
@@ -170,10 +188,9 @@ describe('getTypescriptArgs', () => {
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(typescriptArgs).toEqual(expect.arrayContaining([
-        '--declarationDir',
-        resolve(out, 'types'),
-      ]))
+      expect(typescriptArgs).toEqual(
+        expect.arrayContaining(['--declarationDir', resolve(out, 'types')]),
+      )
     })
 
     it('specifies the declaration destination when `out` is absolute', () => {
@@ -183,10 +200,9 @@ describe('getTypescriptArgs', () => {
         watch: BUILD_ARGS.watch.default,
       })
 
-      expect(typescriptArgs).toEqual(expect.arrayContaining([
-        '--declarationDir',
-        '/out/dir/types',
-      ]))
+      expect(typescriptArgs).toEqual(
+        expect.arrayContaining(['--declarationDir', '/out/dir/types']),
+      )
     })
 
     describe('watch option', () => {

@@ -10,6 +10,8 @@ const CONSOLE_FAIL_TYPES = ['error', 'warn']
 CONSOLE_FAIL_TYPES.forEach((type) => {
   // eslint-disable-next-line no-console
   console[type] = (message) => {
-    throw new Error(`Failing due to console.${type} while running test!\n\n${message}`)
+    throw new Error(
+      `Failing due to console.${type} while running test!\n\n${message}`,
+    )
   }
 })

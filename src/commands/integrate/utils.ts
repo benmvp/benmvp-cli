@@ -1,10 +1,9 @@
 import { TestMode } from '../types'
 import { VALID_TEST_MODES } from '../test/utils'
 
-
 export interface IntegrateParams {
-  modes: TestMode[];
-  pattern: string;
+  modes: TestMode[]
+  pattern: string
 }
 
 const VALID_TEST_MODE_NAMES = new Set(Object.keys(VALID_TEST_MODES))
@@ -18,7 +17,9 @@ const VALID_TEST_MODE_NAMES = new Set(Object.keys(VALID_TEST_MODES))
  * @returns {string[]}
  */
 export const getTestArgs = ({ modes, pattern }: IntegrateParams): string[] => {
-  const validSelectedModes = modes.filter((mode) => VALID_TEST_MODE_NAMES.has(mode))
+  const validSelectedModes = modes.filter((mode) =>
+    VALID_TEST_MODE_NAMES.has(mode),
+  )
 
   if (!validSelectedModes.length || validSelectedModes.length < modes.length) {
     throw new Error(`Invalid test modes specified: ${modes}`)

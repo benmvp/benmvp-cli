@@ -11,7 +11,7 @@ Looking for CLI docs? View companion [`benmvp test` documentation](../cli/test.m
 To run all modes on all files (default behavior):
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 test()
 ```
@@ -19,7 +19,7 @@ test()
 To run just unit tests on all files:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 test({
   modes: ['spec'],
@@ -29,7 +29,7 @@ test({
 To run linting & typing on all files:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 test({
   modes: ['lint', 'type'],
@@ -39,7 +39,7 @@ test({
 To run all modes only on files within `utils/` directories:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 test({
   pattern: 'utils/',
@@ -49,7 +49,7 @@ test({
 To just run linting on files within `api/` directories while continuously watching for changes:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 test({
   modes: ['lint'],
@@ -85,7 +85,7 @@ An `Array` of the types or modes of tests to run. Available modes:
 - `'lint'` - Runs ESLint (files ending in `.ts` or `.tsx`)
 - `'spec'` - Runs Jest-based unit tests (files ending in `.spec.ts`)
 
-Optional. Defaults to all modes when unspecified. 
+Optional. Defaults to all modes when unspecified.
 
 ### `pattern`
 

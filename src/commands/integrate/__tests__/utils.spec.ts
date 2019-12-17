@@ -1,7 +1,6 @@
 import { getTestArgs, IntegrateParams } from '../utils'
 import { TestMode } from '../../types'
 
-
 describe('getTestArgs', () => {
   it('throws an error if no args are specified', () => {
     const tryGet = (): void => {
@@ -47,7 +46,9 @@ describe('getTestArgs', () => {
     it('returns multiple args when multiple valid modes are specified', () => {
       const actual = getTestArgs({ modes: ['lint', 'spec'], pattern: '' })
 
-      expect(actual).toEqual(expect.arrayContaining(['--modes', 'lint', 'spec']))
+      expect(actual).toEqual(
+        expect.arrayContaining(['--modes', 'lint', 'spec']),
+      )
     })
   })
 

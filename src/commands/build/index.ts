@@ -35,9 +35,12 @@ export default async ({
     // eslint-disable-next-line no-console
     console.log(
       '\nBuilding...',
-      '\n  formats:', formats.toString(),
-      '\n  output dir:', out,
-      '\n  watching?', watch ? 'yes' : 'no',
+      '\n  formats:',
+      formats.toString(),
+      '\n  output dir:',
+      out,
+      '\n  watching?',
+      watch ? 'yes' : 'no',
       '\n',
     )
 

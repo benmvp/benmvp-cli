@@ -8,7 +8,6 @@ import Snake from './objects/snake'
 import Horse from './objects/horse'
 import Counter from './react/Counter'
 
-
 const PACKAGE_JSON = readFileSync(resolve(__dirname, '../package.json'))
 
 export const run = (): void => {

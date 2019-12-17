@@ -1,4 +1,4 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 const babelJest = require('babel-jest')
 
 // Special augmented babel-jest where we point to a specific

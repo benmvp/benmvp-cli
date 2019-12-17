@@ -1,11 +1,5 @@
 import pick from 'lodash/pick'
-import {
-  create,
-  test as testCommand,
-  start,
-  build,
-  integrate,
-} from '..'
+import { create, test as testCommand, start, build, integrate } from '..'
 import {
   CREATE_ARGS,
   CREATE_POS_ARGS,
@@ -32,7 +26,10 @@ export const run = (args: string[] = []): Promise<Result> => {
   switch (command) {
     case 'create':
       return create(
-        pick(parsedArgs, [...Object.keys(CREATE_ARGS), ...Object.keys(CREATE_POS_ARGS)]),
+        pick(parsedArgs, [
+          ...Object.keys(CREATE_ARGS),
+          ...Object.keys(CREATE_POS_ARGS),
+        ]),
       )
     case 'build':
       return build(pick(parsedArgs, Object.keys(BUILD_ARGS)))

@@ -3,13 +3,13 @@ import yargs from 'yargs'
 import { ModuleFormat, TestMode, Command } from '../commands/types'
 
 interface CommandOptions {
-  [key: string]: yargs.Options;
+  [key: string]: yargs.Options
 }
 
 interface YargsArgv {
-  [x: string]: unknown;
-  _: string[];
-  $0: string;
+  [x: string]: unknown
+  _: string[]
+  $0: string
 }
 
 const TEST_MODES = {
@@ -22,7 +22,8 @@ const TEST_MODES = {
 }
 const TEST_PATTERN = {
   pattern: {
-    describe: 'Regexp pattern string that is matched against all tests paths before executing the test',
+    describe:
+      'Regexp pattern string that is matched against all tests paths before executing the test',
     alias: 'p',
     string: true,
     default: '',
@@ -90,34 +91,39 @@ export const INTEGRATE_COMMAND = 'integrate' as Command
 
 export const DEFAULT_COMMAND = CREATE_COMMAND
 
-export const parseArgs = (args: string[]): YargsArgv => yargs(args)
-  .version()
-  .command<CommandOptions>(
-    TEST_COMMAND,
-    'Runs linting, typing & Jest tests for the library',
-    TEST_ARGS,
-  )
-  .command<CommandOptions>(
-    START_COMMAND,
-    'Runs the lib\'s tests in watch mode',
-    START_ARGS,
-  )
-  .command<CommandOptions>(
-    BUILD_COMMAND,
-    'Builds the library into desired module formats',
-    BUILD_ARGS,
-  )
-  .command<CommandOptions>(
-    INTEGRATE_COMMAND,
-    'Runs integration tests for the library',
-    INTEGRATE_ARGS,
-  )
-  .command(
-    [`${CREATE_COMMAND} [name]`, '$0'],
-    'Creates a new library with test/build infra using @benmvp/cli',
-    (commandYargs: yargs.Argv) => commandYargs.options(CREATE_ARGS).positional('name', CREATE_POS_ARGS.name),
-  )
-  .completion()
-  .epilog('For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md')
-  .help()
-  .argv
+export const parseArgs = (args: string[]): YargsArgv =>
+  yargs(args)
+    .version()
+    .command<CommandOptions>(
+      TEST_COMMAND,
+      'Runs linting, typing & Jest tests for the library',
+      TEST_ARGS,
+    )
+    .command<CommandOptions>(
+      START_COMMAND,
+      "Runs the lib's tests in watch mode",
+      START_ARGS,
+    )
+    .command<CommandOptions>(
+      BUILD_COMMAND,
+      'Builds the library into desired module formats',
+      BUILD_ARGS,
+    )
+    .command<CommandOptions>(
+      INTEGRATE_COMMAND,
+      'Runs integration tests for the library',
+      INTEGRATE_ARGS,
+    )
+    .command(
+      [`${CREATE_COMMAND} [name]`, '$0'],
+      'Creates a new library with test/build infra using @benmvp/cli',
+      (commandYargs: yargs.Argv) =>
+        commandYargs
+          .options(CREATE_ARGS)
+          .positional('name', CREATE_POS_ARGS.name),
+    )
+    .completion()
+    .epilog(
+      'For more details, visit https://github.com/benmvp/benmvp-cli/blob/master/API.md',
+    )
+    .help().argv

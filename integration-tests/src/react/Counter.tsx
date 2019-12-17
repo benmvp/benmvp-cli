@@ -3,12 +3,10 @@ import React, { useState, FunctionComponent } from 'react'
 import Button from './Button'
 
 interface Props {
-  initialCount?: number;
+  initialCount?: number
 }
 
-const Counter: FunctionComponent<Props> = ({
-  initialCount = 0,
-}) => {
+const Counter: FunctionComponent<Props> = ({ initialCount = 0 }) => {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(initialCount)
   const onClick = (): void => setCount(count + 1)
@@ -16,9 +14,7 @@ const Counter: FunctionComponent<Props> = ({
   return (
     <div>
       <p className="text--medium">You clicked {count} times</p>
-      <Button onClick={onClick}>
-        Click me
-      </Button>
+      <Button onClick={onClick}>Click me</Button>
     </div>
   )
 }

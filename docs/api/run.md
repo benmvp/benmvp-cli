@@ -11,7 +11,7 @@ This function is most useful if you have a Node script that accepts parameters t
 Pass along the arguments from a Node script:
 
 ```js
-const {run} = require('@benmvp/cli');
+const { run } = require('@benmvp/cli')
 
 run(process.argv.slice(2))
 ```
@@ -19,7 +19,7 @@ run(process.argv.slice(2))
 Build with specified formats:
 
 ```js
-const {run} = require('@benmvp/cli');
+const { run } = require('@benmvp/cli')
 
 run(['build', '--formats', 'esm', 'cjs'])
 ```
@@ -27,7 +27,7 @@ run(['build', '--formats', 'esm', 'cjs'])
 To run just unit tests:
 
 ```js
-const {run} = require('@benmvp/cli');
+const { run } = require('@benmvp/cli')
 
 run(['test', '--modes', 'spec'])
 ```
