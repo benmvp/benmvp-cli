@@ -30,7 +30,7 @@
     "build": "./bin/benmvp build",
     "preintegrate": "npm run build",
     "integrate": "./bin/benmvp integrate",
-    "format": "prettier --write"
+    "format": "prettier --write '**/*.*'"
   },
   "engines": {
     "node": ">= 8"
