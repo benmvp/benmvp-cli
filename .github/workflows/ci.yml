@@ -41,7 +41,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v1
 
-      - name: Use Node12
+      - name: Use Node 12
         uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -49,7 +49,7 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
 
-      - name: Format iles
+      - name: Format files
         run: npm run format
 
       - name: Show git working tree
@@ -67,3 +67,4 @@ jobs:
         uses: ad-m/github-push-action@v0.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
