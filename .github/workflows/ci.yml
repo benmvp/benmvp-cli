@@ -66,5 +66,8 @@ jobs:
       - name: Push data to repo
         uses: ad-m/github-push-action@v0.5.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+
+          # Need to use special repo-scoped token so that when
+          # the push happens, it triggers CI again
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
