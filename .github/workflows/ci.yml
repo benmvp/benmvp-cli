@@ -49,14 +49,16 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
 
-      - name: Format Files
+      - name: Format iles
         run: npm run format
 
       - name: Show git working tree
         run: git status
 
-      - name: Commit formatted Files
+      - name: Commit formatted files on branch
         run: |
+          git config --local user.email "ben@benmvp.com"
+          git config --local user.name "Automated Formatter"
           git add -A
           # Do nothing if there are no changes
           git diff-index --quiet HEAD || git commit -m "Automated format of files"
