@@ -29,7 +29,8 @@
     "prebuild": "npm run bootstrap",
     "build": "./bin/benmvp build",
     "preintegrate": "npm run build",
-    "integrate": "./bin/benmvp integrate"
+    "integrate": "./bin/benmvp integrate",
+    "format": "prettier --write"
   },
   "engines": {
     "node": ">= 8"
@@ -66,12 +67,15 @@
     "jest-runner-tsc": "^1.6.0",
     "jest-watch-typeahead": "^0.3.0",
     "lodash": "^4.17.15",
+    "prettier": "1.19.1",
     "rimraf": "^3.0.0",
     "typescript": "^3.7.3",
     "yargs": "^14.2.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.149",
-    "@types/yargs": "^13.0.3"
+    "@types/yargs": "^13.0.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   }
 }
