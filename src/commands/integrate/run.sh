@@ -30,7 +30,11 @@ fi
 
 # copy the integration tests "project" over to $TEMP_INTEGRATION_PATH
 echo -e "cp -r ./integration-tests/* $TEMP_INTEGRATION_PATH\n"
-cp -r ./integration-tests/* $TEMP_INTEGRATION_PATH
+cp -r ./integration-tests/. $TEMP_INTEGRATION_PATH
+
+# copy the prettier configs over to $TEMP_INTEGRATION_PATH
+echo -e "cp .prettier* $TEMP_INTEGRATION_PATH\n"
+cp .prettier* $TEMP_INTEGRATION_PATH
 
 echo -e "pushd $TEMP_INTEGRATION_PATH\n"
 pushd $TEMP_INTEGRATION_PATH
