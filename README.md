@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/github/license/benmvp/benmvp-cli.svg)](LICENSE)
 
 [![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
-[![Build Status](https://travis-ci.org/benmvp/benmvp-cli.svg?branch=master)](https://travis-ci.org/benmvp/benmvp-cli)
+[![Build Status](https://github.com/benmvp/bart-salmon/workflows/CI/badge.svg)](https://github.com/benmvp/benmvp-cli/actions)
 [![Tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
 [![Dev Dependencies status](https://img.shields.io/david/dev/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli?type=dev)
@@ -109,6 +109,7 @@ The CLI has been tested to work in Node 8+.
 - [Jest](https://jestjs.io/en) (testing & code coverage)
 - [React testing library](https://testing-library.com/docs/react-testing-library/intro) (testing React components)
 - [ESLint](http://eslint.org/) (linting)
+- [Prettier](https://prettier.io/) (code formatting)
 - [Yargs](https://github.com/yargs/yargs) (command line argument parsing)
 
 ## Contributing
@@ -119,7 +120,7 @@ Contributions are welcome! See [Contributing Guidelines](CONTRIBUTING.md) for mo
 
 We take the stability of this SDK **very** seriously. `@benmvp/cli` follows the [SemVer](http://semver.org/) standard for versioning.
 
-All updates must pass the [CI build](https://travis-ci.org/benmvp/benmvp-cli/).
+All updates must pass the [CI build](https://github.com/benmvp/benmvp-cli/actions).
 
 ## License
 
