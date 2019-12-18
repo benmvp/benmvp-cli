@@ -100,9 +100,14 @@ module.exports = {
     // eslint-plugin-jest settings
     'jest/consistent-test-it': 'error',
     'jest/lowercase-name': 'error',
+    'jest/no-duplicate-hooks': 'error',
+    'jest/prefer-hooks-on-top': 'error',
     'jest/prefer-to-be-null': 'error',
     'jest/prefer-to-be-undefined': 'error',
-    'jest/valid-describe': 'error',
+    'jest/prefer-to-contain': 'error',
+    'jest/prefer-to-have-length': 'error',
+    'jest/prefer-todo': 'error',
+    'jest/valid-title': 'error',
     'jest/valid-expect-in-promise': 'error',
 
     // eslint-config-prettier setting
