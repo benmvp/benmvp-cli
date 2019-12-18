@@ -7,6 +7,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jest/recommended',
+    'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'prettier/react',
   ],
   env: {
     jest: true,
@@ -15,12 +18,19 @@ module.exports = {
     'jest/globals': true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jest'],
+  plugins: ['@typescript-eslint', 'jest', 'prettier'],
   // parserOptions: {
   //   project: resolve(__dirname, 'tsconfig.json'),
   // },
   settings: {
-    react: 'detect',
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      },
+    },
+    react: {
+      version: 'detect',
+    },
   },
   rules: {
     // overrides of eslint-config-airbnb
@@ -62,7 +72,7 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-one-expression-per-line': 'off',
     'react/prop-types': 'off',
-    semi: ['error', 'never'],
+    // semi: ['error', 'never'],
 
     // need to be turned off for rules in plugin:@typescript-eslint/recommended
     'no-undef': 'off',
@@ -94,15 +104,17 @@ module.exports = {
     'jest/prefer-to-be-undefined': 'error',
     'jest/valid-describe': 'error',
     'jest/valid-expect-in-promise': 'error',
+
+    // eslint-config-prettier setting
+    'prettier/prettier': 'error',
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
-    react: {
-      version: 'detect',
-    },
-  },
+  ],
 }

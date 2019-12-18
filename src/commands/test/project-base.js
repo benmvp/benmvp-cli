@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+
 const REAL_ROOT_DIR = process.cwd()
 
 // NOTE: We really want `rootDir` to be the current working directory, but

@@ -8,7 +8,9 @@ It will:
 
 - Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
 - After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
-- Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
+- Add (or overwrite) `.prettierrc.json`, `.prettierignore` & `.vscode/settings.json` files to format all code
+- Add (or overwrite) a `.github/workflows/ci.yml` [Github workflow](https://help.github.com/en/actions) for testing & formatting your code when a branch is pushed to or a PR is updated. Formatted code will be pushed as a new commit to the branch.
+- Add (or overwrite) a `.github/workflows/release.yml` [Github workflow](https://help.github.com/en/actions) for release a new version of your package with new commits to `master`.
 
 Looking for Node API docs? View companion [`create()` documentation](../api/create.md).
 
