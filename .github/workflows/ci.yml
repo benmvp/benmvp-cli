@@ -50,7 +50,7 @@ jobs:
         run: npm ci
 
       - name: Format files
-        run: npx prettier --write '**/*.*'"
+        run: npx prettier --write "**/*.*"
 
       - name: Show git working tree
         run: git status
