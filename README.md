@@ -22,14 +22,14 @@ A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Ty
 
 ## ToC
 
-*  [Installation](#installation)
-*  [Quick Usage](#quick-usage)
-*  [Docs](docs/)
-*  [Supported Node Versions](#supported-node-versions)
-*  [Technologies Used](#technologies-used)
-*  [Contributing](CONTRIBUTING.md)
-*  [Project philosophy](#project-philosophy)
-*  [License](LICENSE)
+- [Installation](#installation)
+- [Quick Usage](#quick-usage)
+- [Docs](docs/)
+- [Supported Node Versions](#supported-node-versions)
+- [Technologies Used](#technologies-used)
+- [Contributing](CONTRIBUTING.md)
+- [Project philosophy](#project-philosophy)
+- [License](LICENSE)
 
 ## Installation
 

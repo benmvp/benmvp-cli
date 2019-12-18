@@ -2,12 +2,16 @@
 
 > NOTE: `create()` is still under development
 
-
 Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
+
+It will:
 
 - Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
 - After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
-- Will add (or overwrite) a `.travis.yml` file w/ [build stages](https://docs.travis-ci.com/user/build-stages/) for testing and deploying the library
+- Add (or overwrite) `.prettierrc.json`, `.prettierignore` & `.vscode/settings.json` files to format all code
+- Add (or overwrite) a `.github/workflows/ci.yml` [Github workflow](https://help.github.com/en/actions) for testing your code when a branch is pushed to or a PR is updated.
+- Add (or overwrite) a `.github/workflows/format.yml` [Github workflow](https://help.github.com/en/actions) for formatting your files when a non-`master` branch is pushed to. Formatted code will be pushed as a new commit to the branch.
+- Add (or overwrite) a `.github/workflows/release.yml` [Github workflow](https://help.github.com/en/actions) for release a new version of your package with new commits to `master`.
 
 Looking for CLI docs? View companion [`benmvp create` documentation](../cli/create.md).
 
@@ -16,15 +20,15 @@ Looking for CLI docs? View companion [`benmvp create` documentation](../cli/crea
 Create a new lib named `lib-of-fun` with the default settings (simplest setup):
 
 ```js
-import {create} from '@benmvp/cli'
+import { create } from '@benmvp/cli'
 
-create({name: 'lib-of-fun'})
+create({ name: 'lib-of-fun' })
 ```
 
 Add lint verification to an existing library:
 
 ```js
-import {create} from '@benmvp/cli'
+import { create } from '@benmvp/cli'
 
 create({
   modes: ['lint'],
@@ -34,7 +38,7 @@ create({
 Create a new library named `my-lib` that only outputs ESM format:
 
 ```js
-import {create} from '@benmvp/cli'
+import { create } from '@benmvp/cli'
 
 create({
   name: 'my-lib',
@@ -45,7 +49,7 @@ create({
 Add custom setup to an existing library:
 
 ```js
-import {create} from '@benmvp/cli'
+import { create } from '@benmvp/cli'
 
 create({
   modes: ['type', 'spec'],
@@ -71,10 +75,12 @@ The optional `Options` object supports the following properties:
 The name of the library to create or update.
 
 When `name` is unspecified:
+
 - If a `package.json` does not already exist, it creates a new `package.json` with the name matching the directory it's within.
 - If a `package.json` does exist, it does nothing to the existing `package.json`.
 
 When `name` is specified:
+
 - If a `package.json` does not already exist, it creates a new `package.json` with the specified name.
 - If a `package.json` does exist, it updates the `"name"` property of the `package.json` with specified name.
 
@@ -111,7 +117,6 @@ An `Array` of the types or modes of tests to run. Available modes:
 Optional. Defaults to all modes when unspecified.
 
 This will initialize the `"start"`, `"test"` and `"integrate"` scripts in the `package.json` to pass the matching argument.
-
 
 ## Return Value
 

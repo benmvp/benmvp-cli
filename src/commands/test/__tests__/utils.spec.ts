@@ -40,20 +40,28 @@ describe('getJestArgs', () => {
     it('returns single project when single valid mode is specified', () => {
       const actual = getJestArgs({ modes: ['type'], pattern: '', watch: false })
 
-      expect(actual).toEqual(expect.arrayContaining([
-        '--projects',
-        expect.stringContaining('project-type.js'),
-      ]))
+      expect(actual).toEqual(
+        expect.arrayContaining([
+          '--projects',
+          expect.stringContaining('project-type.js'),
+        ]),
+      )
     })
 
     it('returns multiple projects when multiple valid modes are specified', () => {
-      const actual = getJestArgs({ modes: ['lint', 'spec'], pattern: '', watch: false })
+      const actual = getJestArgs({
+        modes: ['lint', 'spec'],
+        pattern: '',
+        watch: false,
+      })
 
-      expect(actual).toEqual(expect.arrayContaining([
-        '--projects',
-        expect.stringContaining('project-lint.js'),
-        expect.stringContaining('project-spec.js'),
-      ]))
+      expect(actual).toEqual(
+        expect.arrayContaining([
+          '--projects',
+          expect.stringContaining('project-lint.js'),
+          expect.stringContaining('project-spec.js'),
+        ]),
+      )
     })
   })
 
@@ -62,10 +70,9 @@ describe('getJestArgs', () => {
       const pattern = 'api/'
       const actual = getJestArgs({ pattern, modes: ['lint'], watch: false })
 
-      expect(actual).toEqual(expect.arrayContaining([
-        '--testPathPattern',
-        pattern,
-      ]))
+      expect(actual).toEqual(
+        expect.arrayContaining(['--testPathPattern', pattern]),
+      )
     })
 
     it('does not include --testPathPattern flag when pattern option is empty string', () => {

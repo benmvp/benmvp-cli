@@ -20,7 +20,7 @@ Looking for CLI docs? View companion [`benmvp integrate` documentation](../cli/i
 To run all modes of integration tests on all files (default behavior):
 
 ```js
-import {integrate} from '@benmvp/cli'
+import { integrate } from '@benmvp/cli'
 
 integrate()
 ```
@@ -28,7 +28,7 @@ integrate()
 To run just the integration tests themselves (excluding linting & typing) on all files:
 
 ```js
-import {integrate} from '@benmvp/cli'
+import { integrate } from '@benmvp/cli'
 
 integrate({
   modes: ['spec'],
@@ -38,7 +38,7 @@ integrate({
 To run just linting & typing on all files in the integration tests project:
 
 ```js
-import {integrate} from '@benmvp/cli'
+import { integrate } from '@benmvp/cli'
 
 integrate({
   modes: ['lint', 'type'],
@@ -48,7 +48,7 @@ integrate({
 To run all modes only on files within `utils/` directories of the integration tests project:
 
 ```js
-import {integrate} from '@benmvp/cli'
+import { integrate } from '@benmvp/cli'
 
 integrate({
   pattern: 'utils/',
@@ -58,7 +58,7 @@ integrate({
 To just run linting on files within `api/` directories of the integration tests project:
 
 ```js
-import {integrate} from '@benmvp/cli'
+import { integrate } from '@benmvp/cli'
 
 integrate({
   modes: ['lint'],
@@ -92,7 +92,7 @@ An `Array` of the types or modes of tests to run. Available modes:
 - `'type'` - Runs Typescript type-checking (files ending in `.ts` or `.tsx`)
 - `'lint'` - Runs ESLint (files ending in `.ts` or `.tsx`)
 
-Optional. Defaults to all modes when unspecified. 
+Optional. Defaults to all modes when unspecified.
 
 ### `pattern`
 

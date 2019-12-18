@@ -2,15 +2,15 @@ import { resolve } from 'path'
 import { TestMode } from '../types'
 
 interface ValidTestModes {
-  type: string;
-  lint: string;
-  spec: string;
-  [index: string]: string;
+  type: string
+  lint: string
+  spec: string
+  [index: string]: string
 }
 export interface Args {
-  modes: TestMode[];
-  pattern: string;
-  watch: boolean;
+  modes: TestMode[]
+  pattern: string
+  watch: boolean
 }
 
 // NOTE: Ideally we'd point to project configuration objects for
@@ -53,7 +53,6 @@ export const getJestArgs = ({ modes, pattern, watch }: Args): string[] => {
   if (process.env.CI === 'true') {
     jestArgs.push('--ci')
   }
-
 
   return jestArgs
 }

@@ -4,10 +4,9 @@ import { INTEGRATE_ARGS } from '../../cli/args'
 import { Result } from '../types'
 import { getTestArgs } from './utils'
 
-
 const SCRIPT_PATH = pathResolve(__dirname, 'run.sh')
 
-const spawnAsync = (command: string, args: string[]): Promise<void> => (
+const spawnAsync = (command: string, args: string[]): Promise<void> =>
   new Promise((resolve, reject) => {
     const childProcess = spawn(command, args)
 
@@ -21,14 +20,14 @@ const spawnAsync = (command: string, args: string[]): Promise<void> => (
     })
     childProcess.on('close', (code) => {
       if (code !== 0) {
-        reject(new Error(`"${command} ${args.join(' ')}" exited with code ${code}`))
+        reject(
+          new Error(`"${command} ${args.join(' ')}" exited with code ${code}`),
+        )
       } else {
         resolve()
       }
     })
   })
-)
-
 
 /**
  * Runs a one-time pass of the specified integration tests

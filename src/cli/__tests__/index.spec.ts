@@ -272,7 +272,17 @@ describe('run', () => {
       })
 
       it('parses multiple arguments (aliases)', () => {
-        run(['create', 'test-lib', '-m', 'type', '-o', './built', '-f', 'esm', 'type'])
+        run([
+          'create',
+          'test-lib',
+          '-m',
+          'type',
+          '-o',
+          './built',
+          '-f',
+          'esm',
+          'type',
+        ])
 
         expect(create).toHaveBeenCalledWith({
           name: 'test-lib',
@@ -466,7 +476,15 @@ describe('run', () => {
 
     describe('combination', () => {
       it('parses multiple arguments', () => {
-        run(['build', '--out', './output', '--watch', '--formats', 'esm', 'cjs'])
+        run([
+          'build',
+          '--out',
+          './output',
+          '--watch',
+          '--formats',
+          'esm',
+          'cjs',
+        ])
 
         expect(build).toHaveBeenCalledWith({
           formats: ['esm', 'cjs'],
@@ -590,7 +608,15 @@ describe('run', () => {
       })
 
       it('parses all args', () => {
-        run(['test', '--watch', '--modes', 'spec', 'type', '--pattern', 'utils/'])
+        run([
+          'test',
+          '--watch',
+          '--modes',
+          'spec',
+          'type',
+          '--pattern',
+          'utils/',
+        ])
 
         expect(testCommand).toHaveBeenCalledWith({
           modes: ['spec', 'type'],
@@ -663,7 +689,6 @@ describe('run', () => {
           pattern: START_ARGS.pattern.default,
         })
       })
-
 
       it('parses pattern', () => {
         const pattern = 'api/'
@@ -741,7 +766,6 @@ describe('run', () => {
           pattern: INTEGRATE_ARGS.pattern.default,
         })
       })
-
 
       it('parses pattern', () => {
         const pattern = 'api/'

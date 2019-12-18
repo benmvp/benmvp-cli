@@ -1,6 +1,11 @@
 {
-  "jest.enableInlineErrorMessages": false,
-  "jest.enableSnapshotPreviews": false,
-  "jest.enableSnapshotUpdateMessages": false,
-  "jest.autoEnable": false
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "json.format.enable": false
 }

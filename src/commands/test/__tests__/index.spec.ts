@@ -53,12 +53,14 @@ describe('success cases', () => {
     it('calls jest with args and returns success when no modes are passed', async () => {
       const result = await testCommand({})
 
-      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-        '--projects',
-        expect.stringContaining('project-type.js'),
-        expect.stringContaining('project-lint.js'),
-        expect.stringContaining('project-spec.js'),
-      ]))
+      expect(runJest).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          '--projects',
+          expect.stringContaining('project-type.js'),
+          expect.stringContaining('project-lint.js'),
+          expect.stringContaining('project-spec.js'),
+        ]),
+      )
 
       expect(result).toEqual({ code: 0 })
     })
@@ -66,10 +68,12 @@ describe('success cases', () => {
     it('calls jest with args and returns success when valid modes are passed', async () => {
       const result = await testCommand({ modes: ['spec'] })
 
-      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-        '--projects',
-        expect.stringContaining('project-spec.js'),
-      ]))
+      expect(runJest).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          '--projects',
+          expect.stringContaining('project-spec.js'),
+        ]),
+      )
 
       expect(result).toEqual({ code: 0 })
     })
@@ -79,9 +83,9 @@ describe('success cases', () => {
     it('calls jest with args and returns success when no pattern is passed', async () => {
       const result = await testCommand()
 
-      expect(runJest).toHaveBeenCalledWith(expect.not.arrayContaining([
-        '--pattern',
-      ]))
+      expect(runJest).toHaveBeenCalledWith(
+        expect.not.arrayContaining(['--pattern']),
+      )
 
       expect(result).toEqual({ code: 0 })
     })
@@ -90,10 +94,9 @@ describe('success cases', () => {
       const pattern = 'utils/'
       const result = await testCommand({ pattern })
 
-      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-        '--testPathPattern',
-        pattern,
-      ]))
+      expect(runJest).toHaveBeenCalledWith(
+        expect.arrayContaining(['--testPathPattern', pattern]),
+      )
 
       expect(result).toEqual({ code: 0 })
     })
@@ -103,9 +106,9 @@ describe('success cases', () => {
     it('calls jest with args and returns success when no watch flag is passed', async () => {
       const result = await testCommand()
 
-      expect(runJest).toHaveBeenCalledWith(expect.not.arrayContaining([
-        '--watch',
-      ]))
+      expect(runJest).toHaveBeenCalledWith(
+        expect.not.arrayContaining(['--watch']),
+      )
 
       expect(result).toEqual({ code: 0 })
     })
@@ -113,9 +116,7 @@ describe('success cases', () => {
     it('calls jest with args and returns success when watch flag is passed', async () => {
       const result = await testCommand({ watch: true })
 
-      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-        '--watch',
-      ]))
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining(['--watch']))
 
       expect(result).toEqual({ code: 0 })
     })
@@ -129,9 +130,7 @@ describe('success cases', () => {
 
       const result = await testCommand()
 
-      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining([
-        '--ci',
-      ]))
+      expect(runJest).toHaveBeenCalledWith(expect.arrayContaining(['--ci']))
 
       expect(result).toEqual({ code: 0 })
 

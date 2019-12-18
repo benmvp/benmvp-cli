@@ -1,4 +1,4 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 const BASE_CONFIG = require('./project-base')
 
 const [ROOT_DIR] = BASE_CONFIG.roots
@@ -13,6 +13,6 @@ module.exports = {
 
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    resolve(__dirname, 'spec-setup.js')
+    resolve(__dirname, 'spec-setup.js'),
   ],
 }

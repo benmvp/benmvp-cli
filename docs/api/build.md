@@ -9,7 +9,7 @@ Looking for CLI docs? View companion [`benmvp build` documentation](../cli/build
 Build all module formats in default output directory:
 
 ```js
-import {build} from '@benmvp/cli'
+import { build } from '@benmvp/cli'
 
 build()
 ```
@@ -17,15 +17,15 @@ build()
 To specify an alternate output directory:
 
 ```js
-import {build} from '@benmvp/cli'
+import { build } from '@benmvp/cli'
 
-build({out: './built'})
+build({ out: './built' })
 ```
 
 To exclude type definitions:
 
 ```js
-import {build} from '@benmvp/cli'
+import { build } from '@benmvp/cli'
 
 build({
   formats: ['esm', 'cjs'],
@@ -35,7 +35,7 @@ build({
 To put ESM & type declarations in an alternate build location with continuous watch:
 
 ```js
-import {build} from '@benmvp/cli'
+import { build } from '@benmvp/cli'
 
 build({
   formats: ['esm', 'type'],

@@ -13,8 +13,9 @@ import testCommand from '../test'
 export default ({
   modes = START_ARGS.modes.default,
   pattern = START_ARGS.pattern.default,
-} = {}): Promise<Result> => testCommand({
-  modes,
-  pattern,
-  watch: true,
-})
+} = {}): Promise<Result> =>
+  testCommand({
+    modes,
+    pattern,
+    watch: true,
+  })

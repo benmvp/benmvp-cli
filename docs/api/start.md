@@ -9,7 +9,7 @@ Looking for CLI docs? View companion [`benmvp start` documentation](../cli/start
 To continuously run all modes on all files (default behavior):
 
 ```js
-import {start} from '@benmvp/cli'
+import { start } from '@benmvp/cli'
 
 start()
 ```
@@ -17,10 +17,10 @@ start()
 To continuously run just type-checking on all files:
 
 ```js
-import {start} from '@benmvp/cli'
+import { start } from '@benmvp/cli'
 
 start({
-  modes: ['type']
+  modes: ['type'],
 })
 ```
 
@@ -37,7 +37,7 @@ start({
 To continuously run all modes only on files within `utils/` directories:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 start({
   pattern: 'utils/',
@@ -47,7 +47,7 @@ start({
 To continuously run just linting on files within `api/` directories:
 
 ```js
-import {test} from '@benmvp/cli'
+import { test } from '@benmvp/cli'
 
 start({
   modes: ['lint'],

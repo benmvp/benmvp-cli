@@ -8,4 +8,3 @@ The Node API exposes the following functions:
 - [`build()`](build.md) - Builds the library into the desired module formats at the specified location
 - [`integrate()`](integrate.md) - Runs additional integration tests for the library
 - [`run()`](run.md) - Parses the specified array of CLI arguments to runs the desired command
-

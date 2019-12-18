@@ -19,7 +19,10 @@ export default async ({
 } = {}): Promise<Result> => {
   // eslint-disable-next-line no-console
   console.log('run create', {
-    formats, out, modes, libraryName,
+    formats,
+    out,
+    modes,
+    libraryName,
   })
 
   return {

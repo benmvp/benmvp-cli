@@ -3,7 +3,7 @@ export type ModuleFormat = 'type' | 'esm' | 'cjs'
 export type TestMode = 'type' | 'lint' | 'spec'
 
 export interface Result {
-  readonly code?: number;
-  readonly error?: Error;
-  readonly message?: string;
+  readonly code?: number
+  readonly error?: Error
+  readonly message?: string
 }
