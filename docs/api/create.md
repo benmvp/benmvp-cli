@@ -1,7 +1,5 @@
 # `create()` Documentation
 
-> NOTE: `create()` is still under development
-
 Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
 
 It will:

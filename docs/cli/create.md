@@ -1,7 +1,5 @@
 # `benmvp create` Documentation
 
-> NOTE: `benmvp create` is still under development
-
 Creates a new library set up with infrastructure using `@benmvp/cli`.
 
 It will:
