@@ -12,6 +12,9 @@ It will:
 - Add (or overwrite) a `.github/workflows/ci.yml` [Github workflow](https://help.github.com/en/actions) for testing your code when a branch is pushed to or a PR is updated.
 - Add (or overwrite) a `.github/workflows/format.yml` [Github workflow](https://help.github.com/en/actions) for formatting your files when a non-`master` branch is pushed to. Formatted code will be pushed as a new commit to the branch.
 - Add (or overwrite) a `.github/workflows/release.yml` [Github workflow](https://help.github.com/en/actions) for release a new version of your package with new commits to `master`.
+- Add (or overwrite) `.github/pull_request_template.md` & `.github/ISSUE_TEMPLATE/*` for more organized [pull request](https://help.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository) and [issue](https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository) creation.
+
+> NOTE: `create()` can be called multiple times on a repo. It's a good idea to call `create()` every time you bump the version of `@benmvp/cli` so you can get the latest configuration for `package.json`, prettier, Github workflows, and Github PR/Issue templates.
 
 Looking for CLI docs? View companion [`benmvp create` documentation](../cli/create.md).
 
