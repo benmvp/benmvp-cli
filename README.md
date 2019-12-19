@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/github/license/benmvp/benmvp-cli.svg)](LICENSE)
 
 [![Maintenance Status](https://img.shields.io/badge/status-maintained-brightgreen.svg)](https://github.com/benmvp/benmvp-cli/pulse)
-[![Build Status](https://github.com/benmvp/bart-salmon/workflows/CI/badge.svg)](https://github.com/benmvp/benmvp-cli/actions)
+[![Build Status](https://github.com/benmvp/benmvp-cli/workflows/CI/badge.svg)](https://github.com/benmvp/benmvp-cli/actions)
 [![Tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![Dependencies status](https://img.shields.io/david/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli)
 [![Dev Dependencies status](https://img.shields.io/david/dev/benmvp/benmvp-cli.svg)](https://david-dm.org/benmvp/benmvp-cli?type=dev)
