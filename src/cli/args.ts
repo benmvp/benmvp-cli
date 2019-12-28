@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import yargs from 'yargs'
 import { ModuleFormat, TestMode, Command } from '../commands/types'
 
@@ -41,7 +40,7 @@ const OUTPUT_PATH = {
   out: {
     describe: 'Path to the output directory for the built formats',
     alias: 'o',
-    default: resolve(process.cwd(), 'lib'),
+    default: '',
     string: true,
   },
 }
@@ -50,7 +49,7 @@ export const CREATE_ARGS = { ...BUILD_FORMATS, ...OUTPUT_PATH, ...TEST_MODES }
 export const CREATE_POS_ARGS = {
   name: {
     description: 'Name of the library to create',
-    default: 'my-awesome-lib',
+    default: '',
     string: true,
   },
 }

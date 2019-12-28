@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import { promisify } from 'util'
 import { exec } from 'child_process'
 import runBabel from './run-babel'
@@ -28,7 +29,8 @@ export default async ({
 } = {}): Promise<Result> => {
   try {
     const uniqueFormats = new Set(formats)
-    const buildOptions = { formats: uniqueFormats, out, watch }
+    const outDir = out || resolve(process.cwd(), 'lib')
+    const buildOptions = { formats: uniqueFormats, out: outDir, watch }
     const babelArgsToRun = getBabelArgs(buildOptions)
     const typeScriptArgsToRun = getTypescriptArgs(buildOptions)
 
@@ -38,7 +40,7 @@ export default async ({
       '\n  formats:',
       formats.toString(),
       '\n  output dir:',
-      out,
+      outDir,
       '\n  watching?',
       watch ? 'yes' : 'no',
       '\n',
@@ -69,7 +71,8 @@ export default async ({
     }
 
     // remove all of the copied files that we don't want in built directory
-    await execAsync(`npx rimraf ${getCopiedFilesToDelete(out).join(' ')}`)
+    await execAsync(`npx rimraf ${getCopiedFilesToDelete(outDir).join(' ')}`)
+    // TODO: Switch to fs-extra if it's still being used
   } catch (error) {
     return {
       code: error.code || 1,

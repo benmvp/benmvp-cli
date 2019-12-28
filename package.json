@@ -10,14 +10,17 @@
     "benmvp": "bin/benmvp"
   },
   "files": [
-    "/lib",
-    "/bin"
+    "lib",
+    "bin"
   ],
   "repository": "https://github.com/benmvp/benmvp-cli.git",
   "author": "Ben Ilegbodu <ben@benmvp.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">= 8"
   },
   "scripts": {
     "prebootstrap": "rm -rf lib",
@@ -30,9 +33,6 @@
     "build": "./bin/benmvp build",
     "preintegrate": "npm run build",
     "integrate": "./bin/benmvp integrate"
-  },
-  "engines": {
-    "node": ">= 8"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
@@ -63,6 +63,7 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-testing-library": "^1.3.4",
+    "fs-extra": "^8.1.0",
     "jest": "^24.9.0",
     "jest-runner-eslint": "^0.7.5",
     "jest-runner-tsc": "^1.6.0",
@@ -74,6 +75,7 @@
     "yargs": "^15.0.2"
   },
   "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.149",
     "@types/yargs": "^13.0.3",
     "react": "^16.12.0",

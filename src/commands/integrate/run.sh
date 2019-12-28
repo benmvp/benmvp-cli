@@ -44,7 +44,7 @@ pushd $TEMP_INTEGRATION_PATH
 # Delete node_modules if it exists
 # (should only happen in local dev testing)
 if [ -d "$TEMP_INTEGRATION_PATH/node_modules" ]; then
-  echo -e "rm -rf $TEMP_INTEGRATION_PATH/node_modules"
+  echo -e "rm -rf $TEMP_INTEGRATION_PATH/node_modules\n"
   rm -rf $TEMP_INTEGRATION_PATH/node_modules
 fi
 
