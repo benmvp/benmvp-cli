@@ -1,11 +1,10 @@
-import { resolve, parse } from 'path'
+import { resolve } from 'path'
 import { promisify } from 'util'
 import { exec } from 'child_process'
 import {
   ensureDir,
   pathExists,
   readJson,
-  emptyDir,
   ensureFile,
   remove,
   writeJson,
@@ -23,7 +22,7 @@ const CWD = process.cwd()
 
 jest.setTimeout(360000)
 
-const getMockPackageJson = (packageName: string) => ({
+const getMockPackageJson = (packageName: string): object => ({
   name: packageName,
   version: '0.0.0-semantically-released',
   bin: {
@@ -44,7 +43,7 @@ const getMockPackageJson = (packageName: string) => ({
     '@types/react-dom': '^16.8.5',
   },
 })
-const getLatestLibVersion = async () => {
+const getLatestLibVersion = async (): Promise<string> => {
   const response = await fetch('https://registry.npmjs.org/@benmvp/cli')
   const packageInfo: PackageInfoResponse = await response.json()
 

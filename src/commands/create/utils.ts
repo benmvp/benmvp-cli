@@ -2,7 +2,7 @@ import { join, resolve } from 'path'
 import { CREATE_ARGS } from '../../cli/args'
 import { ModuleFormat, TestMode, Command } from '../types'
 
-const getOutputPath = (out: string) => out || 'lib'
+const getOutputPath = (out: string): string => out || 'lib'
 
 const areIdentical = <T>(first: T[], second: T[]): boolean => {
   const firstLookup = new Set(first)
@@ -13,8 +13,8 @@ const areIdentical = <T>(first: T[], second: T[]): boolean => {
   )
 }
 
-const formatBuildScript = (formats: ModuleFormat[], out: string) => {
-  let args: string[] = []
+const formatBuildScript = (formats: ModuleFormat[], out: string): string => {
+  const args: string[] = []
 
   if (!areIdentical(formats, CREATE_ARGS.formats.default)) {
     args.push('--formats', formats.join(' '))
@@ -26,8 +26,8 @@ const formatBuildScript = (formats: ModuleFormat[], out: string) => {
   return `benmvp build ${args.join(' ')}`.trim()
 }
 
-const formatTestScript = (command: Command, modes: TestMode[]) => {
-  let args: string[] = []
+const formatTestScript = (command: Command, modes: TestMode[]): string => {
+  const args: string[] = []
 
   if (!areIdentical(modes, CREATE_ARGS.modes.default)) {
     args.push('--modes', modes.join(' '))
@@ -89,7 +89,7 @@ export const getUpdatePackageInfo = (
 ): PackageJson => {
   const outputPath = getOutputPath(out)
   const formatsLookup = new Set(formats)
-  let packageInfo = { ...initialPackageInfo }
+  const packageInfo = { ...initialPackageInfo }
 
   // Overwrite "name" to libraryName if it exists
   // especially if it is a scoped package and the name doesn't
