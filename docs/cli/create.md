@@ -7,6 +7,7 @@ It will:
 - Set up git (i.e. `git init`) in the directory
 - Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
 - After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [npm](https://docs.npmjs.com/)
+- Add a dummy `src/index.ts` file which is the entry-point to the lib and from where all top-level API functions will be exported
 - Add (or overwrite) [`.prettierrc.json`](https://github.com/benmvp/benmvp-cli/blob/master/.prettierrc.json), [`.prettierignore`](https://github.com/benmvp/benmvp-cli/blob/master/.prettierignore) & [`.vscode/settings.json`](https://github.com/benmvp/benmvp-cli/blob/master/.vscode/settings.json) files to format all code
 - Add (or overwrite) a [`.github/workflows/ci.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/ci.yml) [Github workflow](https://help.github.com/en/actions) for testing your code when a branch is pushed to or a PR is updated.
 - Add (or overwrite) a [`.github/workflows/format.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/format.yml) [Github workflow](https://help.github.com/en/actions) for formatting your files when a non-`master` branch is pushed to. Formatted code will be pushed as a new commit to the branch.

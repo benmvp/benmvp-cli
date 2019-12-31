@@ -28,7 +28,7 @@ const updatePackageJson = async (
     createOptions,
   )
 
-  await writeJson(packageJsonPath, updatedPackageJson)
+  await writeJson(packageJsonPath, updatedPackageJson, { spaces: 2 })
 }
 
 const replaceInFile = async (

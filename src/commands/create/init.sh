@@ -27,7 +27,15 @@ if [ ! -d ".git" ]; then
   git init
 fi
 
+# Create index file if it doesn't already exist
+mkdir -p src/
+if [ ! -f "src/index.ts" ]; then
+  echo -e "Creating src/index.ts file\n"
+  echo -e "// Root index file for the library\n// Export top-level functions here" > src/index.ts
+fi
+
 # Copy miscellaneous config and repo files
 DIRNAME=`dirname $0`
 CONFIGS_PATH="$DIRNAME/../../../configs"
+echo -e "cp -r $CONFIGS_PATH/. ./"
 cp -r $CONFIGS_PATH/. ./
