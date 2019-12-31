@@ -9,9 +9,9 @@ import {
   remove,
   writeJson,
   readFile,
+  outputFile,
 } from 'fs-extra'
 import fetch from 'node-fetch'
-import { outputFile } from 'fs-extra'
 
 interface PackageInfoResponse {
   'dist-tags': {
