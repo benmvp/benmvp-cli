@@ -20,15 +20,15 @@ mkdir -p $CONFIGS_PATH
 mkdir -p $CONFIGS_VSCODE_PATH
 mkdir -p $CONFIGS_GITHUB_PATH
 
+cp -r .github/ISSUE_TEMPLATE $CONFIGS_GITHUB_PATH/
+cp -r .github/workflows $CONFIGS_GITHUB_PATH/
+cp .github/pull_request_template.md $CONFIGS_GITHUB_PATH/
+cp .vscode/settings.json $CONFIGS_VSCODE_PATH/
 cp .gitignore $CONFIGS_PATH/
 cp .nvmrc $CONFIGS_PATH/
 cp .prettier* $CONFIGS_PATH/
 cp CHANGELOG.md $CONFIGS_PATH/
 cp CONTRIBUTING.md $CONFIGS_PATH/
 cp LICENSE $CONFIGS_PATH/
-cp .vscode/settings.json $CONFIGS_VSCODE_PATH/
-cp .github/pull_request_template.md $CONFIGS_GITHUB_PATH/
-cp -r .github/ISSUE_TEMPLATE $CONFIGS_GITHUB_PATH/
-cp -r .github/workflows $CONFIGS_GITHUB_PATH/
 
 echo -e "Done.\n\n"

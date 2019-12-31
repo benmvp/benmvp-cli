@@ -8,6 +8,7 @@ import {
   ensureFile,
   remove,
   writeJson,
+  readFile,
 } from 'fs-extra'
 import fetch from 'node-fetch'
 
@@ -301,10 +302,24 @@ describe('copies configs/files', () => {
   })
 
   it('copies other repo configs & files', async () => {
-    expect(await pathExists(resolve(LIB_PATH, '.gitignore'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, '.nvmrc'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, '.gitignore'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, 'CHANGELOG.md'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, 'CONTRIBUTING.md'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, 'LICENSE'))).toBe(true)
+  })
+
+  it('replaces `benmvp-cli` name with repo name', async () => {
+    const filesToCheck = [
+      resolve(LIB_PATH, 'CHANGELOG.md'),
+      resolve(LIB_PATH, 'CONTRIBUTING.md'),
+    ]
+
+    for (const fileToCheck of filesToCheck) {
+      const fileContents = (await readFile(fileToCheck)).toString()
+
+      expect(fileContents).not.toMatch('benmvp-cli')
+      expect(fileContents).toMatch('benmvp-new-lib')
+    }
   })
 })
