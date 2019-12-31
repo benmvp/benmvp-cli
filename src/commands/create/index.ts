@@ -1,5 +1,5 @@
 import { resolve, parse } from 'path'
-import { readJson, writeJson } from 'fs-extra'
+import { readJson, writeJson, readFile, writeFile } from 'fs-extra'
 import { CREATE_ARGS, CREATE_POS_ARGS } from '../../cli/args'
 import { Result } from '../types'
 import { spawnAsync } from '../utils'
@@ -31,6 +31,17 @@ const updatePackageJson = async (
   await writeJson(packageJsonPath, updatedPackageJson)
 }
 
+const replaceInFile = async (
+  filePath: string,
+  from: string,
+  to: string,
+): Promise<void> => {
+  const fileContents = (await readFile(filePath)).toString()
+  const replacedFileContents = fileContents.replace(new RegExp(from, 'g'), to)
+
+  await writeFile(filePath, replacedFileContents)
+}
+
 const replaceRepoNameReferences = async (
   sanitizedLibraryName: string,
 ): Promise<void> => {
@@ -41,12 +52,11 @@ const replaceRepoNameReferences = async (
 
   await Promise.all(
     FILES_TO_REPLACE_REPO_REFS.map((filePath) =>
-      spawnAsync('sed', [
-        '-i',
-        `''`,
-        `s/benmvp-cli/${repoName}/g`,
+      replaceInFile(
         resolve(cwd, sanitizedLibraryName, filePath),
-      ]),
+        'benmvp-cli',
+        repoName,
+      ),
     ),
   )
 }

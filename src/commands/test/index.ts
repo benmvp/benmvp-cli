@@ -1,7 +1,7 @@
+import { run } from 'jest'
 import { TEST_ARGS } from '../../cli/args'
 import { Result } from '../types'
 import { getJestArgs } from './utils'
-import runJest from './run-jest'
 
 /**
  * Runs a one-time pass of the specified modes of tests
@@ -18,7 +18,7 @@ export default async ({
   watch = TEST_ARGS.watch.default,
 } = {}): Promise<Result> => {
   try {
-    await runJest(getJestArgs({ modes, pattern, watch }))
+    await run(getJestArgs({ modes, pattern, watch }))
   } catch (error) {
     return {
       code: 1,

@@ -8,19 +8,8 @@ import { spawn } from 'child_process'
  */
 export const spawnAsync = (command: string, args: string[]): Promise<void> =>
   new Promise((resolve, reject) => {
-    // eslint-disable-next-line no-console
-    console.log(`${command} ${args.join(' ')}`)
+    const childProcess = spawn(command, args, { stdio: 'inherit' })
 
-    const childProcess = spawn(command, args)
-
-    childProcess.stdout.on('data', (data) => {
-      // eslint-disable-next-line no-console
-      console.log(`${data}`)
-    })
-    childProcess.stderr.on('data', (data) => {
-      // eslint-disable-next-line no-console
-      console.error(`${data}`)
-    })
     childProcess.on('close', (code) => {
       if (code !== 0) {
         reject(
