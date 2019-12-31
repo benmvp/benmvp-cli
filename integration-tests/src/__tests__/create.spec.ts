@@ -8,8 +8,8 @@ import {
   ensureFile,
   remove,
   writeJson,
-  readFile,
   outputFile,
+  readFileSync,
 } from 'fs-extra'
 import fetch from 'node-fetch'
 
@@ -136,7 +136,7 @@ describe('when `--name` argument is not specified', () => {
 
     expect(await pathExists(indexPath)).toBe(true)
 
-    const indexFileContents = (await readFile(indexPath)).toString()
+    const indexFileContents = await readFileSync(indexPath).toString()
 
     expect(indexFileContents).toEqual('export default 1')
   })
@@ -203,7 +203,7 @@ describe('when `--name` argument is specified', () => {
 
     expect(await pathExists(indexPath)).toBe(true)
 
-    const indexFileContents = (await readFile(indexPath)).toString()
+    const indexFileContents = await readFileSync(indexPath).toString()
 
     // should stat with comments which is what the dummy text starts with
     expect(indexFileContents).toMatch(/^\/\/ /)
@@ -293,7 +293,7 @@ describe('when `--name` argument is specified and sub folder already exists', ()
 
     expect(await pathExists(indexPath)).toBe(true)
 
-    const indexFileContents = (await readFile(indexPath)).toString()
+    const indexFileContents = await readFileSync(indexPath).toString()
 
     // should stat with comments which is what the dummy text starts with
     expect(indexFileContents).toMatch(/^\/\/ /)
@@ -343,17 +343,17 @@ describe('other configs/files', () => {
     expect(await pathExists(resolve(LIB_PATH, 'LICENSE'))).toBe(true)
   })
 
-  it('replaces `benmvp-cli` name with repo name', async () => {
+  it('replaces `benmvp-cli` name with repo name', () => {
     const filesToCheck = [
       resolve(LIB_PATH, 'CHANGELOG.md'),
       resolve(LIB_PATH, 'CONTRIBUTING.md'),
     ]
 
-    for (const fileToCheck of filesToCheck) {
-      const fileContents = (await readFile(fileToCheck)).toString()
+    filesToCheck.forEach((fileToCheck) => {
+      const fileContents = readFileSync(fileToCheck).toString()
 
       expect(fileContents).not.toContain('benmvp-cli')
       expect(fileContents).toContain('benmvp-new-lib')
-    }
+    })
   })
 })
