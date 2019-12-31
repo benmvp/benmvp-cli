@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import {
-  getBabelArgs,
+  getBabelCLIOptionsList,
   getTypescriptArgs,
   getCopiedFilesToDelete,
 } from '../utils'
@@ -14,7 +14,7 @@ const DEFAULT_OUT = resolve(CWD, 'lib')
 describe('getBabelArgs', () => {
   describe('source files', () => {
     it('uses current working directory for source files location', () => {
-      const [firstSetOfArgs] = getBabelArgs({
+      const [firstSetOfArgs] = getBabelCLIOptionsList({
         formats: BUILD_ARGS.formats.default,
         out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
@@ -26,7 +26,7 @@ describe('getBabelArgs', () => {
 
   describe('formats + out', () => {
     it('returns empty array when empty formats are specified', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(),
         out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
@@ -36,7 +36,7 @@ describe('getBabelArgs', () => {
     })
 
     it('generates CJS + ESM w/ default output directory', () => {
-      const [cjsArgs, esmArgs] = getBabelArgs({
+      const [cjsArgs, esmArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs', 'esm'] as ModuleFormat[]),
         out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
@@ -56,7 +56,7 @@ describe('getBabelArgs', () => {
     })
 
     it('still only generates CJS + ESM when more formats are specified', () => {
-      const [cjsArgs, esmArgs, ...otherArgs] = getBabelArgs({
+      const [cjsArgs, esmArgs, ...otherArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs', 'esm', 'type'] as ModuleFormat[]),
         out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
@@ -79,7 +79,7 @@ describe('getBabelArgs', () => {
 
     it('sets correct outDir when `out` is relative', () => {
       const out = './built'
-      const [esmArgs] = getBabelArgs({
+      const [esmArgs] = getBabelCLIOptionsList({
         formats: new Set(['esm'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
@@ -90,7 +90,7 @@ describe('getBabelArgs', () => {
 
     it('sets correct outDir when `out` is absolute', () => {
       const out = '/path/to/built'
-      const [cjsArgs] = getBabelArgs({
+      const [cjsArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
@@ -102,7 +102,7 @@ describe('getBabelArgs', () => {
 
   describe('watch option', () => {
     it('adds watch: true to `cliOptions` for each valid format when `true`', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(BUILD_ARGS.formats.default),
         out: DEFAULT_OUT,
         watch: true,
@@ -114,7 +114,7 @@ describe('getBabelArgs', () => {
     })
 
     it('adds watch: false to `cliOptions` for each valid format when `false`', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(BUILD_ARGS.formats.default),
         out: DEFAULT_OUT,
         watch: false,

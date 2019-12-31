@@ -65,7 +65,7 @@ interface PackageJson {
   }
 }
 
-interface CreateArgs {
+export interface CreateOptions {
   libraryName: string
   formats: ModuleFormat[]
   out: string
@@ -75,7 +75,7 @@ interface CreateArgs {
 /**
  * Updates package.json contents with various properties needed when creating a benmvp lib
  * @param {PackageJson} initialPackageInfo Initial package.json contents
- * @param {CreateArgs} options
+ * @param {CreateOptions} options
  * @param {string} options.libraryName The name of the library being created
  * @param {ModuleFormat[]} options.formats A list of the module formats when building
  * @param {string} options.out A path (relative or absolute) to the output directory
@@ -85,7 +85,7 @@ interface CreateArgs {
  */
 export const getUpdatePackageInfo = (
   initialPackageInfo: PackageJson,
-  { libraryName, formats, out, modes }: CreateArgs,
+  { libraryName, formats, out, modes }: CreateOptions,
 ): PackageJson => {
   const outputPath = getOutputPath(out)
   const formatsLookup = new Set(formats)

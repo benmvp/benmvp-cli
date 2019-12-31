@@ -49,7 +49,7 @@ interface BabelCLIOptions {
   cliOptions: CLIOptions
 }
 
-interface BuildArgs {
+export interface BuildArgs {
   formats: Set<ModuleFormat>
   out: string
   watch: boolean
@@ -60,7 +60,7 @@ const VALID_BABEL_FORMATS = new Set(['cjs', 'esm'] as ModuleFormat[])
 const BUILT_FILES_TO_REMOVE = ['**/__tests__/', '**/*.spec.*']
 
 /**
- * Gets an array of options/arguments to pass babel, one for each valid format
+ * Gets an array of CLI options/arguments to pass babel, one for each valid format
  * @param {BuildArgs} options
  * @param {Set<ModuleFormat>} options.formats A set of the module formats to build
  * @param {string} options.out A path (relative or absolute) to the output directory
@@ -69,7 +69,7 @@ const BUILT_FILES_TO_REMOVE = ['**/__tests__/', '**/*.spec.*']
  *  generate the built module formats whenever source files change
  * @returns {BabelCLIOptions[]}
  */
-export const getBabelArgs = ({
+export const getBabelCLIOptionsList = ({
   formats,
   out: outputPath,
   watch,
@@ -145,4 +145,4 @@ export const getTypescriptArgs = ({
  * @returns {string[]}
  */
 export const getCopiedFilesToDelete = (outputPath: string): string[] =>
-  BUILT_FILES_TO_REMOVE.map((glob) => resolve(`${outputPath}/${glob}`))
+  BUILT_FILES_TO_REMOVE.map((glob) => resolve(outputPath, glob))

@@ -264,3 +264,47 @@ describe('when `--name` argument is specified and sub folder already exists', ()
     )
   })
 })
+
+describe('copies configs/files', () => {
+  const MOCK_LIB_NAME = '@benmvp/new-lib'
+  const LIB_PATH = resolve(CWD, `../benmvp-new-lib`)
+
+  beforeAll(async () => {
+    process.chdir('..')
+    await execAsync(`npx benmvp create --name ${MOCK_LIB_NAME}`)
+  })
+  afterAll(async () => {
+    // clean up
+    process.chdir(CWD)
+    await remove(LIB_PATH)
+  })
+
+  it('copies expected github-related config files', async () => {
+    expect(
+      await pathExists(resolve(LIB_PATH, '.github/pull_request_template.md')),
+    ).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, '.github/ISSUE_TEMPLATE'))).toBe(
+      true,
+    )
+    expect(await pathExists(resolve(LIB_PATH, '.github/workflows'))).toBe(true)
+  })
+
+  it('copies expected vscode-related config files', async () => {
+    expect(await pathExists(resolve(LIB_PATH, '.vscode/settings.json'))).toBe(
+      true,
+    )
+  })
+
+  it('copies prettier-related configs', async () => {
+    expect(await pathExists(resolve(LIB_PATH, '.prettierrc.json'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, '.prettierignore'))).toBe(true)
+  })
+
+  it('copies other repo configs & files', async () => {
+    expect(await pathExists(resolve(LIB_PATH, '.gitignore'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, '.nvmrc'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, 'CHANGELOG.md'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, 'CONTRIBUTING.md'))).toBe(true)
+    expect(await pathExists(resolve(LIB_PATH, 'LICENSE'))).toBe(true)
+  })
+})

@@ -7,7 +7,7 @@ if [ "$LIB_NAME" != "" ]; then
   echo -e "mkdir -p $LIB_NAME\n"
 
   mkdir -p $LIB_NAME
-  cd $LIB_NAME
+  pushd $LIB_NAME
   pwd
 fi
 
@@ -26,3 +26,8 @@ if [ ! -d ".git" ]; then
   echo -e "git init\n"
   git init
 fi
+
+# Copy miscellaneous config and repo files
+DIRNAME=`dirname $0`
+CONFIGS_PATH="$DIRNAME/../../../configs"
+cp -r $CONFIGS_PATH/. ./

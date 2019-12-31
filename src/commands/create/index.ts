@@ -24,9 +24,11 @@ export default async ({
   modes = CREATE_ARGS.modes.default,
 } = {}): Promise<Result> => {
   try {
+    // initialize the repo with the necessary files & dependencies
     const sanitizedLibraryName = libraryName.replace('@', '').replace('/', '-')
     await spawnAsync(INIT_SCRIPT_PATH, [sanitizedLibraryName])
 
+    // update the package.json with the necessary properties
     const packageJsonPath = resolve(
       process.cwd(),
       sanitizedLibraryName,
@@ -37,11 +39,6 @@ export default async ({
       { libraryName, formats, out, modes },
     )
     await writeJson(packageJsonPath, updatedPackageJson)
-
-    // copy files
-    // - Prettier configs: `.prettier*`, & `.vscode/settings.json`
-    // - Github workflows: `.github/workflows`
-    // - Github templates: `.github/pull_request_template.md` & `.github/ISSUE_TEMPLATE`
   } catch (error) {
     return {
       code: error.code || 1,

@@ -30,7 +30,7 @@
     "pretest": "npm run build",
     "test": "./bin/benmvp test",
     "prebuild": "npm run bootstrap",
-    "build": "./bin/benmvp build",
+    "build": "./bin/benmvp build && scripts/copy-configs.sh",
     "preintegrate": "npm run build",
     "integrate": "./bin/benmvp integrate"
   },
