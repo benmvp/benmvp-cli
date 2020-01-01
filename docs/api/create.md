@@ -1,6 +1,6 @@
 # `create()` Documentation
 
-Creates a new library with the specified name set up with infrastructure using `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
+Creates a new library or updates an existing library, to be set up with infrastructure using the latest version of `@benmvp/cli`, returning a `Promise` indicating whether the creation succeeded or failed.
 
 It will:
 

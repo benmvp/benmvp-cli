@@ -1,6 +1,6 @@
 # `benmvp create` Documentation
 
-Creates a new library set up with infrastructure using `@benmvp/cli`.
+Creates a new library or updates an existing library, to be set up with infrastructure using the latest version of `@benmvp/cli`.
 
 It will:
 
