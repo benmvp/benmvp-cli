@@ -58,6 +58,7 @@ describe('when `--name` argument is not specified', () => {
 
   beforeAll(async () => {
     // create some existing files
+    await execAsync('git init')
     await ensureFile(resolve(LIB_PATH, '.git/foo'))
     await writeJson(
       resolve(LIB_PATH, 'package.json'),

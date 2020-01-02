@@ -35,10 +35,7 @@ echo -e "npm install --save-dev @benmvp/cli@latest\n"
 npm install --save-dev @benmvp/cli@latest
 
 # Init git, if it doesn't yet exist in directory
-if [ ! -d ".git" ]; then
-  echo -e "git init\n"
-  git init
-fi
+git status || echo -e "git init\n" && git init
 
 # Create index file if it doesn't already exist
 mkdir -p src/
