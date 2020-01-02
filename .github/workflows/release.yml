@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  release:
+  main:
     name: Release
     runs-on: ubuntu-latest
 
