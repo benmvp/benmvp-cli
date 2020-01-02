@@ -70,7 +70,6 @@
     "jest-watch-typeahead": "^0.4.2",
     "lodash": "^4.17.15",
     "prettier": "1.19.1",
-    "rimraf": "^3.0.0",
     "typescript": "^3.7.3",
     "yargs": "^15.0.2"
   },
