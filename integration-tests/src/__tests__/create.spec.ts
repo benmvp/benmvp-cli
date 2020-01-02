@@ -322,7 +322,9 @@ describe('other configs/files', () => {
     const filePath = resolve(LIB_PATH, '.gitignore')
 
     expect(await pathExists(filePath)).toBe(true)
-    expect(readFileSync(filePath).toString()).toMatch(/^lib$/)
+
+    // There should be a line in the .gitignore for built directory
+    expect(readFileSync(filePath).toString()).toMatch(/^lib$/gm)
 
     // TODO: Need a test where .gitignore already exists and verify we don't
     // append dupe content
