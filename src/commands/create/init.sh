@@ -16,11 +16,9 @@ echo -e "npx license mit > LICENSE\n"
 npx license mit > LICENSE
 
 # Set node-based .gitignore
-if [ ! -f ".gitignore" ]; then
-  echo -e "npx gitignore node\n"
-  npx gitignore node
-fi
-echo -e "\n\n# built lib directory\nlib\n" >> .gitignore
+echo -e "rm .gitignore && npx gitignore node\n"
+rm .gitignore && npx gitignore node
+echo -e "\n# built lib directory\nlib\n" >> .gitignore
 
 # Set Contributor Covenant Code of Conduct (CODE_OF_CONDUCT.md file)
 echo -e "npx covgen ben@benmvp.com"

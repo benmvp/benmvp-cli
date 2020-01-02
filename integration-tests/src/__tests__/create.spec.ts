@@ -325,9 +325,6 @@ describe('other configs/files', () => {
 
     // There should be a line in the .gitignore for built directory
     expect(readFileSync(filePath).toString()).toMatch(/^lib$/gm)
-
-    // TODO: Need a test where .gitignore already exists and verify we don't
-    // append dupe content
   })
 
   it('creates CoC file', async () => {
