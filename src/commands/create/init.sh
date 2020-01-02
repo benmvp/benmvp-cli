@@ -11,6 +11,15 @@ if [ "$LIB_NAME" != "" ]; then
   pwd
 fi
 
+# Generate MIT license (LICENSE file)
+npx license mit > LICENSE
+
+# Set node-based .gitignore
+npx gitignore node
+
+# Set Contributor Covenant Code of Conduct (CODE_OF_CONDUCT.md file)
+npx covgen ben@benmvp.com
+
 # Init npm, if package.json doesn't exist
 if [ ! -f "package.json" ]; then
   echo -e "npm init -y\n"
