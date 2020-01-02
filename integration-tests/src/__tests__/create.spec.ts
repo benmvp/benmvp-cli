@@ -314,6 +314,24 @@ describe('other configs/files', () => {
     await remove(LIB_PATH)
   })
 
+  it('creates MIT license file', async () => {
+    expect(await pathExists(resolve(LIB_PATH, 'LICENSE'))).toBe(true)
+  })
+
+  it('creates .gitignore file', async () => {
+    const filePath = resolve(LIB_PATH, '.gitignore')
+
+    expect(await pathExists(filePath)).toBe(true)
+    expect(readFileSync(filePath).toString()).toMatch(/^lib$/)
+
+    // TODO: Need a test where .gitignore already exists and verify we don't
+    // append dupe content
+  })
+
+  it('creates CoC file', async () => {
+    expect(await pathExists(resolve(LIB_PATH, 'CODE_OF_CONDUCT.md'))).toBe(true)
+  })
+
   it('copies expected github-related config files', async () => {
     expect(
       await pathExists(resolve(LIB_PATH, '.github/pull_request_template.md')),
@@ -337,10 +355,8 @@ describe('other configs/files', () => {
 
   it('copies other repo configs & files', async () => {
     expect(await pathExists(resolve(LIB_PATH, '.nvmrc'))).toBe(true)
-    // expect(await pathExists(resolve(LIB_PATH, '.gitignore'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, 'CHANGELOG.md'))).toBe(true)
     expect(await pathExists(resolve(LIB_PATH, 'CONTRIBUTING.md'))).toBe(true)
-    expect(await pathExists(resolve(LIB_PATH, 'LICENSE'))).toBe(true)
   })
 
   it('replaces `benmvp-cli` name with repo name', () => {
