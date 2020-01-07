@@ -92,8 +92,8 @@ export default async ({
     // eslint-disable-next-line no-console
     console.log(
       libraryName
-        ? `${libraryName} successfully created.`
-        : 'Repo successfully updated',
+        ? `DONE! ${libraryName} successfully created.`
+        : 'DONE! Repo successfully updated.',
     )
   } catch (error) {
     return {
