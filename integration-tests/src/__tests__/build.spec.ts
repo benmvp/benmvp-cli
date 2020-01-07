@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { promisify } from 'util'
 import { exec } from 'child_process'
-import { pathExists, readFile } from 'fs-extra'
+import { pathExists, readFile, remove } from 'fs-extra'
 
 const execAsync = promisify(exec)
 const CWD = process.cwd()
@@ -14,7 +14,7 @@ describe('when no arguments are passed', () => {
   })
   afterAll(async () => {
     // clean up
-    await execAsync('npx rimraf lib')
+    await remove('lib')
   })
 
   it('transpiles .ts(x) files', async () => {
@@ -99,66 +99,72 @@ describe('when no arguments are passed', () => {
 
 describe('when format & output directory are specified', () => {
   beforeAll(async () => {
-    await execAsync('npx benmvp build --formats esm type --out ./built')
+    await execAsync('npx benmvp build --formats esm type --out ./built/dist')
   })
   afterAll(async () => {
     // clean up
-    await execAsync('npx rimraf built')
+    await remove('built/dist')
   })
 
   it('transpiles .ts files into specified output folder', async () => {
-    expect(await pathExists(resolve(CWD, 'built/esm/index.js'))).toBe(true)
-    expect(await pathExists(resolve(CWD, 'built/esm/config.js'))).toBe(true)
-    expect(await pathExists(resolve(CWD, 'built/esm/objects/animal.js'))).toBe(
+    expect(await pathExists(resolve(CWD, 'built/dist/esm/index.js'))).toBe(true)
+    expect(await pathExists(resolve(CWD, 'built/dist/esm/config.js'))).toBe(
       true,
     )
-    expect(await pathExists(resolve(CWD, 'built/esm/objects/horse.js'))).toBe(
-      true,
-    )
-    expect(await pathExists(resolve(CWD, 'built/esm/objects/snake.js'))).toBe(
-      true,
-    )
-    expect(await pathExists(resolve(CWD, 'built/esm/react/Counter.js'))).toBe(
-      true,
-    )
-    expect(await pathExists(resolve(CWD, 'built/esm/react/Button.js'))).toBe(
-      true,
-    )
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/esm/objects/animal.js')),
+    ).toBe(true)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/esm/objects/horse.js')),
+    ).toBe(true)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/esm/objects/snake.js')),
+    ).toBe(true)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/esm/react/Counter.js')),
+    ).toBe(true)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/esm/react/Button.js')),
+    ).toBe(true)
 
-    expect(await pathExists(resolve(CWD, 'built/types/index.d.ts'))).toBe(true)
+    expect(await pathExists(resolve(CWD, 'built/dist/types/index.d.ts'))).toBe(
+      true,
+    )
     expect(
-      await pathExists(resolve(CWD, 'built/types/objects/animal.d.ts')),
+      await pathExists(resolve(CWD, 'built/dist/types/objects/animal.d.ts')),
     ).toBe(true)
     expect(
-      await pathExists(resolve(CWD, 'built/types/objects/snake.d.ts')),
+      await pathExists(resolve(CWD, 'built/dist/types/objects/snake.d.ts')),
     ).toBe(true)
     expect(
-      await pathExists(resolve(CWD, 'built/types/objects/horse.d.ts')),
+      await pathExists(resolve(CWD, 'built/dist/types/objects/horse.d.ts')),
     ).toBe(true)
     expect(
-      await pathExists(resolve(CWD, 'built/types/react/Counter.d.ts')),
+      await pathExists(resolve(CWD, 'built/dist/types/react/Counter.d.ts')),
     ).toBe(true)
     expect(
-      await pathExists(resolve(CWD, 'built/types/react/Button.d.ts')),
+      await pathExists(resolve(CWD, 'built/dist/types/react/Button.d.ts')),
     ).toBe(true)
   })
   it('does not create CJS files', async () => {
-    expect(await pathExists(resolve(CWD, 'built/cjs/index.js'))).toBe(false)
-    expect(await pathExists(resolve(CWD, 'built/cjs/objects/animal.js'))).toBe(
+    expect(await pathExists(resolve(CWD, 'built/dist/cjs/index.js'))).toBe(
       false,
     )
-    expect(await pathExists(resolve(CWD, 'built/cjs/objects/snake.js'))).toBe(
-      false,
-    )
-    expect(await pathExists(resolve(CWD, 'built/cjs/objects/horse.js'))).toBe(
-      false,
-    )
-    expect(await pathExists(resolve(CWD, 'built/cjs/react/Counter.js'))).toBe(
-      false,
-    )
-    expect(await pathExists(resolve(CWD, 'built/cjs/react/Button.js'))).toBe(
-      false,
-    )
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/cjs/objects/animal.js')),
+    ).toBe(false)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/cjs/objects/snake.js')),
+    ).toBe(false)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/cjs/objects/horse.js')),
+    ).toBe(false)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/cjs/react/Counter.js')),
+    ).toBe(false)
+    expect(
+      await pathExists(resolve(CWD, 'built/dist/cjs/react/Button.js')),
+    ).toBe(false)
   })
   it('does not put files in default location', async () => {
     expect(await pathExists(resolve(CWD, 'lib/esm/index.js'))).toBe(false)

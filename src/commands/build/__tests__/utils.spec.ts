@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import {
-  getBabelArgs,
+  getBabelCLIOptionsList,
   getTypescriptArgs,
   getCopiedFilesToDelete,
 } from '../utils'
@@ -9,13 +9,14 @@ import { ModuleFormat } from '../../types'
 import BASE_TSCONFIG from '../../test/tsconfig.json'
 
 const CWD = process.cwd()
+const DEFAULT_OUT = resolve(CWD, 'lib')
 
 describe('getBabelArgs', () => {
   describe('source files', () => {
     it('uses current working directory for source files location', () => {
-      const [firstSetOfArgs] = getBabelArgs({
+      const [firstSetOfArgs] = getBabelCLIOptionsList({
         formats: BUILD_ARGS.formats.default,
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -25,9 +26,9 @@ describe('getBabelArgs', () => {
 
   describe('formats + out', () => {
     it('returns empty array when empty formats are specified', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -35,9 +36,9 @@ describe('getBabelArgs', () => {
     })
 
     it('generates CJS + ESM w/ default output directory', () => {
-      const [cjsArgs, esmArgs] = getBabelArgs({
+      const [cjsArgs, esmArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs', 'esm'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -55,9 +56,9 @@ describe('getBabelArgs', () => {
     })
 
     it('still only generates CJS + ESM when more formats are specified', () => {
-      const [cjsArgs, esmArgs, ...otherArgs] = getBabelArgs({
+      const [cjsArgs, esmArgs, ...otherArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs', 'esm', 'type'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -78,7 +79,7 @@ describe('getBabelArgs', () => {
 
     it('sets correct outDir when `out` is relative', () => {
       const out = './built'
-      const [esmArgs] = getBabelArgs({
+      const [esmArgs] = getBabelCLIOptionsList({
         formats: new Set(['esm'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
@@ -89,7 +90,7 @@ describe('getBabelArgs', () => {
 
     it('sets correct outDir when `out` is absolute', () => {
       const out = '/path/to/built'
-      const [cjsArgs] = getBabelArgs({
+      const [cjsArgs] = getBabelCLIOptionsList({
         formats: new Set(['cjs'] as ModuleFormat[]),
         out,
         watch: BUILD_ARGS.watch.default,
@@ -101,9 +102,9 @@ describe('getBabelArgs', () => {
 
   describe('watch option', () => {
     it('adds watch: true to `cliOptions` for each valid format when `true`', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(BUILD_ARGS.formats.default),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: true,
       })
 
@@ -113,9 +114,9 @@ describe('getBabelArgs', () => {
     })
 
     it('adds watch: false to `cliOptions` for each valid format when `false`', () => {
-      const babelArgsToRun = getBabelArgs({
+      const babelArgsToRun = getBabelCLIOptionsList({
         formats: new Set(BUILD_ARGS.formats.default),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: false,
       })
 
@@ -131,7 +132,7 @@ describe('getTypescriptArgs', () => {
     it('returns null if `formats` is empty', () => {
       const typescriptArgs = getTypescriptArgs({
         formats: new Set(),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -141,7 +142,7 @@ describe('getTypescriptArgs', () => {
     it('returns null if `formats` does not contain "type"', () => {
       const typescriptArgs = getTypescriptArgs({
         formats: new Set(['esm'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -153,7 +154,7 @@ describe('getTypescriptArgs', () => {
     it('includes all of the args from base config', () => {
       const typescriptArgs = getTypescriptArgs({
         formats: new Set(['esm', 'type'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -169,7 +170,7 @@ describe('getTypescriptArgs', () => {
     it('specifies generic declaration information', () => {
       const typescriptArgs = getTypescriptArgs({
         formats: new Set(['esm', 'type'] as ModuleFormat[]),
-        out: BUILD_ARGS.out.default,
+        out: DEFAULT_OUT,
         watch: BUILD_ARGS.watch.default,
       })
 
@@ -209,7 +210,7 @@ describe('getTypescriptArgs', () => {
       it('includes --watch when `watch` is true', () => {
         const typescriptArgs = getTypescriptArgs({
           formats: new Set(['type'] as ModuleFormat[]),
-          out: BUILD_ARGS.out.default,
+          out: DEFAULT_OUT,
           watch: true,
         })
 
@@ -219,7 +220,7 @@ describe('getTypescriptArgs', () => {
       it('does not include --watch when `watch` is false', () => {
         const typescriptArgs = getTypescriptArgs({
           formats: new Set(['type'] as ModuleFormat[]),
-          out: BUILD_ARGS.out.default,
+          out: DEFAULT_OUT,
           watch: false,
         })
 
@@ -231,7 +232,7 @@ describe('getTypescriptArgs', () => {
       it('uses current working directory for source files location', () => {
         const typescriptArgs = getTypescriptArgs({
           formats: new Set(['type'] as ModuleFormat[]),
-          out: BUILD_ARGS.out.default,
+          out: DEFAULT_OUT,
           watch: BUILD_ARGS.watch.default,
         })
 

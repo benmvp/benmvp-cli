@@ -1,15 +1,55 @@
+import { resolve } from 'path'
 import { promisify } from 'util'
 import { exec } from 'child_process'
 import runBabel from './run-babel'
 import { BUILD_ARGS } from '../../cli/args'
 import { Result, ModuleFormat } from '../types'
 import {
-  getBabelArgs,
+  BuildArgs,
+  getBabelCLIOptionsList,
   getTypescriptArgs,
   getCopiedFilesToDelete,
 } from './utils'
 
 const execAsync = promisify(exec)
+
+const genTranspiledFiles = async (buildArgs: BuildArgs): Promise<void> => {
+  const babelArgsToRun = getBabelCLIOptionsList(buildArgs)
+
+  for (const babelArgs of babelArgsToRun) {
+    // eslint-disable-next-line no-await-in-loop
+    await runBabel(babelArgs)
+  }
+}
+
+const genTypedFiles = async (buildArgs: BuildArgs): Promise<void> => {
+  const typeScriptArgsToRun = getTypescriptArgs(buildArgs)
+
+  if (typeScriptArgsToRun) {
+    try {
+      // when `benmvp-cli` is a module w/in a lib's node_modules, this should
+      // still run the `tsc` script for `benmvp-cli`, which will run the tsc
+      // binary. This was the easiest way to reliably get to the binary
+      // no matter where we put the transpiled lib code
+      const command = `npx tsc ${typeScriptArgsToRun.join(' ')}`
+
+      await execAsync(command)
+
+      // eslint-disable-next-line no-console
+      console.log('Generated TypeScript definitions from src/index.ts.')
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.stdout)
+      throw Error('Unable able to generate type definitions')
+    }
+  }
+}
+
+const deleteUnneededFiles = async (outDir: string): Promise<void> => {
+  // remove all of the copied files that we don't want in built directory
+  // TODO: Switch to fs-extra if it's still being used
+  await execAsync(`npx rimraf ${getCopiedFilesToDelete(outDir).join(' ')}`)
+}
 
 /**
  * Builds the library into the desired module formats at the specified location
@@ -28,9 +68,8 @@ export default async ({
 } = {}): Promise<Result> => {
   try {
     const uniqueFormats = new Set(formats)
-    const buildOptions = { formats: uniqueFormats, out, watch }
-    const babelArgsToRun = getBabelArgs(buildOptions)
-    const typeScriptArgsToRun = getTypescriptArgs(buildOptions)
+    const outDir = out || resolve(process.cwd(), 'lib')
+    const buildOptions = { formats: uniqueFormats, out: outDir, watch }
 
     // eslint-disable-next-line no-console
     console.log(
@@ -38,38 +77,15 @@ export default async ({
       '\n  formats:',
       formats.toString(),
       '\n  output dir:',
-      out,
+      outDir,
       '\n  watching?',
       watch ? 'yes' : 'no',
       '\n',
     )
 
-    for (const babelArgs of babelArgsToRun) {
-      // eslint-disable-next-line no-await-in-loop
-      await runBabel(babelArgs)
-    }
-
-    if (typeScriptArgsToRun) {
-      try {
-        // when `benmvp-cli` is a module w/in a lib's node_modules, this should
-        // still run the `tsc` script for `benmvp-cli`, which will run the tsc
-        // binary. This was the easiest way to reliably get to the binary
-        // no matter where we put the transpiled lib code
-        const command = `npx tsc ${typeScriptArgsToRun.join(' ')}`
-
-        await execAsync(command)
-
-        // eslint-disable-next-line no-console
-        console.log('Generated TypeScript definitions from src/index.ts.')
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(err.stdout)
-        throw Error('Unable able to generate type definitions')
-      }
-    }
-
-    // remove all of the copied files that we don't want in built directory
-    await execAsync(`npx rimraf ${getCopiedFilesToDelete(out).join(' ')}`)
+    await genTranspiledFiles(buildOptions)
+    await genTypedFiles(buildOptions)
+    await deleteUnneededFiles(outDir)
   } catch (error) {
     return {
       code: error.code || 1,

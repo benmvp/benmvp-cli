@@ -1,20 +1,29 @@
 # `benmvp create` Documentation
 
-> NOTE: `benmvp create` is still under development
-
-Creates a new library set up with infrastructure using `@benmvp/cli`.
+Creates a new library or updates an existing library, to be set up with infrastructure using the latest version of `@benmvp/cli`.
 
 It will:
 
+- Set up git (i.e. `git init`) in the directory
 - Add `"test"`, `"start"`, `"build"` and `"integrate"` scripts in the `package.json` to call [`benmvp test`](test.md), [`benmvp start`](start.md), [`benmvp build`](build.md), and [`benmvp integrate`](integrate.md), respectively
-- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [Yarn](https://yarnpkg.com/) if available. If Yarn is unavailable, it will fallback to [npm](https://docs.npmjs.com/)
-- Add (or overwrite) `.prettierrc.json`, `.prettierignore` & `.vscode/settings.json` files to format all code
-- Add (or overwrite) a `.github/workflows/ci.yml` [Github workflow](https://help.github.com/en/actions) for testing your code when a branch is pushed to or a PR is updated.
-- Add (or overwrite) a `.github/workflows/format.yml` [Github workflow](https://help.github.com/en/actions) for formatting your files when a non-`master` branch is pushed to. Formatted code will be pushed as a new commit to the branch.
-- Add (or overwrite) a `.github/workflows/release.yml` [Github workflow](https://help.github.com/en/actions) for release a new version of your package with new commits to `master`.
-- Add (or overwrite) `.github/pull_request_template.md` & `.github/ISSUE_TEMPLATE/*` for more organized [pull request](https://help.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository) and [issue](https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository) creation.
+- After the `package.json` is created (or updated), it will install `@benmvp/cli` as a dev dependency, using [npm](https://docs.npmjs.com/)
+- Add a dummy `src/index.ts` file which is the entry-point to the lib and from where all top-level API functions will be exported
+- Add (or overwrite) [`.prettierrc.json`](https://github.com/benmvp/benmvp-cli/blob/master/.prettierrc.json), [`.prettierignore`](https://github.com/benmvp/benmvp-cli/blob/master/.prettierignore) & [`.vscode/settings.json`](https://github.com/benmvp/benmvp-cli/blob/master/.vscode/settings.json) files to format all code
+- Add (or overwrite) [Github workflows](https://help.github.com/en/actions):
+  - [`.github/workflows/ci.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/ci.yml) for testing your code when a branch is pushed to or a PR is updated.
+  - [`.github/workflows/format.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/format.yml) for formatting your files when a non-`master` branch is pushed to. Formatted code will be pushed as a new commit to the branch.
+  - [`.github/workflows/validate-pr.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/validate-pr.yml) for validating that each PR title follows the [Conventional Commits specification](https://www.conventionalcommits.org/).
+  - [`.github/workflows/release.yml`](https://github.com/benmvp/benmvp-cli/blob/master/.github/workflows/release.yml) for releasing a new version of your package upon new commits to `master`.
+- Add (or overwrite) [`.github/pull_request_template.md`](https://github.com/benmvp/benmvp-cli/blob/master/.github/pull_request_template.md) & [`.github/ISSUE_TEMPLATE`](https://github.com/benmvp/benmvp-cli/tree/master/.github/ISSUE_TEMPLATE) for more organized [pull request](https://help.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository) and [issue](https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository) creation.
+- Add (or overwrite) other miscellaneous config files:
+  - [`.gitignore`](https://github.com/benmvp/benmvp-cli/blob/master/.gitignore)
+  - [`.nvmrc`](https://github.com/benmvp/benmvp-cli/blob/master/.nvmrc)
+  - [`CHANGELOG.md`](https://github.com/benmvp/benmvp-cli/blob/master/CHANGELOG.md)
+  - [`CONTRIBUTING.md`](https://github.com/benmvp/benmvp-cli/blob/master/CONTRIBUTING.md)
+  - [`CODE_OF_CONDUCT.md`](https://github.com/benmvp/benmvp-cli/blob/master/CODE_OF_CONDUCT.md)
+  - [`LICENSE`](https://github.com/benmvp/benmvp-cli/blob/master/LICENSE)
 
-> NOTE: `benmvp create` can be called multiple times on a repo. It's a good idea to call `create()` every time you bump the version of `@benmvp/cli` so you can get the latest configuration for `package.json`, prettier, Github workflows, and Github PR/Issue templates.
+> NOTE: `benmvp create` can be called multiple times on a repo. It's a good idea to call `benmvp create` every time you bump the version of `@benmvp/cli` so you can get the latest configuration for `package.json`, prettier, Github workflows, Github PR/Issue templates, and other miscellaneous config files.
 
 Looking for Node API docs? View companion [`create()` documentation](../api/create.md).
 
@@ -52,12 +61,12 @@ npx @benmvp/cli create --modes type spec --out ./built --formats esm cjs
 
 (Optional) The name of the library to create or update.
 
-When `name` is unspecified:
+When `name` is unspecified, it assumes the current working directory is the root of the library. Also:
 
 - If a `package.json` does not already exist, it creates a new `package.json` with the name matching the directory it's within.
 - If a `package.json` does exist, it does nothing to the existing `package.json`.
 
-When `name` is specified:
+When `name` is specified, it will create a directory of `name` within the current working directory. Also:
 
 - If a `package.json` does not already exist, it creates a new `package.json` with the specified name.
 - If a `package.json` does exist, it updates the `"name"` property of the `package.json` with specified name.

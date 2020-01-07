@@ -44,7 +44,7 @@ pushd $TEMP_INTEGRATION_PATH
 # Delete node_modules if it exists
 # (should only happen in local dev testing)
 if [ -d "$TEMP_INTEGRATION_PATH/node_modules" ]; then
-  echo -e "rm -rf $TEMP_INTEGRATION_PATH/node_modules"
+  echo -e "rm -rf $TEMP_INTEGRATION_PATH/node_modules\n"
   rm -rf $TEMP_INTEGRATION_PATH/node_modules
 fi
 
@@ -52,8 +52,12 @@ fi
 # This will also install all missing dependencies from `package-lock.json`
 # Note for integration tests for @benmvp/cli specifically this *should* overwrite
 # @benmvp/cli dependency from registry with the tarball
-echo -e "npm install && npm install --save-dev @benmvp/cli && npm install --save-dev $TARBALL_FILENAME\n"
-npm install && npm install --save-dev @benmvp/cli && npm install --save-dev $TARBALL_FILENAME
+echo -e "npm install\n"
+npm install
+echo -e "npm install --save-dev @benmvp/cli\n"
+npm install --save-dev @benmvp/cli
+echo -e "npm install --save-dev $TARBALL_FILENAME\n"
+npm install --save-dev $TARBALL_FILENAME
 
 # Verify @benmvp/cli binary (named "benmvp") exists
 if [ ! -f "$TEMP_INTEGRATION_PATH/node_modules/.bin/benmvp" ]; then

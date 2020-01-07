@@ -1,33 +1,10 @@
-import { resolve as pathResolve } from 'path'
-import { spawn } from 'child_process'
+import { resolve } from 'path'
 import { INTEGRATE_ARGS } from '../../cli/args'
 import { Result } from '../types'
+import { spawnAsync } from '../utils'
 import { getTestArgs } from './utils'
 
-const SCRIPT_PATH = pathResolve(__dirname, 'run.sh')
-
-const spawnAsync = (command: string, args: string[]): Promise<void> =>
-  new Promise((resolve, reject) => {
-    const childProcess = spawn(command, args)
-
-    childProcess.stdout.on('data', (data) => {
-      // eslint-disable-next-line no-console
-      console.log(`${data}`)
-    })
-    childProcess.stderr.on('data', (data) => {
-      // eslint-disable-next-line no-console
-      console.error(`${data}`)
-    })
-    childProcess.on('close', (code) => {
-      if (code !== 0) {
-        reject(
-          new Error(`"${command} ${args.join(' ')}" exited with code ${code}`),
-        )
-      } else {
-        resolve()
-      }
-    })
-  })
+const SCRIPT_PATH = resolve(__dirname, 'run.sh')
 
 /**
  * Runs a one-time pass of the specified integration tests
