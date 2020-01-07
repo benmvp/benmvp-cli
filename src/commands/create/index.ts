@@ -88,6 +88,13 @@ export default async ({
       modes,
     })
     await replaceRepoNameReferences(sanitizedLibraryName)
+
+    // eslint-disable-next-line no-console
+    console.log(
+      libraryName
+        ? `${libraryName} successfully created.`
+        : 'Repo successfully updated',
+    )
   } catch (error) {
     return {
       code: error.code || 1,
