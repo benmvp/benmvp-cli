@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jest/recommended',
+    'plugin:testing-library/react',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
     'prettier/react',
@@ -72,7 +73,6 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-one-expression-per-line': 'off',
     'react/prop-types': 'off',
-    // semi: ['error', 'never'],
 
     // need to be turned off for rules in plugin:@typescript-eslint/recommended
     'no-undef': 'off',
