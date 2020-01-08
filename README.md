@@ -20,16 +20,22 @@
 
 A highly-opinionated, zero-config CLI for consistent infra for Ben Ilegbodu's Typescript-based libraries.
 
-## ToC
+## Table of Contents
 
-- [Installation](#installation)
-- [Quick Usage](#quick-usage)
-- [Docs](docs/)
-- [Supported Node Versions](#supported-node-versions)
-- [Technologies Used](#technologies-used)
-- [Contributing](CONTRIBUTING.md)
-- [Project philosophy](#project-philosophy)
-- [License](LICENSE)
+- [@benmvp/cli](#benmvpcli)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Quick Usage](#quick-usage)
+    - [Unit Testing](#unit-testing)
+    - [Developing](#developing)
+    - [Building](#building)
+    - [Integration Testing](#integration-testing)
+  - [Docs](#docs)
+  - [Supported Node Versions](#supported-node-versions)
+  - [Technologies Used](#technologies-used)
+  - [Contributing](#contributing)
+  - [Project philosophy](#project-philosophy)
+  - [License](#license)
 
 ## Installation
 
@@ -45,10 +51,13 @@ Installs the latest version of `@benmvp/cli` as a dev dependency and updates the
   "scripts": {
     "start": "benmvp start",
     "test": "benmvp test",
-    "build": "benmvp build"
+    "build": "benmvp build",
+    "integrate": "benmvp integrate"
   }
 }
 ```
+
+> NOTE: More fields within the `package.json` will be updated to set up the library for proper releasing.
 
 Read the API docs for more on [`benmvp create`](docs/cli/create.md).
 
@@ -118,7 +127,7 @@ Contributions are welcome! See [Contributing Guidelines](CONTRIBUTING.md) for mo
 
 ## Project philosophy
 
-We take the stability of this SDK **very** seriously. `@benmvp/cli` follows the [SemVer](http://semver.org/) standard for versioning.
+We take the stability of this library **very** seriously. `@benmvp/cli` follows the [SemVer](http://semver.org/) standard for versioning.
 
 All updates must pass the [CI build](https://github.com/benmvp/benmvp-cli/actions).
 
