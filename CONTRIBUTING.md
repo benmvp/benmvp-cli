@@ -13,7 +13,7 @@ Thank you for your interest in contributing to the library!
 
 ## Setup
 
-1. [For the repository](https://help.github.com/articles/fork-a-repo/)
+1. [Fork the repository](https://help.github.com/articles/fork-a-repo/)
 1. Clone your new forked repository to your local computer
 1. Set the `benmvp` repository as your branch's upstream branch: `git remote add upstream https://github.com/benmvp/benmvp-cli.git`
 1. Navigate to the root directory of your newly cloned repository: `cd /path/to/benmvp-cli`
