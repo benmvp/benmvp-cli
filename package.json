@@ -67,7 +67,7 @@
     "jest": "^24.9.0",
     "jest-runner-eslint": "^0.7.5",
     "jest-runner-tsc": "^1.6.0",
-    "jest-watch-typeahead": "^0.4.2",
+    "jest-watch-typeahead": "^0.6.0",
     "lodash": "^4.17.15",
     "prettier": "1.19.1",
     "typescript": "^3.7.3",
